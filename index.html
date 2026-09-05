@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D'Andre McNeish | Data Analytics &amp; Data Engineering</title>
+<meta name="description" content="D'Andre McNeish, Data Analytics and Data Engineering professional. Portfolio of pipeline engineering, cloud architecture, and predictive modeling projects.">
+<style>
+  :root {
+    --navy: #0a1e3d;
+    --blue: #1f5fbf;
+    --blue-light: #2f7ff0;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #1c2530;
+    --text-muted: #5b6675;
+    --border: #e3e7ed;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 80px 0; }
+
+  /* Nav */
+  header.site-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; padding: 16px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-inner .brand { font-weight: 700; color: var(--navy); font-size: 18px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--text); font-weight: 500; font-size: 15px; }
+  .nav-links a:hover { color: var(--blue); text-decoration: none; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, var(--navy) 0%, #12305c 60%, var(--blue) 130%);
+    color: #fff;
+    padding: 90px 0 100px;
+  }
+  .hero-inner {
+    display: flex; align-items: center; gap: 48px; flex-wrap: wrap;
+  }
+  .hero-photo img {
+    width: 190px; height: 190px; border-radius: 50%;
+    object-fit: cover; border: 4px solid rgba(255,255,255,0.25);
+  }
+  .hero-text { flex: 1; min-width: 280px; }
+  .hero-text .eyebrow {
+    text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+    color: #9fc2ff; font-weight: 600; margin-bottom: 10px;
+  }
+  .hero-text h1 { font-size: 40px; font-weight: 700; margin-bottom: 12px; }
+  .hero-text p.tagline { font-size: 19px; color: #d8e4fb; max-width: 560px; margin-bottom: 28px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 8px;
+    font-weight: 600; font-size: 15px; transition: all .15s ease;
+  }
+  .btn-primary { background: #fff; color: var(--navy); }
+  .btn-primary:hover { background: #e8eefc; text-decoration: none; }
+  .btn-outline { border: 1.5px solid rgba(255,255,255,0.6); color: #fff; }
+  .btn-outline:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+
+  /* Section headings */
+  .section-head { margin-bottom: 40px; }
+  .section-head .kicker {
+    text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+    color: var(--blue); font-weight: 700; margin-bottom: 8px;
+  }
+  .section-head h2 { font-size: 28px; color: var(--navy); font-weight: 700; }
+
+  /* About */
+  .about-grid { display: flex; gap: 48px; flex-wrap: wrap; }
+  .about-text { flex: 2; min-width: 300px; color: var(--text-muted); font-size: 16px; }
+  .about-text p { margin-bottom: 16px; }
+  .about-facts { flex: 1; min-width: 220px; }
+  .fact { border-left: 3px solid var(--blue); padding: 8px 0 8px 16px; margin-bottom: 18px; }
+  .fact .label { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-muted); }
+  .fact .value { font-weight: 600; color: var(--navy); font-size: 15px; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 22px;
+  }
+  .skill-card h3 { font-size: 16px; color: var(--navy); margin-bottom: 12px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    background: #eef3fc; color: var(--blue); font-size: 13px; font-weight: 600;
+    padding: 5px 11px; border-radius: 20px;
+  }
+
+  /* Certification */
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; display: flex; gap: 26px; align-items: center; flex-wrap: wrap;
+  }
+  .cert-card img { width: 96px; height: 96px; }
+  .cert-body { flex: 1; min-width: 240px; }
+  .cert-body h3 { color: var(--navy); font-size: 19px; margin-bottom: 6px; }
+  .cert-body p { color: var(--text-muted); font-size: 15px; margin-bottom: 10px; }
+  .verified-pill {
+    display: inline-flex; align-items: center; gap: 6px; background: #e7f7ee; color: #1e8a4c;
+    font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+  }
+
+  /* Projects */
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .project-media { height: 170px; background: #eef1f5; overflow: hidden; }
+  .project-media img { width: 100%; height: 100%; object-fit: cover; }
+  .project-media.placeholder {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--blue); font-weight: 700; font-size: 14px; letter-spacing: .5px;
+    background: linear-gradient(135deg, #eaf1fd, #dbe8fb);
+  }
+  .project-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+  .project-body h3 { color: var(--navy); font-size: 17px; margin-bottom: 8px; }
+  .project-body p { color: var(--text-muted); font-size: 14.5px; margin-bottom: 14px; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .project-tags .tag { font-size: 12px; padding: 4px 9px; }
+  .project-links { display: flex; gap: 16px; font-size: 14px; font-weight: 600; }
+
+  /* Experience */
+  .timeline { border-left: 2px solid var(--border); padding-left: 28px; }
+  .timeline-item { margin-bottom: 32px; position: relative; }
+  .timeline-item::before {
+    content: ""; position: absolute; left: -34px; top: 4px;
+    width: 12px; height: 12px; border-radius: 50%; background: var(--blue);
+  }
+  .timeline-item h3 { color: var(--navy); font-size: 17px; }
+  .timeline-item .meta { color: var(--text-muted); font-size: 14px; margin-bottom: 10px; }
+  .timeline-item ul { padding-left: 20px; color: var(--text-muted); font-size: 14.5px; }
+  .timeline-item li { margin-bottom: 6px; }
+
+  /* Education */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px;
+  }
+  .edu-card h3 { color: var(--navy); font-size: 16px; margin-bottom: 4px; }
+  .edu-card .meta { color: var(--text-muted); font-size: 14px; }
+
+  /* Contact / Footer */
+  .contact { background: var(--navy); color: #fff; }
+  .contact .section-head .kicker { color: #9fc2ff; }
+  .contact .section-head h2 { color: #fff; }
+  .contact p { color: #cdd9ee; font-size: 16px; margin-bottom: 24px; max-width: 520px; }
+  .contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .contact-links a {
+    color: #fff; border: 1.5px solid rgba(255,255,255,0.35); padding: 10px 18px;
+    border-radius: 8px; font-weight: 600; font-size: 14.5px;
+  }
+  .contact-links a:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+  footer.bottom {
+    background: var(--navy); color: #7d94bd; text-align: center; padding: 20px 0 32px; font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  @media (max-width: 640px) {
+    .hero-inner { flex-direction: column; text-align: center; }
+    .hero-actions { justify-content: center; }
+    .about-grid { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="brand">D'Andre McNeish</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-photo">
+      <img src="assets/headshot.png" alt="D'Andre McNeish">
+    </div>
+    <div class="hero-text">
+      <div class="eyebrow">Data Analytics &amp; Data Engineering</div>
+      <h1>D'Andre McNeish</h1>
+      <p class="tagline">
+        I build reliable data pipelines, cloud data architectures, and predictive models
+        that turn raw data into decisions organizations can act on.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Download Resume</a>
+        <a class="btn btn-outline" href="#projects">View Projects</a>
+        <a class="btn btn-outline" href="#contact">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">About</div>
+      <h2>Background</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am a data analytics and data engineering professional pursuing a Master of Science in
+          Data Analytics and Data Engineering at Western Governors University, building on a
+          Bachelor of Applied Science in Data Analytics and Artificial Intelligence from Broward College.
+          I hold the WGU Data Analytics Professional Certificate, demonstrating hands on competence
+          in the full data analytics lifecycle, statistical data mining, and data storytelling.
+        </p>
+        <p>
+          My project work spans building production style ETL pipelines in Apache Airflow, designing
+          cloud data warehouse architectures on Google Cloud Platform, applying linear and logistic
+          regression and principal component analysis to real business scenarios, and tracking
+          reproducible machine learning experiments with MLflow and DVC.
+        </p>
+        <p>
+          Alongside my studies, I work in product enablement at Modernizing Medicine, where I lead
+          AI adoption efforts, build LLM powered internal tools in Python, and use JQL and Salesforce
+          reporting to analyze operational data and resolve process bottlenecks. I am looking to bring
+          that same combination of technical depth and clear communication to a data analytics or
+          data engineering role.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <div class="label">Location</div>
+          <div class="value">Orlando, FL</div>
+        </div>
+        <div class="fact">
+          <div class="label">Currently</div>
+          <div class="value">Product Enablement Specialist III, Modernizing Medicine</div>
+        </div>
+        <div class="fact">
+          <div class="label">Studying</div>
+          <div class="value">MS Data Analytics and Data Engineering, WGU (Expected 2027)</div>
+        </div>
+        <div class="fact">
+          <div class="label">Certified</div>
+          <div class="value">WGU Data Analytics Professional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Skills</div>
+      <h2>Tools &amp; Platforms</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Data Engineering &amp; Pipelines</h3>
+        <div class="skill-tags">
+          <span class="tag">Apache Airflow</span>
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">ETL / ELT</span>
+          <span class="tag">AWS Redshift</span>
+          <span class="tag">DVC</span>
+          <span class="tag">MLflow</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Cloud &amp; Data Platforms</h3>
+        <div class="skill-tags">
+          <span class="tag">Google Cloud Platform</span>
+          <span class="tag">BigQuery</span>
+          <span class="tag">AWS S3</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GitLab CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Analytics &amp; Modeling</h3>
+        <div class="skill-tags">
+          <span class="tag">Linear Regression</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">PCA</span>
+          <span class="tag">Statistical Analysis</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Data Visualization</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Product &amp; AI Tooling</h3>
+        <div class="skill-tags">
+          <span class="tag">LLMs (Gemini, Claude)</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">Jira / JQL</span>
+          <span class="tag">Confluence</span>
+          <span class="tag">Agile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Certifications</div>
+      <h2>Verified Credentials</h2>
+    </div>
+    <div class="cert-card" style="margin-bottom: 20px;">
+      <img src="assets/wgu-badge.png" alt="WGU Data Analytics Professional Certificate badge">
+      <div class="cert-body">
+        <span class="verified-pill">&#10003; Verified by Parchment Digital Badges</span>
+        <h3>Data Analytics Professional Certificate</h3>
+        <p>
+          Awarded by Western Governors University for demonstrated competence in the data analytics
+          lifecycle, statistical data mining including linear and logistic regression and principal
+          component analysis, and data storytelling for technical and non technical audiences,
+          including designing interactive dashboards for executive decision making.
+        </p>
+        <a href="https://wgu.badges.parchment.com/public/assertions/HulL6v6HTrytM9MMs82xQA?identity__email=dmcnei29@wgu.edu" target="_blank">View verified credential &rarr;</a>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-body">
+        <span class="verified-pill">&#10003; Verified by Udacity</span>
+        <h3>Data Pipelines with Airflow (WGU D608 Data Processing)</h3>
+        <p>
+          Nanodegree program certificate awarded by Udacity for building a production style ETL
+          pipeline in Apache Airflow, including custom operators for staging data from Amazon S3,
+          loading a Redshift data warehouse, and running automated data quality checks.
+        </p>
+        <a href="https://www.udacity.com/certificate/e/55353290-a8a8-11f1-a1b3-37c52abf07c4" target="_blank">View verified credential &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Projects</div>
+      <h2>Selected Work</h2>
+    </div>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <div class="project-media"><img src="assets/gcp-architecture.png" alt="GCP cloud architecture diagram"></div>
+        <div class="project-body">
+          <h3>Cloud Data Architecture on GCP</h3>
+          <p>
+            Designed a Google Cloud Platform architecture and normalized logical data model for an
+            enterprise data solution, then implemented it in BigQuery with a nested transaction
+            schema, loaded real records, and wrote analytical queries to support business decisions.
+          </p>
+          <div class="project-tags">
+            <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Data Modeling</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-media"><img src="assets/regression-bivariate.png" alt="Regression analysis visualization"></div>
+        <div class="project-body">
+          <h3>Predictive Modeling: Regression &amp; PCA</h3>
+          <p>
+            Applied a supervised linear regression approach and a deterministic principal component
+            analysis to reduce dimensionality and generate business recommendations from a real
+            world dataset, as part of the WGU Data Analytics Professional certification work.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">Regression</span><span class="tag">PCA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-media"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
+        <div class="project-body">
+          <h3>ML Experiment Tracking Pipeline</h3>
+          <p>
+            Built a reproducible machine learning pipeline for flight delay prediction with versioned
+            data using DVC, tracked experiments and metrics with MLflow, and automated testing and
+            deployment through a GitLab CI/CD pipeline.
+          </p>
+          <div class="project-tags">
+            <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">GitLab CI/CD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-media placeholder">APACHE AIRFLOW</div>
+        <div class="project-body">
+          <h3>Data Pipelines with Airflow</h3>
+          <p>
+            Engineered four custom Apache Airflow operators and a fully orchestrated DAG that stages
+            JSON data from Amazon S3, loads it into an Amazon Redshift data warehouse, and runs
+            parametrized data quality checks with automatic retry on failure. Completed as a verified
+            Udacity nanodegree certificate.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Python</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">GitHub &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-media placeholder">PROGRAM ANALYSIS</div>
+        <div class="project-body">
+          <h3>Program Implementation Automation</h3>
+          <p>
+            Wrote a Python program to implement and analyze an organizational program dataset,
+            producing structured output used to evaluate program effectiveness and support
+            data driven decisions.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span><span class="tag">Data Analysis</span>
+          </div>
+          <div class="project-links">
+            <a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">GitLab &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-media placeholder">DATA GOVERNANCE</div>
+        <div class="project-body">
+          <h3>Continuous Monitoring &amp; Data Governance Plan</h3>
+          <p>
+            Authored business requirements, key monitoring components, and a continuous monitoring
+            plan for an enterprise data pipeline, covering benchmarks, troubleshooting procedures,
+            and the business benefits of proactive data quality monitoring.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Data Governance</span><span class="tag">Process Design</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Experience</div>
+      <h2>Professional Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Product Enablement Specialist III &amp; Tech Services AI Gem Leader</h3>
+        <div class="meta">Modernizing Medicine, Inc. (Remote) | Feb 2026 to Present</div>
+        <ul>
+          <li>Promoted to Level III to drive AI adoption within the department as a designated Gem Leader.</li>
+          <li>Developed the Fax Flow Assistant, an LLM tool automating compliance review of LOAs with structured document scanning logic.</li>
+          <li>Independently learned Python to build Ask PE, a desktop application with an integrated AI knowledge base for internal SOPs.</li>
+          <li>Analyzed fulfillment data using JQL and Salesforce reporting to identify and prove routing bottlenecks, presenting findings at the CS Town Hall.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Product Enablement Specialist II</h3>
+        <div class="meta">Modernizing Medicine, Inc. (Remote) | Jan 2025 to Jan 2026</div>
+        <ul>
+          <li>Coordinated complex cross functional workflows across Cloud Services, Data Services, and Product Management.</li>
+          <li>Monitored system health logs and analyzed daily automation reporting for enterprise RPA bots.</li>
+          <li>Identified edge cases in Salesforce data and API timeouts, preventing client facing errors and reducing manual labor.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Product Enablement Specialist I</h3>
+        <div class="meta">Modernizing Medicine, Inc. (Remote) | Jan 2023 to Dec 2024</div>
+        <ul>
+          <li>Coordinated the order to activation lifecycle for enterprise clients, ensuring accurate data entry and SLA adherence.</li>
+          <li>Configured client environments using Sysadmin tools, Jenkins, and Jira to support automated onboarding workflows.</li>
+          <li>Awarded Best Team Lead on Implementation in the first year for client deployment and teamwork.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Education</div>
+      <h2>Academic Background</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>Master of Science, Data Analytics and Data Engineering</h3>
+        <div class="meta">Western Governors University | Expected Summer 2027</div>
+      </div>
+      <div class="edu-card">
+        <h3>Bachelor of Applied Science, Data Analytics and Artificial Intelligence</h3>
+        <div class="meta">Broward College | Graduated Dec 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Contact</div>
+      <h2>Let's Connect</h2>
+    </div>
+    <p>
+      I am open to data analytics and data engineering opportunities. Feel free to reach out
+      or take a look at my work below.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:dandre.mcneish@gmail.com">Email</a>
+      <a href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Resume</a>
+      <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
+      <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
+    </div>
+  </div>
+</section>
+
+<footer class="bottom">
+  &copy; 2026 D'Andre McNeish. Built with data, coffee, and a lot of debugging.
+</footer>
+
+</body>
+</html>
