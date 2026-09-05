@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>D'Andre McNeish | Data Analytics &amp; Data Engineering</title>
-<meta name="description" content="D'Andre McNeish, Data Analytics and Data Engineering professional. Portfolio of pipeline engineering, cloud architecture, and predictive modeling projects.">
+<meta name="description" content="D'Andre McNeish, Data Analytics and Data Engineering professional. Interactive portfolio of pipeline engineering, cloud architecture, and predictive modeling projects.">
 <style>
   :root {
     --navy: #0a1e3d;
@@ -16,6 +16,18 @@
     --text-muted: #5b6675;
     --border: #e3e7ed;
     --radius: 10px;
+    --shadow: 0 1px 3px rgba(15,23,42,0.06);
+  }
+  [data-theme="dark"] {
+    --navy: #0d1b2f;
+    --blue: #4c8dff;
+    --blue-light: #6fa4ff;
+    --bg: #0f151f;
+    --card: #171f2c;
+    --text: #e7ecf3;
+    --text-muted: #a3aebd;
+    --border: #2a3444;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -24,28 +36,60 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
+    transition: background .25s ease, color .25s ease;
   }
   a { color: var(--blue); text-decoration: none; }
   a:hover { text-decoration: underline; }
   img { max-width: 100%; display: block; }
-  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
   section { padding: 80px 0; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
 
   /* Nav */
   header.site-nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,0.92);
+    background: var(--card);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
+    transition: background .25s ease, border-color .25s ease;
   }
   .nav-inner {
-    max-width: 1080px; margin: 0 auto; padding: 16px 24px;
+    max-width: 1120px; margin: 0 auto; padding: 16px 24px;
     display: flex; justify-content: space-between; align-items: center;
   }
   .nav-inner .brand { font-weight: 700; color: var(--navy); font-size: 18px; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-right { display: flex; align-items: center; gap: 18px; }
+  .nav-links { display: flex; gap: 26px; list-style: none; }
   .nav-links a { color: var(--text); font-weight: 500; font-size: 15px; }
   .nav-links a:hover { color: var(--blue); text-decoration: none; }
+  .theme-toggle {
+    background: none; border: 1.5px solid var(--border); color: var(--text);
+    border-radius: 20px; padding: 7px 14px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s ease; white-space: nowrap;
+  }
+  .theme-toggle:hover { border-color: var(--blue); color: var(--blue); }
+  .nav-toggle {
+    display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text);
+  }
+
+  @media (max-width: 760px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0; background: var(--card);
+      flex-direction: column; gap: 0; max-height: 0; overflow: hidden;
+      border-bottom: 1px solid var(--border); transition: max-height .25s ease;
+    }
+    .nav-links.open { max-height: 320px; }
+    .nav-links li { border-top: 1px solid var(--border); }
+    .nav-links a { display: block; padding: 14px 24px; }
+  }
 
   /* Hero */
   .hero {
@@ -53,9 +97,7 @@
     color: #fff;
     padding: 90px 0 100px;
   }
-  .hero-inner {
-    display: flex; align-items: center; gap: 48px; flex-wrap: wrap;
-  }
+  .hero-inner { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
   .hero-photo img {
     width: 190px; height: 190px; border-radius: 50%;
     object-fit: cover; border: 4px solid rgba(255,255,255,0.25);
@@ -70,12 +112,20 @@
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
   .btn {
     display: inline-block; padding: 12px 22px; border-radius: 8px;
-    font-weight: 600; font-size: 15px; transition: all .15s ease;
+    font-weight: 600; font-size: 15px; transition: all .15s ease; cursor: pointer; border: none;
   }
   .btn-primary { background: #fff; color: var(--navy); }
   .btn-primary:hover { background: #e8eefc; text-decoration: none; }
-  .btn-outline { border: 1.5px solid rgba(255,255,255,0.6); color: #fff; }
+  .btn-outline { border: 1.5px solid rgba(255,255,255,0.6); color: #fff; background: none; }
   .btn-outline:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+  .btn-chip {
+    background: var(--blue); color: #fff; border: none; padding: 9px 18px; border-radius: 20px;
+    font-weight: 600; font-size: 13.5px; cursor: pointer; transition: all .15s ease;
+  }
+  .btn-chip:hover { background: var(--blue-light); }
+  .btn-chip:disabled { opacity: .6; cursor: default; }
+  .btn-chip.ghost { background: none; border: 1.5px solid var(--border); color: var(--text); }
+  .btn-chip.ghost:hover { border-color: var(--blue); color: var(--blue); }
 
   /* Section headings */
   .section-head { margin-bottom: 40px; }
@@ -84,6 +134,9 @@
     color: var(--blue); font-weight: 700; margin-bottom: 8px;
   }
   .section-head h2 { font-size: 28px; color: var(--navy); font-weight: 700; }
+  [data-theme="dark"] .section-head h2 { color: #fff; }
+
+  .alt-bg { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
   /* About */
   .about-grid { display: flex; gap: 48px; flex-wrap: wrap; }
@@ -93,40 +146,58 @@
   .fact { border-left: 3px solid var(--blue); padding: 8px 0 8px 16px; margin-bottom: 18px; }
   .fact .label { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-muted); }
   .fact .value { font-weight: 600; color: var(--navy); font-size: 15px; }
+  [data-theme="dark"] .fact .value { color: #fff; }
 
   /* Skills */
   .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
   .skill-card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 22px;
+    padding: 22px; box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease;
   }
+  .skill-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(15,23,42,0.1); }
   .skill-card h3 { font-size: 16px; color: var(--navy); margin-bottom: 12px; }
+  [data-theme="dark"] .skill-card h3 { color: #fff; }
   .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
   .tag {
     background: #eef3fc; color: var(--blue); font-size: 13px; font-weight: 600;
     padding: 5px 11px; border-radius: 20px;
   }
+  [data-theme="dark"] .tag { background: rgba(76,141,255,0.15); }
+
+  .learning-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .learning-badge {
+    display: inline-flex; align-items: center; gap: 6px; background: var(--card);
+    border: 1px solid var(--border); padding: 7px 14px; border-radius: 20px; font-size: 13px;
+    color: var(--text-muted); font-weight: 600;
+  }
+  .learning-badge b { color: var(--text); font-weight: 700; }
 
   /* Certification */
   .cert-card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 28px; display: flex; gap: 26px; align-items: center; flex-wrap: wrap;
+    box-shadow: var(--shadow);
   }
   .cert-card img { width: 96px; height: 96px; }
   .cert-body { flex: 1; min-width: 240px; }
   .cert-body h3 { color: var(--navy); font-size: 19px; margin-bottom: 6px; }
+  [data-theme="dark"] .cert-body h3 { color: #fff; }
   .cert-body p { color: var(--text-muted); font-size: 15px; margin-bottom: 10px; }
   .verified-pill {
     display: inline-flex; align-items: center; gap: 6px; background: #e7f7ee; color: #1e8a4c;
     font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
   }
+  [data-theme="dark"] .verified-pill { background: rgba(46,166,98,0.18); color: #6fe0a0; }
 
   /* Projects */
   .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
   .project-card {
     background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    overflow: hidden; display: flex; flex-direction: column;
+    overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
   }
+  .project-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(15,23,42,0.12); }
+  .project-card.wide { grid-column: 1 / -1; }
   .project-media { height: 170px; background: #eef1f5; overflow: hidden; }
   .project-media img { width: 100%; height: 100%; object-fit: cover; }
   .project-media.placeholder {
@@ -134,21 +205,76 @@
     color: var(--blue); font-weight: 700; font-size: 14px; letter-spacing: .5px;
     background: linear-gradient(135deg, #eaf1fd, #dbe8fb);
   }
+  [data-theme="dark"] .project-media.placeholder { background: linear-gradient(135deg, #16233a, #1c2c48); }
   .project-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
   .project-body h3 { color: var(--navy); font-size: 17px; margin-bottom: 8px; }
-  .project-body p { color: var(--text-muted); font-size: 14.5px; margin-bottom: 14px; flex: 1; }
+  [data-theme="dark"] .project-body h3 { color: #fff; }
+  .project-body p { color: var(--text-muted); font-size: 14.5px; margin-bottom: 14px; }
   .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
   .project-tags .tag { font-size: 12px; padding: 4px 9px; }
   .project-links { display: flex; gap: 16px; font-size: 14px; font-weight: 600; }
+  .chart-note { font-size: 13px; color: var(--text-muted); font-style: italic; margin-top: 10px; }
+  .stat-row { display: flex; gap: 24px; flex-wrap: wrap; margin: 14px 0; }
+  .stat-pill {
+    background: #eef3fc; color: var(--navy); font-weight: 700; font-size: 14px;
+    padding: 8px 16px; border-radius: 8px;
+  }
+  [data-theme="dark"] .stat-pill { background: rgba(76,141,255,0.12); color: #fff; }
+
+  /* GCP slideshow */
+  .gcp-slideshow { position: relative; background: #eef1f5; border-radius: 8px; overflow: hidden; }
+  [data-theme="dark"] .gcp-slideshow { background: #0c1420; }
+  .gcp-slideshow img { width: 100%; }
+  .slideshow-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 12px; }
+  #gcpCaption { font-size: 13.5px; color: var(--text-muted); flex: 1; }
+
+  /* Pipeline tabs */
+  .pipeline-tab-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .pipeline-tab-btn {
+    background: none; border: 1.5px solid var(--border); color: var(--text-muted);
+    padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .pipeline-tab-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .pipeline-tab-panel { display: none; }
+  .pipeline-tab-panel.active { display: block; }
+  .pipeline-tab-panel p { color: var(--text-muted); font-size: 14.5px; }
+
+  /* Airflow DAG demo */
+  .dag-demo { padding-top: 4px; }
+  .dag-nodes { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .dag-node {
+    background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; font-size: 13px; font-weight: 700; color: var(--text-muted);
+    transition: all .25s ease; text-align: center; min-width: 120px;
+  }
+  .dag-node span { display: block; font-size: 11px; font-weight: 500; margin-top: 3px; }
+  .dag-node.active { background: var(--blue); border-color: var(--blue); color: #fff; transform: scale(1.06); }
+  .dag-node.done { background: #e7f7ee; border-color: #b6e6c8; color: #1e8a4c; }
+  [data-theme="dark"] .dag-node.done { background: rgba(46,166,98,0.15); border-color: rgba(46,166,98,0.35); color: #6fe0a0; }
+  .dag-arrow { color: var(--text-muted); font-weight: 700; }
+  .dag-log {
+    background: #0c1420; color: #7fe3a1; font-family: "SF Mono", Consolas, monospace; font-size: 12.5px;
+    padding: 14px; border-radius: 8px; min-height: 90px; max-height: 140px; overflow-y: auto;
+    white-space: pre-wrap; margin-bottom: 10px;
+  }
+
+  /* Chart canvases */
+  .chart-wrap { background: var(--bg); border-radius: 8px; padding: 14px; margin-bottom: 8px; }
+  canvas { max-width: 100%; }
 
   /* Experience */
   .timeline { border-left: 2px solid var(--border); padding-left: 28px; }
+  .timeline-group {
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 12.5px;
+    font-weight: 700; margin: 8px 0 20px;
+  }
   .timeline-item { margin-bottom: 32px; position: relative; }
   .timeline-item::before {
     content: ""; position: absolute; left: -34px; top: 4px;
     width: 12px; height: 12px; border-radius: 50%; background: var(--blue);
   }
   .timeline-item h3 { color: var(--navy); font-size: 17px; }
+  [data-theme="dark"] .timeline-item h3 { color: #fff; }
   .timeline-item .meta { color: var(--text-muted); font-size: 14px; margin-bottom: 10px; }
   .timeline-item ul { padding-left: 20px; color: var(--text-muted); font-size: 14.5px; }
   .timeline-item li { margin-bottom: 6px; }
@@ -159,6 +285,7 @@
     background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px;
   }
   .edu-card h3 { color: var(--navy); font-size: 16px; margin-bottom: 4px; }
+  [data-theme="dark"] .edu-card h3 { color: #fff; }
   .edu-card .meta { color: var(--text-muted); font-size: 14px; }
 
   /* Contact / Footer */
@@ -169,7 +296,7 @@
   .contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
   .contact-links a {
     color: #fff; border: 1.5px solid rgba(255,255,255,0.35); padding: 10px 18px;
-    border-radius: 8px; font-weight: 600; font-size: 14.5px;
+    border-radius: 8px; font-weight: 600; font-size: 14.5px; transition: background .15s ease;
   }
   .contact-links a:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
   footer.bottom {
@@ -181,6 +308,7 @@
     .hero-inner { flex-direction: column; text-align: center; }
     .hero-actions { justify-content: center; }
     .about-grid { flex-direction: column; }
+    .dag-node { min-width: 90px; font-size: 11.5px; }
   }
 </style>
 </head>
@@ -189,13 +317,17 @@
 <header class="site-nav">
   <div class="nav-inner">
     <div class="brand">D'Andre McNeish</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu">&#9776;</button>
+    </div>
   </div>
 </header>
 
@@ -209,7 +341,8 @@
       <h1>D'Andre McNeish</h1>
       <p class="tagline">
         I build reliable data pipelines, cloud data architectures, and predictive models
-        that turn raw data into decisions organizations can act on.
+        that turn raw data into decisions organizations can act on. Scroll down for interactive,
+        clickable demos of the actual work, not just screenshots.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Download Resume</a>
@@ -220,7 +353,7 @@
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">About</div>
@@ -232,21 +365,24 @@
           I am a data analytics and data engineering professional pursuing a Master of Science in
           Data Analytics and Data Engineering at Western Governors University, building on a
           Bachelor of Applied Science in Data Analytics and Artificial Intelligence from Broward College.
-          I hold the WGU Data Analytics Professional Certificate, demonstrating hands on competence
-          in the full data analytics lifecycle, statistical data mining, and data storytelling.
+          I hold the WGU Data Analytics Professional Certificate and a verified Udacity nanodegree
+          certificate in Data Pipelines with Airflow, demonstrating hands on competence across the
+          full data lifecycle, from pipeline engineering to statistical modeling to data storytelling.
         </p>
         <p>
           My project work spans building production style ETL pipelines in Apache Airflow, designing
-          cloud data warehouse architectures on Google Cloud Platform, applying linear and logistic
-          regression and principal component analysis to real business scenarios, and tracking
-          reproducible machine learning experiments with MLflow and DVC.
+          cloud data warehouse architectures on Google Cloud Platform, applying linear regression and
+          principal component analysis to real business scenarios, and tracking reproducible machine
+          learning experiments with MLflow and DVC. Every project below is interactive, so you can
+          explore the actual data and logic rather than a static screenshot.
         </p>
         <p>
           Alongside my studies, I work in product enablement at Modernizing Medicine, where I lead
           AI adoption efforts, build LLM powered internal tools in Python, and use JQL and Salesforce
-          reporting to analyze operational data and resolve process bottlenecks. I am looking to bring
-          that same combination of technical depth and clear communication to a data analytics or
-          data engineering role.
+          reporting to analyze operational data and resolve process bottlenecks. Before moving into
+          data and product work, I spent several years in technical support and customer operations
+          roles, which is where I first learned to diagnose problems methodically, a habit that carried
+          straight into data engineering and analytics.
         </p>
       </div>
       <div class="about-facts">
@@ -264,14 +400,14 @@
         </div>
         <div class="fact">
           <div class="label">Certified</div>
-          <div class="value">WGU Data Analytics Professional</div>
+          <div class="value">WGU Data Analytics Professional, Udacity Data Pipelines with Airflow</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="skills" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+<section id="skills" class="alt-bg reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Skills</div>
@@ -297,6 +433,7 @@
           <span class="tag">BigQuery</span>
           <span class="tag">AWS S3</span>
           <span class="tag">Docker</span>
+          <span class="tag">Azure Databricks</span>
           <span class="tag">GitLab CI/CD</span>
         </div>
       </div>
@@ -322,10 +459,17 @@
         </div>
       </div>
     </div>
+    <div class="learning-badges">
+      <span class="learning-badge"><b>LinkedIn Learning:</b> PySpark Essential Training</span>
+      <span class="learning-badge"><b>LinkedIn Learning:</b> Databricks for Data Engineering</span>
+      <span class="learning-badge"><b>LinkedIn Learning:</b> Airflow Pipeline Management</span>
+      <span class="learning-badge"><b>LinkedIn Learning:</b> Tableau Essential Training</span>
+      <span class="learning-badge"><b>LinkedIn Learning:</b> Preventing Scope Creep</span>
+    </div>
   </div>
 </section>
 
-<section id="certifications">
+<section id="certifications" class="reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Certifications</div>
@@ -345,7 +489,7 @@
         <a href="https://wgu.badges.parchment.com/public/assertions/HulL6v6HTrytM9MMs82xQA?identity__email=dmcnei29@wgu.edu" target="_blank">View verified credential &rarr;</a>
       </div>
     </div>
-    <div class="cert-card">
+    <div class="cert-card" style="margin-bottom: 20px;">
       <div class="cert-body">
         <span class="verified-pill">&#10003; Verified by Udacity</span>
         <h3>Data Pipelines with Airflow (WGU D608 Data Processing)</h3>
@@ -357,73 +501,158 @@
         <a href="https://www.udacity.com/certificate/e/55353290-a8a8-11f1-a1b3-37c52abf07c4" target="_blank">View verified credential &rarr;</a>
       </div>
     </div>
+    <div class="cert-card">
+      <div class="cert-body">
+        <span class="verified-pill">&#10003; Verified by CompTIA</span>
+        <h3>Competency in AI Agent Essentials</h3>
+        <p>
+          Credential ID 6-3C6-DTEWP. Validates foundational knowledge of how AI agents are designed,
+          deployed, and governed, complementing hands on LLM tooling work built at ModMed.
+        </p>
+        <a href="https://certification.platform.comptia.org/verifycert/6-3C6-DTEWP" target="_blank">View verified credential &rarr;</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="projects" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+<section id="projects" class="alt-bg reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Projects</div>
       <h2>Selected Work</h2>
+      <p style="color:var(--text-muted); max-width: 640px; margin-top: 8px; font-size: 15px;">
+        Every card below is interactive. Click, drag the toggles, or press play to see the actual
+        logic behind each project instead of just a picture of it.
+      </p>
     </div>
     <div class="project-grid">
 
-      <div class="project-card">
-        <div class="project-media"><img src="assets/gcp-architecture.png" alt="GCP cloud architecture diagram"></div>
+      <div class="project-card wide">
         <div class="project-body">
           <h3>Cloud Data Architecture on GCP</h3>
           <p>
             Designed a Google Cloud Platform architecture and normalized logical data model for an
             enterprise data solution, then implemented it in BigQuery with a nested transaction
             schema, loaded real records, and wrote analytical queries to support business decisions.
+            Use the arrows to flip between the architecture view and the logical data model.
           </p>
-          <div class="project-tags">
+          <div class="gcp-slideshow" id="gcpSlideshow">
+            <img src="assets/gcp-architecture.png" alt="GCP architecture diagram" style="display:block;">
+            <img src="assets/gcp-logical-diagram.png" alt="Normalized logical data diagram" style="display:none;">
+          </div>
+          <div class="slideshow-controls">
+            <button id="gcpPrev" class="btn-chip ghost" type="button">&larr; Prev</button>
+            <span id="gcpCaption">Architecture diagram: how data flows from ingestion into BigQuery.</span>
+            <button id="gcpNext" class="btn-chip ghost" type="button">Next &rarr;</button>
+          </div>
+          <div class="project-tags" style="margin-top:16px;">
             <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Data Modeling</span>
           </div>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-media"><img src="assets/regression-bivariate.png" alt="Regression analysis visualization"></div>
+      <div class="project-card wide">
         <div class="project-body">
           <h3>Predictive Modeling: Regression &amp; PCA</h3>
           <p>
-            Applied a supervised linear regression approach and a deterministic principal component
-            analysis to reduce dimensionality and generate business recommendations from a real
-            world dataset, as part of the WGU Data Analytics Professional certification work.
+            Real housing data (7,000 records). Each dot below is one actual home from the dataset used
+            for the WGU Data Analytics Professional certification. The line is a genuine linear
+            regression fit computed from that data, not a mockup.
           </p>
-          <div class="project-tags">
-            <span class="tag">Python</span><span class="tag">Regression</span><span class="tag">PCA</span>
+          <div class="stat-row">
+            <span class="stat-pill" id="r2Stat">R&sup2; = &hellip;</span>
+            <span class="stat-pill" id="slopeStat">&hellip;</span>
+          </div>
+          <div class="chart-wrap"><canvas id="regressionChart" height="220"></canvas></div>
+          <button id="toggleLineBtn" class="btn-chip ghost" type="button">Hide regression line</button>
+          <p class="chart-note">Plain language: as square footage goes up, price tends to go up too. The
+            line is the trend line Python fit automatically from the data.</p>
+
+          <h3 style="margin-top:28px;">Principal Component Analysis</h3>
+          <p>
+            Real eigenvalues from the same housing dataset, reduced to 7 standardized variables.
+            Bars in blue are the components that pass the Kaiser rule (eigenvalue greater than 1) and
+            were kept in the final model; gray bars were dropped.
+          </p>
+          <div class="chart-wrap"><canvas id="pcaChart" height="200"></canvas></div>
+          <p class="chart-note">Plain language: PCA looks for the handful of underlying patterns that
+            explain most of the variation in the data, so you can work with fewer variables without
+            losing much information. Here, 2 of 7 components were worth keeping.</p>
+          <div class="project-tags" style="margin-top:8px;">
+            <span class="tag">Python</span><span class="tag">Regression</span><span class="tag">PCA</span><span class="tag">Real Data</span>
           </div>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-media"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
+      <div class="project-card wide">
         <div class="project-body">
           <h3>ML Experiment Tracking Pipeline</h3>
           <p>
             Built a reproducible machine learning pipeline for flight delay prediction with versioned
             data using DVC, tracked experiments and metrics with MLflow, and automated testing and
-            deployment through a GitLab CI/CD pipeline.
+            deployment through a GitLab CI/CD pipeline. Click each stage below to see what happens.
           </p>
-          <div class="project-tags">
+          <div class="pipeline-tab-nav">
+            <button class="pipeline-tab-btn active" data-target="tab-import" type="button">1. Import</button>
+            <button class="pipeline-tab-btn" data-target="tab-clean" type="button">2. Clean</button>
+            <button class="pipeline-tab-btn" data-target="tab-train" type="button">3. Train</button>
+            <button class="pipeline-tab-btn" data-target="tab-track" type="button">4. Track</button>
+            <button class="pipeline-tab-btn" data-target="tab-deploy" type="button">5. Deploy</button>
+          </div>
+          <div id="tab-import" class="pipeline-tab-panel active">
+            <p>Pulls raw flight delay records for the chosen airport from the Bureau of Transportation
+              Statistics and versions the raw file with DVC, so every run points at the exact same
+              dataset, byte for byte.</p>
+          </div>
+          <div id="tab-clean" class="pipeline-tab-panel">
+            <p>Filters and cleans the raw records, handles missing values and outliers, and versions
+              the cleaned dataset separately, so the entire transformation is fully reproducible.</p>
+          </div>
+          <div id="tab-train" class="pipeline-tab-panel">
+            <p>Trains a flight delay prediction model on the cleaned data, saving the trained model as
+              a versioned artifact ready for deployment.</p>
+          </div>
+          <div id="tab-track" class="pipeline-tab-panel">
+            <p>MLflow records every run automatically, parameters, metrics, and artifacts, so past
+              experiments always stay comparable. Below is a real run captured from this project.</p>
+            <img src="assets/mlflow-run.png" alt="MLflow experiment tracking run" style="border-radius:8px;margin-top:12px;">
+          </div>
+          <div id="tab-deploy" class="pipeline-tab-panel">
+            <p>Packages the trained model behind a FastAPI endpoint inside Docker, then tests and
+              deploys it automatically through a GitLab CI/CD pipeline on every push.</p>
+          </div>
+          <div class="project-tags" style="margin-top:16px;">
             <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">GitLab CI/CD</span>
           </div>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-media placeholder">APACHE AIRFLOW</div>
+      <div class="project-card wide">
         <div class="project-body">
           <h3>Data Pipelines with Airflow</h3>
           <p>
             Engineered four custom Apache Airflow operators and a fully orchestrated DAG that stages
             JSON data from Amazon S3, loads it into an Amazon Redshift data warehouse, and runs
             parametrized data quality checks with automatic retry on failure. Completed as a verified
-            Udacity nanodegree certificate.
+            Udacity nanodegree certificate. Press play below for a simplified walkthrough of what the
+            real DAG does each run.
           </p>
-          <div class="project-tags">
+          <div class="dag-demo">
+            <div class="dag-nodes">
+              <div class="dag-node" data-node="stage">Stage<span>S3 &rarr; Redshift</span></div>
+              <div class="dag-arrow">&rarr;</div>
+              <div class="dag-node" data-node="fact">Load Fact<span>songplays</span></div>
+              <div class="dag-arrow">&rarr;</div>
+              <div class="dag-node" data-node="dim">Load Dimensions<span>users, songs, time</span></div>
+              <div class="dag-arrow">&rarr;</div>
+              <div class="dag-node" data-node="quality">Data Quality<span>row + null checks</span></div>
+            </div>
+            <button id="dagRunBtn" class="btn-chip" type="button">Run Pipeline</button>
+            <pre id="dagLog" class="dag-log"></pre>
+          </div>
+          <p class="chart-note">This is a simplified visual walkthrough, not a live cluster. The real
+            operator code is on GitHub.</p>
+          <div class="project-tags" style="margin-top:10px;">
             <span class="tag">Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Python</span>
           </div>
           <div class="project-links">
@@ -469,7 +698,7 @@
   </div>
 </section>
 
-<section id="experience">
+<section id="experience" class="reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Experience</div>
@@ -504,11 +733,50 @@
           <li>Awarded Best Team Lead on Implementation in the first year for client deployment and teamwork.</li>
         </ul>
       </div>
+
+      <div class="timeline-group">Earlier Experience</div>
+
+      <div class="timeline-item">
+        <h3>Pharmacy Service Representative</h3>
+        <div class="meta">CVS Specialty (Contract) | Oct 2022 to Jan 2023</div>
+        <ul>
+          <li>Established patient eligibility, finalized insurance modifications, and communicated coverage details to patients.</li>
+          <li>Cleared rejected insurance claims to keep medication delivery on schedule.</li>
+          <li>Reconciled pharmacy prescription records against reimbursed claims to catch inconsistencies.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Technical Support Specialist</h3>
+        <div class="meta">Houghton Mifflin Harcourt | Jun 2022 to Nov 2022</div>
+        <ul>
+          <li>Supported district and school administrators, instructors, and corporate departments with technical and account issues.</li>
+          <li>Used the corporate database to manage customer accounts, update data, and reset passwords.</li>
+          <li>Supported school districts with bulk imports of student, teacher, and administrator accounts, and trained administrators on account management systems.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>AppleCare Technical Support Advisor</h3>
+        <div class="meta">Apple | Sep 2021 to May 2022</div>
+        <ul>
+          <li>Diagnosed and resolved software issues on Mac computers using Activity Monitor, Console, and other diagnostic tools.</li>
+          <li>Helped customers configure and troubleshoot cloud sync across Apple devices.</li>
+          <li>Supported iPhone, iPad, and iPod customers with hardware repair scheduling and troubleshooting.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>Technical Support Specialist</h3>
+        <div class="meta">Teleperformance (Mercedes-Benz USA account) | Aug 2020 to Jun 2021</div>
+        <ul>
+          <li>Supported Mercedes me connect app users on 2019 and newer models, managing cases for Mercedes-Benz USA.</li>
+          <li>Collaborated with the Maastricht, Germany IT department to resolve connected car application issues.</li>
+          <li>Investigated and resolved a wide range of software, hardware, and connectivity issues.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="education" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+<section id="education" class="alt-bg reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Education</div>
@@ -523,11 +791,15 @@
         <h3>Bachelor of Applied Science, Data Analytics and Artificial Intelligence</h3>
         <div class="meta">Broward College | Graduated Dec 2025</div>
       </div>
+      <div class="edu-card">
+        <h3>Associate of Arts and Sciences, Information Technology</h3>
+        <div class="meta">Broward College | Aug 2016 to May 2019 &middot; 3.8 GPA</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="contact">
+<section id="contact" class="contact reveal">
   <div class="container">
     <div class="section-head">
       <div class="kicker">Contact</div>
@@ -535,11 +807,12 @@
     </div>
     <p>
       I am open to data analytics and data engineering opportunities. Feel free to reach out
-      or take a look at my work below.
+      or take a look at my work above.
     </p>
     <div class="contact-links">
-      <a href="mailto:dandre.mcneish@gmail.com">Email</a>
+      <a href="mailto:dmcneish365@gmail.com">Email</a>
       <a href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Resume</a>
+      <a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
       <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
       <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
     </div>
@@ -549,6 +822,180 @@
 <footer class="bottom">
   &copy; 2026 D'Andre McNeish. Built with data, coffee, and a lot of debugging.
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>
+(function () {
+  var root = document.documentElement;
+  var saved = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved) { root.setAttribute('data-theme', saved); }
+  else if (prefersDark) { root.setAttribute('data-theme', 'dark'); }
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var toggle = document.getElementById('themeToggle');
+    function updateToggleLabel() {
+      var isDark = root.getAttribute('data-theme') === 'dark';
+      toggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+    }
+    updateToggleLabel();
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateToggleLabel();
+    });
+
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function () { navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { navLinks.classList.remove('open'); });
+    });
+
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      revealEls.forEach(function (el) { io.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('visible'); });
+    }
+
+    var slides = document.querySelectorAll('#gcpSlideshow img');
+    var captions = [
+      'Architecture diagram: how data flows from ingestion into BigQuery.',
+      'Logical data model: the normalized schema behind the warehouse.'
+    ];
+    var slideIndex = 0;
+    function showSlide(i) {
+      slides.forEach(function (s, idx) { s.style.display = idx === i ? 'block' : 'none'; });
+      document.getElementById('gcpCaption').textContent = captions[i];
+    }
+    document.getElementById('gcpPrev').addEventListener('click', function () {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    });
+    document.getElementById('gcpNext').addEventListener('click', function () {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    });
+
+    var tabButtons = document.querySelectorAll('.pipeline-tab-btn');
+    var tabPanels = document.querySelectorAll('.pipeline-tab-panel');
+    tabButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tabButtons.forEach(function (b) { b.classList.remove('active'); });
+        tabPanels.forEach(function (p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+      });
+    });
+
+    var runBtn = document.getElementById('dagRunBtn');
+    var dagLog = document.getElementById('dagLog');
+    var steps = [
+      { node: 'stage', text: 'StageToRedshiftOperator: copying raw JSON events from Amazon S3 into Redshift staging tables...' },
+      { node: 'fact', text: 'LoadFactOperator: building the songplays fact table from the staged events...' },
+      { node: 'dim', text: 'LoadDimensionOperator: building the users, songs, artists, and time dimension tables...' },
+      { node: 'quality', text: 'DataQualityOperator: checking every table has rows and no NULL keys... PASSED' }
+    ];
+    runBtn.addEventListener('click', function () {
+      runBtn.disabled = true;
+      runBtn.textContent = 'Running...';
+      document.querySelectorAll('.dag-node').forEach(function (n) { n.classList.remove('active', 'done'); });
+      dagLog.textContent = '';
+      var i = 0;
+      function step() {
+        if (i > 0) {
+          var prevNode = document.querySelector('[data-node="' + steps[i - 1].node + '"]');
+          if (prevNode) { prevNode.classList.remove('active'); prevNode.classList.add('done'); }
+        }
+        if (i < steps.length) {
+          var s = steps[i];
+          var node = document.querySelector('[data-node="' + s.node + '"]');
+          if (node) { node.classList.add('active'); }
+          dagLog.textContent += s.text + '\n';
+          dagLog.scrollTop = dagLog.scrollHeight;
+          i++;
+          setTimeout(step, 1000);
+        } else {
+          runBtn.disabled = false;
+          runBtn.textContent = 'Run Pipeline Again';
+        }
+      }
+      step();
+    });
+
+    if (window.Chart) {
+      fetch('assets/regression_sample.json').then(function (r) { return r.json(); }).then(function (data) {
+        var scatterData = data.points.map(function (p) { return { x: p.x, y: p.y }; });
+        var xs = data.points.map(function (p) { return p.x; });
+        var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+        var lineData = [
+          { x: minX, y: data.slope * minX + data.intercept },
+          { x: maxX, y: data.slope * maxX + data.intercept }
+        ];
+        var ctx = document.getElementById('regressionChart');
+        var lineVisible = true;
+        var chart = new Chart(ctx, {
+          type: 'scatter',
+          data: {
+            datasets: [
+              { label: 'Homes (real data)', data: scatterData, backgroundColor: 'rgba(31,95,191,0.55)', pointRadius: 3 },
+              { label: 'Regression line', data: lineData, type: 'line', borderColor: '#0a1e3d', borderWidth: 2, pointRadius: 0, fill: false }
+            ]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { position: 'bottom' } },
+            scales: {
+              x: { title: { display: true, text: 'Square Footage' } },
+              y: { title: { display: true, text: 'Price ($)' } }
+            }
+          }
+        });
+        document.getElementById('r2Stat').textContent = 'R² = ' + data.r2.toFixed(3);
+        document.getElementById('slopeStat').textContent = '+$' + Math.round(data.slope) + ' per sq ft';
+        document.getElementById('toggleLineBtn').addEventListener('click', function () {
+          lineVisible = !lineVisible;
+          chart.data.datasets[1].hidden = !lineVisible;
+          chart.update();
+          this.textContent = lineVisible ? 'Hide regression line' : 'Show regression line';
+        });
+      });
+
+      fetch('assets/pca_scree.json').then(function (r) { return r.json(); }).then(function (data) {
+        var ctx2 = document.getElementById('pcaChart');
+        new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: data.labels,
+            datasets: [{
+              label: 'Eigenvalue',
+              data: data.eigenvalues,
+              backgroundColor: data.eigenvalues.map(function (v) { return v > 1 ? '#1f5fbf' : '#c7d4e8'; })
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: function (c) { return 'Eigenvalue: ' + c.parsed.y.toFixed(3); } } }
+            },
+            scales: { y: { title: { display: true, text: 'Eigenvalue' } } }
+          }
+        });
+      });
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
