@@ -3,1181 +3,658 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D'Andre McNeish | Data Analytics &amp; Data Engineering</title>
-<meta name="description" content="D'Andre McNeish, Data Analytics and Data Engineering professional. A workshop of real, testable tools built from real project data and real code.">
+<title>D'Andre McNeish | Data Engineer</title>
+<meta name="description" content="D'Andre McNeish, data engineer. Pipelines, cloud architecture, and applied modeling, with working demos built on real data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f5efe4;
-    --paper-raised: #fffcf6;
-    --ink: #201c16;
-    --ink-soft: #5c5346;
-    --ink-faint: #948a78;
-    --accent: #c1502e;
-    --accent-dark: #8f3a1f;
-    --teal: #23473f;
-    --teal-light: #35695c;
-    --border: #ddd2ba;
-    --code-bg: #201c16;
-    --radius: 6px;
-    --serif: 'Fraunces', Georgia, serif;
+    --bg: #0a0e14;
+    --bg-raised: #111722;
+    --text: #b9c2cf;
+    --heading: #eef2f6;
+    --muted: #79879c;
+    --accent: #2dd4bf;
+    --border: #1e2733;
     --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
   }
-  [data-theme="dark"] {
-    --paper: #17140f;
-    --paper-raised: #201c15;
-    --ink: #f2ead9;
-    --ink-soft: #b7ab93;
-    --ink-faint: #7d7461;
-    --accent: #e2703f;
-    --accent-dark: #f08a5d;
-    --teal: #16302a;
-    --teal-light: #9fc2b7;
-    --border: #372f24;
+  [data-theme="light"] {
+    --bg: #f7f9fb;
+    --bg-raised: #ffffff;
+    --text: #47536b;
+    --heading: #10141c;
+    --muted: #6b7688;
+    --accent: #0e8074;
+    --border: #e2e7ee;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--sans);
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.65;
     font-size: 16px;
-    transition: background .25s ease, color .25s ease;
+    transition: background .2s ease, color .2s ease;
   }
-  h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
+  h1, h2, h3 { font-family: var(--sans); font-weight: 700; color: var(--heading); letter-spacing: -0.01em; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   img { max-width: 100%; display: block; }
-  .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-  section { padding: 96px 0; }
-  code, pre { font-family: "SF Mono", Consolas, monospace; }
+  code, .mono { font-family: var(--mono); }
+  ::selection { background: var(--accent); color: #04201c; }
 
-  .index-label {
-    font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 2px;
-    color: var(--accent); margin-bottom: 10px; text-transform: uppercase;
+  .layout { max-width: 1200px; margin: 0 auto; display: flex; gap: 0; min-height: 100vh; }
+  .sidebar {
+    width: 340px; flex-shrink: 0; padding: 64px 40px; position: sticky; top: 0; height: 100vh;
+    display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border);
   }
+  .sidebar-top h1 { font-size: 27px; margin-bottom: 8px; }
+  .sidebar-top .role { font-size: 16px; color: var(--text); margin-bottom: 18px; }
+  .sidebar-top p.blurb { font-size: 14.5px; color: var(--muted); margin-bottom: 34px; max-width: 280px; }
+  .side-nav { list-style: none; }
+  .side-nav li { margin-bottom: 4px; }
+  .side-nav a {
+    display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; font-weight: 600;
+    padding: 9px 0; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .side-nav a .num { font-family: var(--mono); color: var(--muted); font-size: 12px; }
+  .side-nav a:hover, .side-nav a.active { color: var(--heading); text-decoration: none; }
+  .side-nav a:hover .num, .side-nav a.active .num { color: var(--accent); }
 
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-    html { scroll-behavior: auto; }
-  }
-
-  /* Nav */
-  header.site-nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--paper); border-bottom: 1px solid var(--border);
-  }
-  .nav-inner { max-width: 1080px; margin: 0 auto; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; }
-  .nav-inner .brand { font-family: var(--serif); font-weight: 600; color: var(--ink); font-size: 20px; }
-  .nav-right { display: flex; align-items: center; gap: 22px; }
-  .nav-links { display: flex; gap: 30px; list-style: none; }
-  .nav-links a {
-    color: var(--ink-soft); font-weight: 500; font-size: 14.5px; text-decoration: none;
-    padding-bottom: 3px; border-bottom: 1.5px solid transparent; transition: all .15s ease;
-  }
-  .nav-links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+  .sidebar-bottom { display: flex; flex-direction: column; gap: 18px; }
+  .social-row { display: flex; gap: 18px; }
+  .social-row a { color: var(--muted); font-size: 13px; font-weight: 600; }
+  .social-row a:hover { color: var(--accent); text-decoration: none; }
   .theme-toggle {
-    background: none; border: 1.5px solid var(--border); color: var(--ink);
-    border-radius: var(--radius); padding: 7px 14px; font-size: 13px; font-weight: 600;
-    cursor: pointer; font-family: var(--sans); white-space: nowrap;
-  }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-  .nav-toggle { display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--ink); }
-
-  @media (max-width: 760px) {
-    .nav-toggle { display: block; }
-    .nav-links {
-      position: absolute; top: 100%; left: 0; right: 0; background: var(--paper);
-      flex-direction: column; gap: 0; max-height: 0; overflow: hidden;
-      border-bottom: 1px solid var(--border); transition: max-height .25s ease;
-    }
-    .nav-links.open { max-height: 320px; }
-    .nav-links li { border-top: 1px solid var(--border); }
-    .nav-links a { display: block; padding: 14px 28px; border-bottom: none; }
-  }
-
-  /* Hero */
-  .hero { background: var(--teal); color: var(--paper); padding: 100px 0 110px; }
-  [data-theme="dark"] .hero { color: var(--ink); }
-  .hero-inner { display: flex; align-items: center; gap: 56px; flex-wrap: wrap; }
-  .hero-photo img {
-    width: 176px; height: 176px; object-fit: cover; border-radius: 4px;
-    transform: rotate(-2.5deg); border: 6px solid var(--paper-raised); box-shadow: 0 14px 30px rgba(0,0,0,0.25);
-  }
-  .hero-text { flex: 1; min-width: 280px; }
-  .hero-text .eyebrow {
-    text-transform: uppercase; letter-spacing: 2px; font-size: 13px;
-    color: #e8a37e; font-weight: 700; margin-bottom: 14px;
-  }
-  .hero-text h1 { font-size: 46px; line-height: 1.08; margin-bottom: 16px; }
-  .hero-text h1 em { font-style: italic; color: #e8a37e; }
-  .hero-text p.tagline { font-size: 18px; color: #d9d2c2; max-width: 560px; margin-bottom: 30px; }
-  [data-theme="dark"] .hero-text p.tagline { color: var(--ink-soft); }
-  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn {
-    display: inline-block; padding: 12px 22px; border-radius: var(--radius);
-    font-weight: 600; font-size: 15px; transition: all .15s ease; cursor: pointer; border: 1.5px solid transparent;
+    align-self: flex-start; background: none; border: 1px solid var(--border); color: var(--muted);
+    border-radius: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
     font-family: var(--sans);
   }
-  .btn-primary { background: var(--accent); color: #fff !important; text-decoration:none; }
-  .btn-primary:hover { background: var(--accent-dark); text-decoration: none; }
-  .btn-outline { border-color: rgba(255,255,255,0.4); color: #fff !important; text-decoration:none; }
-  [data-theme="dark"] .btn-outline { border-color: var(--border); color: var(--ink) !important; }
-  .btn-outline:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-  .btn-chip {
-    background: var(--ink); color: var(--paper); border: none; padding: 10px 18px; border-radius: var(--radius);
-    font-weight: 600; font-size: 13.5px; cursor: pointer; font-family: var(--sans); transition: background .15s ease;
+  .content { flex: 1; min-width: 0; padding: 64px 56px 120px; }
+  section { padding-bottom: 96px; scroll-margin-top: 24px; }
+  .section-title {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 30px;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--heading);
   }
-  .btn-chip:hover { background: var(--accent); }
-  .btn-chip:disabled { opacity: .55; cursor: default; }
-  .btn-chip.ghost { background: none; border: 1.5px solid var(--border); color: var(--ink); }
-  .btn-chip.ghost:hover { border-color: var(--accent); color: var(--accent); background: none; }
-  .btn-chip.accent { background: var(--accent); }
-  .btn-chip.accent:hover { background: var(--accent-dark); }
+  .section-title .num { color: var(--accent); font-family: var(--mono); font-weight: 500; }
+  .section-title .rule { flex: 1; height: 1px; background: var(--border); }
 
-  .section-head { margin-bottom: 44px; max-width: 640px; }
-  .section-head h2 { font-size: 30px; color: var(--ink); }
-  .section-head .sub { color: var(--ink-soft); font-size: 15.5px; margin-top: 10px; }
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 
-  .alt-bg { background: var(--paper-raised); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .lede { font-size: 17px; color: var(--text); max-width: 640px; margin-bottom: 20px; }
+  .lede strong { color: var(--heading); }
+  p.body-text { color: var(--muted); font-size: 15px; max-width: 640px; margin-bottom: 16px; }
 
-  /* About */
-  .about-grid { display: flex; gap: 56px; flex-wrap: wrap; }
-  .about-text { flex: 2; min-width: 300px; color: var(--ink-soft); font-size: 16.5px; }
-  .about-text p { margin-bottom: 18px; }
-  .about-text .lede { font-family: var(--serif); font-size: 22px; color: var(--ink); line-height: 1.5; margin-bottom: 22px; }
-  .about-facts { flex: 1; min-width: 220px; }
-  .fact { border-left: 3px solid var(--accent); padding: 6px 0 6px 16px; margin-bottom: 20px; }
-  .fact .label { font-size: 12.5px; text-transform: uppercase; letter-spacing: .8px; color: var(--ink-faint); }
-  .fact .value { font-weight: 600; color: var(--ink); font-size: 15px; font-family: var(--serif); }
-
-  /* Skills */
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .skill-card { background: var(--paper-raised); padding: 24px; }
-  .skill-card h3 { font-size: 15px; color: var(--ink); margin-bottom: 14px; font-family: var(--sans); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .tag {
-    background: none; color: var(--ink-soft); font-size: 12.5px; font-weight: 600;
-    padding: 5px 10px; border-radius: 4px; border: 1px solid var(--border);
-  }
-  .tag.on-accent { border-color: var(--accent); color: var(--accent); }
-
-  .learning-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-  .learning-badge {
-    display: inline-flex; align-items: center; gap: 6px; background: none;
-    border: 1px dashed var(--border); padding: 7px 14px; border-radius: 4px; font-size: 12.5px;
-    color: var(--ink-soft); font-weight: 600;
-  }
-  .learning-badge b { color: var(--ink); font-weight: 700; }
-
-  /* Certification */
-  .cert-list { border-top: 1px solid var(--border); }
-  .cert-row {
-    display: flex; gap: 24px; align-items: flex-start; padding: 26px 0; border-bottom: 1px solid var(--border);
-  }
-  .cert-row img { width: 64px; height: 64px; flex-shrink: 0; }
-  .cert-row-icon {
-    width: 64px; height: 64px; flex-shrink: 0; border-radius: 4px; background: var(--teal);
-    display: flex; align-items: center; justify-content: center; color: var(--paper); font-family: var(--serif);
-    font-weight: 700; font-size: 22px;
-  }
-  .cert-body h3 { color: var(--ink); font-size: 18px; margin-bottom: 6px; }
-  .cert-body p { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 8px; }
-  .verified-pill {
-    display: inline-flex; align-items: center; gap: 6px; color: var(--teal-light);
-    font-size: 12.5px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px;
+    font-family: var(--mono); font-size: 12px; color: var(--accent); border: 1px solid var(--border);
+    background: var(--bg-raised); padding: 5px 10px; border-radius: 4px;
   }
 
-  /* Projects: editorial case-study blocks */
-  .case {
-    padding: 64px 0; border-bottom: 1px solid var(--border);
-  }
-  .case:last-child { border-bottom: none; }
-  .case-head { display: flex; gap: 22px; align-items: baseline; margin-bottom: 24px; flex-wrap: wrap; }
-  .case-num { font-family: var(--serif); font-size: 15px; color: var(--accent); font-weight: 600; }
-  .case-head h3 { font-size: 26px; color: var(--ink); }
-  .case-lede { color: var(--ink-soft); font-size: 16px; max-width: 720px; margin-bottom: 26px; }
-  .case-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-  .case-links { margin-top: 16px; font-size: 14px; font-weight: 600; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 8px; }
+  .skill-group h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
+  .skill-group .tag-row { margin-top: 0; }
 
-  .chart-note { font-size: 13.5px; color: var(--ink-faint); font-style: italic; margin-top: 10px; }
-  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
-  .stat-pill {
-    background: var(--paper-raised); border: 1px solid var(--border); color: var(--ink); font-weight: 700; font-size: 14px;
-    padding: 9px 16px; border-radius: var(--radius); font-family: var(--serif);
+  .credentials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .credential-chip {
+    display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--bg-raised);
+    padding: 8px 12px; border-radius: 6px; font-size: 13px; color: var(--text);
   }
-
-  /* Try-it panels */
-  .try-panel {
-    background: var(--paper-raised); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 24px; margin: 18px 0;
-  }
-  .try-panel .try-label { font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
-  .try-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
-  .field { display: flex; flex-direction: column; gap: 6px; }
-  .field label { font-size: 12.5px; color: var(--ink-soft); font-weight: 600; }
-  .field input {
-    font-family: var(--sans); font-size: 15px; padding: 9px 12px; border-radius: 4px;
-    border: 1.5px solid var(--border); background: var(--paper); color: var(--ink); width: 170px;
-  }
-  .field input:focus { outline: none; border-color: var(--accent); }
-  .try-result {
-    margin-top: 16px; font-family: var(--serif); font-size: 20px; color: var(--ink);
-    padding: 14px 16px; background: var(--paper); border-left: 3px solid var(--accent); border-radius: 4px;
-  }
-  .try-result .muted { font-family: var(--sans); font-size: 13px; color: var(--ink-soft); display: block; margin-top: 4px; }
-
-  /* Code viewer */
-  .code-toggle { margin-top: 14px; }
-  .code-block {
-    display: none; margin-top: 14px; background: var(--code-bg); border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .code-block.open { display: block; }
-  .code-block .code-label {
-    padding: 10px 16px; font-size: 12px; color: #a99b83; font-family: var(--sans); font-weight: 600;
-    border-bottom: 1px solid rgba(255,255,255,0.08); letter-spacing: .5px; text-transform: uppercase;
-  }
-  .code-block pre { margin: 0; padding: 18px 20px; overflow-x: auto; font-size: 13px; }
-  .code-block pre code.hljs { background: transparent; padding: 0; }
-
-  /* GCP slideshow + components */
-  .gcp-slideshow { position: relative; background: var(--paper-raised); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .gcp-slideshow img { width: 100%; }
-  .slideshow-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 12px; }
-  #gcpCaption { font-size: 13.5px; color: var(--ink-soft); flex: 1; }
-  .gcp-components { margin-top: 26px; border-top: 1px solid var(--border); }
-  .gcp-component { border-bottom: 1px solid var(--border); }
-  .gcp-component-head {
-    width: 100%; text-align: left; background: none; border: none; padding: 16px 0; cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center; font-family: var(--serif); font-size: 17px;
-    color: var(--ink); font-weight: 600;
-  }
-  .gcp-component-head .plus { color: var(--accent); font-family: var(--sans); font-weight: 700; font-size: 20px; }
-  .gcp-component-body { display: none; padding: 0 0 18px; color: var(--ink-soft); font-size: 14.5px; max-width: 700px; }
-  .gcp-component.open .gcp-component-body { display: block; }
-  .gcp-component.open .plus { transform: rotate(45deg); display: inline-block; }
-
-  /* Pipeline tabs */
-  .pipeline-tab-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-  .pipeline-tab-btn {
-    background: none; border: 1.5px solid var(--border); color: var(--ink-soft);
-    padding: 8px 14px; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--sans);
-  }
-  .pipeline-tab-btn.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .pipeline-tab-panel { display: none; }
-  .pipeline-tab-panel.active { display: block; }
-  .pipeline-tab-panel p { color: var(--ink-soft); font-size: 14.5px; }
-
-  /* DAG drag and drop builder */
-  .dag-builder { margin-top: 8px; }
-  .dag-slots { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
-  .dag-slot {
-    flex: 1; min-width: 130px; min-height: 68px; border: 2px dashed var(--border); border-radius: var(--radius);
-    display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px;
-    font-size: 12px; color: var(--ink-faint); transition: border-color .15s ease, background .15s ease;
-  }
-  .dag-slot.filled { border-style: solid; background: var(--paper-raised); }
-  .dag-slot.drag-over { border-color: var(--accent); background: var(--paper-raised); }
-  .dag-slot .slot-index { position: absolute; }
-  .dag-pool { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; padding: 16px; background: var(--paper-raised); border: 1px solid var(--border); border-radius: var(--radius); min-height: 74px; }
-  .dag-tile {
-    background: var(--ink); color: var(--paper); padding: 12px 16px; border-radius: 4px;
-    font-size: 13px; font-weight: 700; cursor: grab; user-select: none; transition: transform .1s ease;
-  }
-  .dag-tile:active { cursor: grabbing; }
-  .dag-tile span { display: block; font-size: 11px; font-weight: 500; margin-top: 3px; opacity: .75; }
-  .dag-tile.placed { background: var(--accent); }
-  .dag-feedback { font-size: 14px; font-weight: 600; margin-top: 6px; min-height: 22px; }
-  .dag-feedback.success { color: #2e8a4c; }
-  [data-theme="dark"] .dag-feedback.success { color: #6fe0a0; }
-  .dag-feedback.error { color: var(--accent); }
-  .dag-code-tabs { display: none; margin-top: 22px; }
-  .dag-code-tabs.open { display: block; }
-
-  /* Loadings table */
-  .loadings-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13.5px; }
-  .loadings-table th, .loadings-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
-  .loadings-table th { color: var(--ink-faint); font-weight: 600; text-transform: uppercase; font-size: 11.5px; letter-spacing: .5px; }
-  .loadings-table td.num { font-family: var(--serif); font-weight: 600; }
-  .loadings-note { margin-top: 14px; font-size: 14px; color: var(--ink-soft); font-style: italic; }
-
-  .chart-wrap { background: var(--paper-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin: 16px 0; }
-  canvas { max-width: 100%; }
-
-  /* Small project cards (non case-study) */
-  .mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 8px; }
-  .mini-card { background: var(--paper-raised); padding: 26px; }
-  .mini-card h3 { color: var(--ink); font-size: 17px; margin-bottom: 10px; }
-  .mini-card p { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 12px; }
-  .mini-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-  .mini-stat { font-size: 12.5px; background: var(--paper); border: 1px solid var(--border); padding: 5px 10px; border-radius: 4px; color: var(--ink-soft); }
-  .mini-stat b { color: var(--ink); }
+  .credential-chip img { width: 20px; height: 20px; border-radius: 2px; }
+  .credential-chip a { color: var(--text); font-weight: 600; }
+  .credential-chip a:hover { color: var(--accent); }
 
   /* Experience */
-  .timeline { border-left: 2px solid var(--border); padding-left: 30px; }
-  .timeline-group { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 1.2px; font-size: 12px; font-weight: 700; margin: 10px 0 22px; }
-  .timeline-item { margin-bottom: 34px; position: relative; }
-  .timeline-item::before { content: ""; position: absolute; left: -36px; top: 5px; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); }
-  .timeline-item h3 { color: var(--ink); font-size: 17.5px; }
-  .timeline-item .meta { color: var(--ink-faint); font-size: 13.5px; margin-bottom: 10px; font-style: italic; }
-  .timeline-item ul { padding-left: 20px; color: var(--ink-soft); font-size: 14.5px; }
-  .timeline-item li { margin-bottom: 6px; }
+  .job { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .job:last-child { border-bottom: none; }
+  .job .period { font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 3px; }
+  .job h3 { font-size: 16px; margin-bottom: 4px; }
+  .job .org { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+  .job ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
+  .job li { margin-bottom: 6px; }
+  .job-group-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 22px 0 4px; font-weight: 700; }
+  @media (max-width: 640px) { .job { grid-template-columns: 1fr; gap: 6px; } }
 
-  /* Education */
-  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .edu-card { background: var(--paper-raised); padding: 22px; }
-  .edu-card h3 { color: var(--ink); font-size: 16px; margin-bottom: 4px; }
-  .edu-card .meta { color: var(--ink-soft); font-size: 14px; }
+  /* Education compact */
+  .edu-row { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-row .name { color: var(--heading); font-weight: 600; font-size: 14.5px; }
+  .edu-row .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
 
-  /* Contact / Footer */
-  .contact { background: var(--ink); color: var(--paper); }
-  [data-theme="dark"] .contact { background: var(--paper-raised); }
-  .contact .section-head h2 { color: var(--paper); }
-  [data-theme="dark"] .contact .section-head h2 { color: var(--ink); }
-  .contact p { color: #cfc6b4; font-size: 16px; margin-bottom: 26px; max-width: 520px; }
-  [data-theme="dark"] .contact p { color: var(--ink-soft); }
-  .contact-links { display: flex; gap: 14px; flex-wrap: wrap; }
-  .contact-links a {
-    color: var(--paper); border: 1.5px solid rgba(255,255,255,0.3); padding: 10px 18px;
-    border-radius: var(--radius); font-weight: 600; font-size: 14.5px; transition: background .15s ease; text-decoration: none;
+  /* Project cards */
+  .project { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 32px; margin-bottom: 28px; }
+  .project h3 { font-size: 19px; margin-bottom: 10px; }
+  .project .desc { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; max-width: 640px; }
+  .project-links { margin-top: 18px; font-size: 13.5px; font-weight: 600; display: flex; gap: 18px; }
+
+  .media-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg); }
+  .media-frame img { width: 100%; }
+  .slideshow-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 12px; }
+  #gcpCaption { font-size: 13px; color: var(--muted); flex: 1; }
+  .btn-chip {
+    background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px;
+    font-weight: 600; font-size: 12.5px; cursor: pointer; font-family: var(--sans);
   }
-  [data-theme="dark"] .contact-links a { color: var(--ink); border-color: var(--border); }
-  .contact-links a:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
-  footer.bottom { background: var(--ink); color: #8a7f6c; text-align: center; padding: 22px 0 34px; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.06); }
-  [data-theme="dark"] footer.bottom { background: var(--paper-raised); color: var(--ink-faint); }
+  .btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-chip.primary { background: var(--accent); border-color: var(--accent); color: #04201c; }
+  .btn-chip.primary:hover { opacity: .9; color: #04201c; }
 
-  @media (max-width: 640px) {
-    .hero-inner { flex-direction: column; text-align: center; }
-    .hero-actions { justify-content: center; }
-    .about-grid { flex-direction: column; }
-    .dag-slots { flex-direction: column; }
-    .try-row { flex-direction: column; align-items: stretch; }
-    .field input { width: 100%; }
+  .gcp-components { margin-top: 20px; }
+  .gcp-component { border-bottom: 1px solid var(--border); }
+  .gcp-component-head {
+    width: 100%; text-align: left; background: none; border: none; padding: 14px 0; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; font-size: 14.5px; font-weight: 600; color: var(--heading);
+    font-family: var(--sans);
+  }
+  .gcp-component-head .plus { color: var(--accent); font-weight: 700; font-size: 18px; }
+  .gcp-component-body { display: none; padding: 0 0 16px; color: var(--muted); font-size: 14px; max-width: 620px; }
+  .gcp-component.open .gcp-component-body { display: block; }
+
+  .pipeline-tab-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .pipeline-tab-btn {
+    background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+    padding: 7px 13px; border-radius: 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: var(--sans);
+  }
+  .pipeline-tab-btn.active { background: var(--accent); border-color: var(--accent); color: #04201c; }
+  .pipeline-tab-panel { display: none; }
+  .pipeline-tab-panel.active { display: block; }
+  .pipeline-tab-panel p { color: var(--muted); font-size: 14px; }
+
+  .demo-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 20px; margin: 18px 0; }
+  .demo-label { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 14px; }
+  .demo-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .field input {
+    font-family: var(--mono); font-size: 14px; padding: 8px 10px; border-radius: 4px;
+    border: 1px solid var(--border); background: var(--bg-raised); color: var(--heading); width: 150px;
+  }
+  .field input:focus { outline: none; border-color: var(--accent); }
+  .demo-result {
+    margin-top: 14px; font-family: var(--mono); font-size: 16px; color: var(--heading);
+    padding: 12px 14px; background: var(--bg-raised); border-left: 2px solid var(--accent); border-radius: 4px;
+  }
+  .demo-result .muted { font-family: var(--sans); font-size: 12.5px; color: var(--muted); display: block; margin-top: 6px; }
+
+  .stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
+  .stat-pill { background: var(--bg); border: 1px solid var(--border); color: var(--heading); font-weight: 600; font-size: 13px; padding: 7px 12px; border-radius: 4px; font-family: var(--mono); }
+
+  .chart-wrap { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin: 14px 0; }
+  canvas { max-width: 100%; }
+  .loadings-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+  .loadings-table th, .loadings-table td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  .loadings-table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: .5px; }
+  .loadings-table td.num { font-family: var(--mono); color: var(--heading); }
+  .loadings-note { margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+
+  .dq-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .dq-table th, .dq-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .dq-table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 10.5px; letter-spacing: .5px; }
+  .dq-table td.status-pass { color: var(--accent); font-weight: 600; font-family: var(--mono); font-size: 12px; }
+  .dq-table td.status-fail { color: #e0654f; font-weight: 600; font-family: var(--mono); font-size: 12px; }
+  .sql-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
+  .sql-table th, .sql-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); font-family: var(--mono); }
+  .sql-table th { color: var(--muted); text-transform: uppercase; font-size: 10.5px; letter-spacing: .5px; }
+
+  .mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .mini-card { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 26px; }
+  .mini-card h3 { font-size: 16px; margin-bottom: 10px; }
+  .mini-card p { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+  .mini-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .mini-stat { font-family: var(--mono); font-size: 12px; background: var(--bg); border: 1px solid var(--border); padding: 5px 9px; border-radius: 4px; color: var(--muted); }
+  .mini-stat b { color: var(--heading); }
+
+  .pipeline-steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+  .pipeline-step {
+    flex: 1; min-width: 140px; border: 1px solid var(--border); border-radius: 6px; padding: 14px; background: var(--bg);
+  }
+  .pipeline-step .n { font-family: var(--mono); color: var(--accent); font-size: 12px; }
+  .pipeline-step .t { font-size: 13.5px; font-weight: 600; color: var(--heading); margin: 4px 0 3px; }
+  .pipeline-step .d { font-size: 12.5px; color: var(--muted); }
+
+  .contact-box { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 40px; text-align: left; }
+  .contact-box p { color: var(--muted); font-size: 15px; max-width: 520px; margin-bottom: 24px; }
+  .contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .contact-links a {
+    color: var(--heading); border: 1px solid var(--border); padding: 9px 16px;
+    border-radius: 6px; font-weight: 600; font-size: 13.5px; text-decoration: none;
+  }
+  .contact-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+  footer.bottom { text-align: center; padding: 30px 0; font-size: 12.5px; color: var(--muted); font-family: var(--mono); }
+
+  .mobile-nav { display: none; }
+
+  @media (max-width: 940px) {
+    .layout { flex-direction: column; }
+    .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 40px 28px; }
+    .side-nav { display: none; }
+    .sidebar-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+    .content { padding: 40px 28px 80px; }
+    .job { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<header class="site-nav">
-  <div class="nav-inner">
-    <div class="brand">D'Andre McNeish</div>
-    <div class="nav-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <h1>D'Andre McNeish</h1>
+      <div class="role">Data Engineer</div>
+      <p class="blurb">
+        I build data pipelines, cloud architectures, and applied models. This site is a working
+        demonstration of that, not a slideshow of it.
+      </p>
+      <ul class="side-nav">
+        <li><a href="#about"><span class="num">01</span> About</a></li>
+        <li><a href="#experience"><span class="num">02</span> Experience</a></li>
+        <li><a href="#work"><span class="num">03</span> Work</a></li>
+        <li><a href="#contact"><span class="num">04</span> Contact</a></li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu">&#9776;</button>
     </div>
-  </div>
-</header>
+    <div class="sidebar-bottom">
+      <div class="social-row">
+        <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
+        <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
+        <a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button">Light mode</button>
+    </div>
+  </aside>
 
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-photo">
-      <img src="assets/headshot.png" alt="D'Andre McNeish">
-    </div>
-    <div class="hero-text">
-      <div class="eyebrow">Data Analytics &amp; Data Engineering</div>
-      <h1>D'Andre McNeish builds pipelines and models you can actually <em>try</em>.</h1>
-      <p class="tagline">
-        Every project below is a real tool, not a screenshot. Type your own square footage into
-        the pricing model. Drag the pipeline steps into order. Click a component to see how the
-        cloud architecture actually works. This is a workshop, not a slideshow.
+  <main class="content">
+
+    <section id="about" class="reveal">
+      <div class="section-title"><span class="num">01.</span> About <span class="rule"></span></div>
+      <p class="lede">
+        I work at the intersection of <strong>data engineering, cloud architecture, and applied
+        analytics</strong>: building pipelines that move and validate data, designing systems that
+        store it correctly, and building the models that turn it into a decision.
       </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Download Resume</a>
-        <a class="btn btn-outline" href="#projects">Try the Work</a>
-        <a class="btn btn-outline" href="#contact">Contact Me</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about" class="reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">01 / About</div>
-      <h2>Background</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p class="lede">
-          I spent years fixing other people's technology before I started building my own data systems,
-          and that order matters more than it sounds like it should.
-        </p>
-        <p>
-          I am pursuing a Master of Science in Data Analytics and Data Engineering at Western Governors
-          University, on top of a Bachelor of Applied Science in Data Analytics and Artificial Intelligence
-          from Broward College. I hold the WGU Data Analytics Professional Certificate and a verified Udacity
-          nanodegree certificate in Data Pipelines with Airflow, and every project on this page is the actual
-          work behind those credentials, not a summary of it.
-        </p>
-        <p>
-          My project work spans building production style ETL pipelines in Apache Airflow, designing cloud
-          data warehouse architectures on Google Cloud Platform, applying linear regression and principal
-          component analysis to real business data, and tracking reproducible machine learning experiments
-          with MLflow and DVC. Scroll down and you can run the pipeline, test the model, and read the code
-          yourself.
-        </p>
-        <p>
-          Alongside my studies, I work in product enablement at Modernizing Medicine, where I lead AI
-          adoption efforts, build LLM powered internal tools in Python, and use data to resolve operational
-          bottlenecks. Before that, I spent several years in technical support at Apple, Teleperformance, and
-          Houghton Mifflin Harcourt, which is where I first learned to diagnose a problem methodically instead
-          of guessing at it.
-        </p>
-      </div>
-      <div class="about-facts">
-        <div class="fact">
-          <div class="label">Location</div>
-          <div class="value">Orlando, FL</div>
-        </div>
-        <div class="fact">
-          <div class="label">Currently</div>
-          <div class="value">Product Enablement Specialist III, Modernizing Medicine</div>
-        </div>
-        <div class="fact">
-          <div class="label">Studying</div>
-          <div class="value">MS Data Analytics and Data Engineering, WGU (Expected 2027)</div>
-        </div>
-        <div class="fact">
-          <div class="label">Certified</div>
-          <div class="value">WGU Data Analytics Professional, Udacity Data Pipelines with Airflow</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills" class="alt-bg reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">02 / Skills</div>
-      <h2>Tools &amp; Platforms</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h3>Data Engineering</h3>
-        <div class="skill-tags">
-          <span class="tag">Apache Airflow</span>
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">ETL / ELT</span>
-          <span class="tag">AWS Redshift</span>
-          <span class="tag">DVC</span>
-          <span class="tag">MLflow</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3>Cloud &amp; Platforms</h3>
-        <div class="skill-tags">
-          <span class="tag">Google Cloud Platform</span>
-          <span class="tag">BigQuery</span>
-          <span class="tag">AWS S3</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Azure Databricks</span>
-          <span class="tag">GitLab CI/CD</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3>Analytics &amp; Modeling</h3>
-        <div class="skill-tags">
-          <span class="tag">Linear Regression</span>
-          <span class="tag">Logistic Regression</span>
-          <span class="tag">PCA</span>
-          <span class="tag">Statistical Analysis</span>
-          <span class="tag">Tableau</span>
-          <span class="tag">Data Visualization</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3>Product &amp; AI</h3>
-        <div class="skill-tags">
-          <span class="tag">LLMs (Gemini, Claude)</span>
-          <span class="tag">Prompt Engineering</span>
-          <span class="tag">Jira / JQL</span>
-          <span class="tag">Confluence</span>
-          <span class="tag">Agile</span>
-        </div>
-      </div>
-    </div>
-    <div class="learning-badges">
-      <span class="learning-badge"><b>LinkedIn Learning:</b> PySpark Essential Training</span>
-      <span class="learning-badge"><b>LinkedIn Learning:</b> Databricks for Data Engineering</span>
-      <span class="learning-badge"><b>LinkedIn Learning:</b> Airflow Pipeline Management</span>
-      <span class="learning-badge"><b>LinkedIn Learning:</b> Tableau Essential Training</span>
-      <span class="learning-badge"><b>LinkedIn Learning:</b> Preventing Scope Creep</span>
-    </div>
-  </div>
-</section>
-
-<section id="certifications" class="reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">03 / Certifications</div>
-      <h2>Verified Credentials</h2>
-    </div>
-    <div class="cert-list">
-      <div class="cert-row">
-        <img src="assets/wgu-badge.png" alt="WGU Data Analytics Professional Certificate badge">
-        <div class="cert-body">
-          <span class="verified-pill">Verified by Parchment Digital Badges</span>
-          <h3>Data Analytics Professional Certificate</h3>
-          <p>
-            Awarded by Western Governors University for demonstrated competence in the data analytics
-            lifecycle, statistical data mining including linear and logistic regression and principal
-            component analysis, and data storytelling for technical and non technical audiences.
-          </p>
-          <a href="https://wgu.badges.parchment.com/public/assertions/HulL6v6HTrytM9MMs82xQA?identity__email=dmcnei29@wgu.edu" target="_blank">View verified credential &rarr;</a>
-        </div>
-      </div>
-      <div class="cert-row">
-        <div class="cert-row-icon">U</div>
-        <div class="cert-body">
-          <span class="verified-pill">Verified by Udacity</span>
-          <h3>Data Pipelines with Airflow (WGU D608 Data Processing)</h3>
-          <p>
-            Nanodegree certificate for building a production style ETL pipeline in Apache Airflow,
-            including custom operators for staging S3 data, loading a Redshift warehouse, and running
-            automated data quality checks. The drag and drop demo below is the real DAG from this project.
-          </p>
-          <a href="https://www.udacity.com/certificate/e/55353290-a8a8-11f1-a1b3-37c52abf07c4" target="_blank">View verified credential &rarr;</a>
-        </div>
-      </div>
-      <div class="cert-row">
-        <div class="cert-row-icon">C</div>
-        <div class="cert-body">
-          <span class="verified-pill">Verified by CompTIA</span>
-          <h3>Competency in AI Agent Essentials</h3>
-          <p>Credential ID 6-3C6-DTEWP. Covers how AI agents are designed, deployed, and governed.</p>
-          <a href="https://certification.platform.comptia.org/verifycert/6-3C6-DTEWP" target="_blank">View verified credential &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="alt-bg reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">04 / Selected Work</div>
-      <h2>Things You Can Actually Try</h2>
-      <p class="sub">
-        No stock photos, no placeholder numbers. Every chart below is built from a real dataset,
-        every code panel is pulled from the actual project file, and every tool computes a real answer.
+      <p class="body-text">
+        Day to day, I work in product enablement at Modernizing Medicine, where I build internal
+        LLM tooling in Python, analyze operational data with SQL and JQL, and troubleshoot
+        integration issues across cloud services. Outside of that role, I design and ship
+        end to end data systems on my own: orchestrated ETL pipelines in Apache Airflow, a proposed
+        cloud data warehouse architecture on GCP, and regression and PCA models trained on real
+        datasets, all of which you can see and run for yourself below.
       </p>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">01</span>
-        <h3>Cloud Data Architecture on GCP</h3>
-      </div>
-      <p class="case-lede">
-        A proposed Google Cloud Platform architecture for a fictional retailer processing 10 TB of
-        transaction data per day. Flip between the architecture view and the normalized logical data
-        model, then click a component below to read the real reasoning behind it.
+      <p class="body-text">
+        Before moving into data work, I spent several years in technical support and IT operations
+        at Apple, Teleperformance, and Houghton Mifflin Harcourt, and hold an Associate of Arts and
+        Sciences in Information Technology in addition to a Bachelor's in Data Analytics and
+        Artificial Intelligence. I am currently completing a Master of Science in Data Analytics and
+        Data Engineering.
       </p>
-      <div class="gcp-slideshow" id="gcpSlideshow">
-        <img src="assets/gcp-architecture.png" alt="GCP architecture diagram" style="display:block;">
-        <img src="assets/gcp-logical-diagram.png" alt="Normalized logical data diagram" style="display:none;">
-      </div>
-      <div class="slideshow-controls">
-        <button id="gcpPrev" class="btn-chip ghost" type="button">&larr; Prev</button>
-        <span id="gcpCaption">Architecture diagram: how data flows from ingestion into BigQuery and Cloud SQL.</span>
-        <button id="gcpNext" class="btn-chip ghost" type="button">Next &rarr;</button>
-      </div>
-      <div class="gcp-components" id="gcpComponents">
-        <div class="gcp-component">
-          <button class="gcp-component-head" type="button">Cloud Pub/Sub <span class="plus">+</span></button>
-          <div class="gcp-component-body">
-            <p>A fully managed, serverless publish/subscribe messaging service that ingests transaction and
-            customer interaction events from the e-commerce platform, customer service tools, third party
-            vendors, and internal operations the moment they occur, decoupling data producers from downstream
-            processing.</p>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="tag-row">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Bash</span>
           </div>
         </div>
-        <div class="gcp-component">
-          <button class="gcp-component-head" type="button">Cloud Dataflow <span class="plus">+</span></button>
-          <div class="gcp-component-body">
-            <p>A serverless streaming and batch data processing service built on Apache Beam that continuously
-            reads from Pub/Sub, validates and de-duplicates records, and routes the data to each storage
-            destination below.</p>
+        <div class="skill-group">
+          <h4>Data Engineering</h4>
+          <div class="tag-row">
+            <span class="tag">Apache Airflow</span><span class="tag">ETL / ELT</span><span class="tag">AWS Redshift</span><span class="tag">DVC</span><span class="tag">MLflow</span>
           </div>
         </div>
-        <div class="gcp-component">
-          <button class="gcp-component-head" type="button">Cloud Storage (raw data lake) <span class="plus">+</span></button>
-          <div class="gcp-component-body">
-            <p>Object storage that retains a permanent, unmodified copy of every incoming JSON record, with a
-            lifecycle policy that automatically moves older objects to Nearline storage after 30 days and
-            Coldline after 90 days to control cost.</p>
+        <div class="skill-group">
+          <h4>Cloud &amp; Infrastructure</h4>
+          <div class="tag-row">
+            <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">AWS S3</span><span class="tag">Docker</span><span class="tag">GitLab CI/CD</span>
           </div>
         </div>
-        <div class="gcp-component">
-          <button class="gcp-component-head" type="button">BigQuery <span class="plus">+</span></button>
-          <div class="gcp-component-body">
-            <p>A serverless, columnar analytics warehouse that stores transaction data in a nested and repeated
-            schema mirroring the original JSON, so business intelligence and marketing queries do not need a
-            separate flattening step first.</p>
-          </div>
-        </div>
-        <div class="gcp-component">
-          <button class="gcp-component-head" type="button">Cloud SQL for PostgreSQL <span class="plus">+</span></button>
-          <div class="gcp-component-body">
-            <p>A regional, high availability relational database storing the same data in a normalized schema
-            (five tables: Customers, Transactions, TransactionItems, Products, Vendors) for operational use
-            cases like support lookups and financial reporting, where row level updates matter more than
-            analytical aggregation.</p>
+        <div class="skill-group">
+          <h4>Analytics &amp; Modeling</h4>
+          <div class="tag-row">
+            <span class="tag">Regression</span><span class="tag">PCA</span><span class="tag">Statistical Analysis</span><span class="tag">Tableau</span>
           </div>
         </div>
       </div>
-      <div class="case-tags">
-        <span class="tag on-accent">GCP</span><span class="tag on-accent">BigQuery</span><span class="tag on-accent">Data Modeling</span>
-      </div>
-    </div>
 
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">02</span>
-        <h3>Predictive Modeling: Regression &amp; PCA</h3>
-      </div>
-      <p class="case-lede">
-        Built on 7,000 real housing records used for the WGU Data Analytics Professional certification.
-        Type a square footage into the box below and the tool will predict a price using the actual
-        regression equation Python fit from this data, live.
-      </p>
-
-      <div class="try-panel">
-        <div class="try-label">Try It: Home Price Estimator</div>
-        <div class="try-row">
-          <div class="field">
-            <label for="sqftInput">Square footage</label>
-            <input type="number" id="sqftInput" min="400" max="2600" step="10" value="1200">
-          </div>
-          <button class="btn-chip accent" id="estimateBtn" type="button">Estimate Price</button>
+      <div class="credentials">
+        <div class="credential-chip">
+          <img src="assets/wgu-badge.png" alt="">
+          <a href="https://wgu.badges.parchment.com/public/assertions/HulL6v6HTrytM9MMs82xQA?identity__email=dmcnei29@wgu.edu" target="_blank">Data Analytics Professional Certificate</a>
         </div>
-        <div class="try-result" id="estimateResult">Enter a square footage and click estimate.</div>
+        <div class="credential-chip">
+          <a href="https://www.udacity.com/certificate/e/55353290-a8a8-11f1-a1b3-37c52abf07c4" target="_blank">Udacity: Data Pipelines with Airflow</a>
+        </div>
+        <div class="credential-chip">
+          <a href="https://certification.platform.comptia.org/verifycert/6-3C6-DTEWP" target="_blank">CompTIA: AI Agent Essentials</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="reveal">
+      <div class="section-title"><span class="num">02.</span> Experience <span class="rule"></span></div>
+
+      <div class="job">
+        <div class="period">Feb 2026 &ndash; Present</div>
+        <div>
+          <h3>Product Enablement Specialist III &amp; Tech Services AI Gem Leader</h3>
+          <div class="org">Modernizing Medicine, Inc. &middot; Remote</div>
+          <ul>
+            <li>Lead AI tool adoption for the department as designated Gem Leader, including intake, rollout, and internal enablement of new tools.</li>
+            <li>Built the Fax Flow Assistant, an LLM tool automating compliance review of legal documents with structured document scanning logic.</li>
+            <li>Independently learned Python to build Ask PE, a desktop application with an integrated AI knowledge base for internal documentation.</li>
+            <li>Used JQL and Salesforce reporting to identify and prove a recurring routing bottleneck, presenting findings and a fix at the CS Town Hall.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="stat-row">
-        <span class="stat-pill" id="r2Stat">R&sup2; = &hellip;</span>
-        <span class="stat-pill" id="slopeStat">&hellip;</span>
-      </div>
-      <div class="chart-wrap"><canvas id="regressionChart" height="220"></canvas></div>
-      <button id="toggleLineBtn" class="btn-chip ghost" type="button">Hide regression line</button>
-
-      <div class="code-toggle">
-        <button class="btn-chip ghost" type="button" data-code-toggle="code-regression">View the real code &rarr;</button>
-      </div>
-      <div class="code-block" id="code-regression">
-        <div class="code-label">D600Task1.py &middot; backward stepwise elimination, the actual optimization step behind this model</div>
-        <pre><code class="language-python">def fit_ols(x: pd.DataFrame, y: pd.Series):
-    """Fit an ordinary least squares regression model using statsmodels,
-    which reports R2, adjusted R2, F-statistic, probability of the
-    F-statistic, coefficient estimates, and p-values for each
-    coefficient in a single model summary."""
-    x_with_const = sm.add_constant(x)
-    model = sm.OLS(y, x_with_const).fit()
-    return model
-
-
-def backward_elimination(x: pd.DataFrame, y: pd.Series, significance: float = 0.05):
-    """Optimize the regression model using backward stepwise elimination:
-    repeatedly fit the model, identify the independent variable with the
-    highest p-value, and remove it if that p-value exceeds the
-    significance threshold. Repeat until all remaining variables are
-    statistically significant."""
-    remaining = list(x.columns)
-    removal_order = []
-    while True:
-        model = fit_ols(x[remaining], y)
-        p_values = model.pvalues.drop("const")
-        max_p_value = p_values.max()
-        if max_p_value > significance:
-            variable_to_remove = p_values.idxmax()
-            removal_order.append((variable_to_remove, round(max_p_value, 4)))
-            remaining.remove(variable_to_remove)
-        else:
-            break
-    return model, remaining, removal_order</code></pre>
+      <div class="job">
+        <div class="period">Jan 2025 &ndash; Jan 2026</div>
+        <div>
+          <h3>Product Enablement Specialist II</h3>
+          <div class="org">Modernizing Medicine, Inc. &middot; Remote</div>
+          <ul>
+            <li>Central point of contact for cross functional workflows across Cloud Services, Data Services, and Product Management.</li>
+            <li>Monitored system health logs and automation reporting for enterprise RPA bots, flagging anomalies before they reached clients.</li>
+            <li>Identified data quality edge cases (missing records, API timeouts), reclaiming roughly 20 minutes of manual work per client.</li>
+          </ul>
+        </div>
       </div>
 
-      <h3 style="margin-top:40px; font-size:22px;">Principal Component Analysis</h3>
-      <p class="case-lede" style="margin-top:10px;">
-        Real eigenvalues from the same housing dataset, reduced to 7 standardized variables. Click any
-        bar to see exactly which variables that component is built from.
+      <div class="job">
+        <div class="period">Jan 2023 &ndash; Dec 2024</div>
+        <div>
+          <h3>Product Enablement Specialist I</h3>
+          <div class="org">Modernizing Medicine, Inc. &middot; Remote</div>
+          <ul>
+            <li>Coordinated the order to activation lifecycle for enterprise clients, maintaining accurate data and SLA adherence.</li>
+            <li>Configured client environments using internal Sysadmin tools, Jenkins, and Jira for automated onboarding.</li>
+            <li>Recognized with Best Team Lead on Implementation for client deployment coordination.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-group-label">Earlier</div>
+
+      <div class="job">
+        <div class="period">Oct 2022 &ndash; Jan 2023</div>
+        <div>
+          <h3>Pharmacy Service Representative</h3>
+          <div class="org">CVS Specialty &middot; Contract</div>
+          <ul>
+            <li>Reconciled pharmacy prescription records against reimbursed claims and resolved rejected claims to keep deliveries on schedule.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="period">2020 &ndash; 2022</div>
+        <div>
+          <h3>Technical Support Specialist</h3>
+          <div class="org">Houghton Mifflin Harcourt, Apple, Teleperformance</div>
+          <ul>
+            <li>Diagnosed and resolved software, hardware, and connectivity issues for enterprise and consumer accounts, including account systems administration for school districts and API/case management for a Mercedes-Benz USA account.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <div class="job-group-label">Education</div>
+        <div class="edu-row">
+          <span class="name">M.S. Data Analytics and Data Engineering, Western Governors University</span>
+          <span class="when">Expected 2027</span>
+        </div>
+        <div class="edu-row">
+          <span class="name">B.A.S. Data Analytics and Artificial Intelligence, Broward College</span>
+          <span class="when">2025</span>
+        </div>
+        <div class="edu-row">
+          <span class="name">A.A.S. Information Technology, Broward College</span>
+          <span class="when">2019 &middot; 3.8 GPA</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="reveal">
+      <div class="section-title"><span class="num">03.</span> Work <span class="rule"></span></div>
+      <p class="lede" style="margin-bottom:36px;">
+        A few things I've built, in plain terms: a pipeline that moves and checks data automatically,
+        a couple of models trained on real numbers, a cloud architecture proposal, and two small tools
+        below you can actually try. No slides needed, just click around.
       </p>
-      <div class="chart-wrap"><canvas id="pcaChart" height="200"></canvas></div>
-      <div id="pcaLoadingsPanel"></div>
 
-      <div class="code-toggle">
-        <button class="btn-chip ghost" type="button" data-code-toggle="code-pca">View the real code &rarr;</button>
-      </div>
-      <div class="code-block" id="code-pca">
-        <div class="code-label">D600Task3.py &middot; the actual PCA fit and Kaiser rule retention logic</div>
-        <pre><code class="language-python">def perform_pca(data_frame: pd.DataFrame, standardized_cols: list):
-    """Perform PCA on the standardized continuous independent variables
-    and return the fitted PCA object and the component scores."""
-    pca = PCA(n_components=len(standardized_cols), random_state=42)
-    component_scores = pca.fit_transform(data_frame[standardized_cols])
-    return pca, component_scores
-
-
-def determine_retained_components(pca: PCA) -> int:
-    """Identify the number of principal components to retain using the
-    Kaiser rule (retain components with an eigenvalue greater than 1)."""
-    eigenvalues = pca.explained_variance_
-    n_retained = int(np.sum(eigenvalues > 1))
-    print("\n=== COMPONENT RETENTION (Kaiser rule: eigenvalue > 1) ===")
-    for i, eigenvalue in enumerate(eigenvalues, start=1):
-        flag = "RETAINED" if eigenvalue > 1 else ""
-        print(f"  PC{i}: eigenvalue = {eigenvalue:.4f} {flag}")
-    print(f"\nNumber of principal components retained: {n_retained}")
-    return n_retained</code></pre>
-      </div>
-
-      <div class="case-tags">
-        <span class="tag on-accent">Python</span><span class="tag on-accent">Regression</span><span class="tag on-accent">PCA</span><span class="tag on-accent">Real Data</span>
-      </div>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">03</span>
-        <h3>ML Experiment Tracking Pipeline</h3>
-      </div>
-      <p class="case-lede">
-        A reproducible flight delay prediction pipeline. Data is versioned with DVC, experiments are
-        tracked with MLflow, and testing and deployment run automatically through GitLab CI/CD. Click
-        through each stage.
-      </p>
-      <div class="pipeline-tab-nav">
-        <button class="pipeline-tab-btn active" data-target="tab-import" type="button">1. Import</button>
-        <button class="pipeline-tab-btn" data-target="tab-clean" type="button">2. Clean</button>
-        <button class="pipeline-tab-btn" data-target="tab-train" type="button">3. Train</button>
-        <button class="pipeline-tab-btn" data-target="tab-track" type="button">4. Track</button>
-        <button class="pipeline-tab-btn" data-target="tab-deploy" type="button">5. Deploy</button>
-      </div>
-      <div id="tab-import" class="pipeline-tab-panel active">
-        <p>Pulls raw flight delay records for the chosen airport from the Bureau of Transportation
-          Statistics and versions the raw file with DVC, so every run points at the exact same dataset,
-          byte for byte.</p>
-      </div>
-      <div id="tab-clean" class="pipeline-tab-panel">
-        <p>Filters and cleans the raw records, handles missing values and outliers, and versions the
-          cleaned dataset separately, so the entire transformation is fully reproducible.</p>
-      </div>
-      <div id="tab-train" class="pipeline-tab-panel">
-        <p>Trains a flight delay prediction model on the cleaned data, saving the trained model as a
-          versioned artifact ready for deployment.</p>
-      </div>
-      <div id="tab-track" class="pipeline-tab-panel">
-        <p>MLflow records every run automatically, parameters, metrics, and artifacts, so past experiments
-          always stay comparable. Below is a real run captured from this project.</p>
-        <img src="assets/mlflow-run.png" alt="MLflow experiment tracking run" style="border-radius:6px;margin-top:12px;border:1px solid var(--border);">
-      </div>
-      <div id="tab-deploy" class="pipeline-tab-panel">
-        <p>Packages the trained model behind a FastAPI endpoint inside Docker, then tests and deploys it
-          automatically through a GitLab CI/CD pipeline on every push.</p>
-      </div>
-      <div class="case-tags">
-        <span class="tag on-accent">MLflow</span><span class="tag on-accent">DVC</span><span class="tag on-accent">GitLab CI/CD</span>
-      </div>
-    </div>
-
-    <div class="case">
-      <div class="case-head">
-        <span class="case-num">04</span>
+      <div class="project">
         <h3>Data Pipelines with Airflow</h3>
-      </div>
-      <p class="case-lede">
-        Four custom Apache Airflow operators and a fully orchestrated DAG that stages JSON data from
-        Amazon S3, loads it into an Amazon Redshift warehouse, and runs data quality checks. Drag the
-        four steps below into the order the real DAG actually runs them, then check your work to unlock
-        the source code for each operator.
-      </p>
-
-      <div class="dag-builder">
-        <div class="dag-pool" id="dagPool">
-          <div class="dag-tile" draggable="true" data-key="stage">Stage to Redshift<span>S3 &rarr; staging tables</span></div>
-          <div class="dag-tile" draggable="true" data-key="fact">Load Fact<span>songplays table</span></div>
-          <div class="dag-tile" draggable="true" data-key="dim">Load Dimensions<span>users, songs, time</span></div>
-          <div class="dag-tile" draggable="true" data-key="quality">Data Quality<span>row + null checks</span></div>
+        <p class="desc">
+          Four custom Apache Airflow operators and a fully orchestrated DAG that stages JSON event
+          data from Amazon S3, loads it into an Amazon Redshift data warehouse, and validates the
+          result with automated data quality checks. Built and verified as a Udacity nanodegree
+          certificate project.
+        </p>
+        <div class="pipeline-steps">
+          <div class="pipeline-step"><div class="n">01</div><div class="t">Stage</div><div class="d">Copy raw JSON from S3 into Redshift staging tables via a custom operator.</div></div>
+          <div class="pipeline-step"><div class="n">02</div><div class="t">Load Fact</div><div class="d">Build the songplays fact table from the staged event data.</div></div>
+          <div class="pipeline-step"><div class="n">03</div><div class="t">Load Dimensions</div><div class="d">Build the users, songs, artists, and time dimension tables in parallel.</div></div>
+          <div class="pipeline-step"><div class="n">04</div><div class="t">Validate</div><div class="d">Run row count and null checks; fail the DAG loudly if data quality does not pass.</div></div>
         </div>
-        <div class="dag-slots" id="dagSlots">
-          <div class="dag-slot" data-slot="0">Drop step 1 here</div>
-          <div class="dag-slot" data-slot="1">Drop step 2 here</div>
-          <div class="dag-slot" data-slot="2">Drop step 3 here</div>
-          <div class="dag-slot" data-slot="3">Drop step 4 here</div>
+        <div class="tag-row">
+          <span class="tag">Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Python</span>
         </div>
-        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-          <button class="btn-chip accent" id="dagCheckBtn" type="button">Check My Order</button>
-          <button class="btn-chip ghost" id="dagResetBtn" type="button">Reset</button>
-          <span class="dag-feedback" id="dagFeedback"></span>
+        <div class="project-links">
+          <a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">Source on GitHub</a>
         </div>
       </div>
 
-      <div class="dag-code-tabs" id="dagCodeTabs">
-        <p class="chart-note" style="font-style:normal; margin-bottom:14px;">
-          Correct. The real dependency chain (from dags/final_project.py):
-          <code>start &gt;&gt; [stage_events, stage_songs] &gt;&gt; load_songplays &gt;&gt; [load_users, load_songs, load_artists, load_time] &gt;&gt; run_quality_checks &gt;&gt; end</code>
+      <div class="project">
+        <h3>Predictive Modeling: Regression &amp; PCA</h3>
+        <p class="desc">
+          A multiple linear regression model and a principal component analysis, both trained on
+          7,000 real housing records. The demo below runs the actual fitted equation, live.
+        </p>
+
+        <div class="demo-panel">
+          <div class="demo-label">Model demo &middot; home price estimator</div>
+          <div class="demo-row">
+            <div class="field">
+              <label for="sqftInput">Square footage</label>
+              <input type="number" id="sqftInput" min="400" max="2600" step="10" value="1200">
+            </div>
+            <button class="btn-chip primary" id="estimateBtn" type="button">Run model</button>
+          </div>
+          <div class="demo-result" id="estimateResult">Enter a value and run the model.</div>
+        </div>
+
+        <div class="stat-row">
+          <span class="stat-pill">R&sup2; = <span id="r2Stat">&hellip;</span></span>
+          <span class="stat-pill" id="slopeStat">&hellip;</span>
+        </div>
+        <div class="chart-wrap"><canvas id="regressionChart" height="220"></canvas></div>
+
+        <h3 style="margin-top:32px; font-size:16px;">Principal Component Analysis</h3>
+        <p class="desc" style="margin-top:8px;">
+          Same dataset, reduced to 7 standardized variables. Click a bar to see the loading weights
+          for that component.
+        </p>
+        <div class="chart-wrap"><canvas id="pcaChart" height="200"></canvas></div>
+        <div id="pcaLoadingsPanel"></div>
+
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">scikit-learn</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>Cloud Data Architecture on GCP</h3>
+        <p class="desc">
+          A proposed Google Cloud Platform architecture for a retailer processing 10 TB of
+          transaction data per day: streaming ingestion, a normalized operational database, and a
+          nested analytics warehouse. Flip between the architecture and logical data views, and open
+          a component below to see the reasoning behind it.
+        </p>
+        <div class="media-frame" id="gcpSlideshow">
+          <img src="assets/gcp-architecture.png" alt="GCP architecture diagram" style="display:block;">
+          <img src="assets/gcp-logical-diagram.png" alt="Normalized logical data diagram" style="display:none;">
+        </div>
+        <div class="slideshow-controls">
+          <button id="gcpPrev" class="btn-chip" type="button">&larr; Prev</button>
+          <span id="gcpCaption">Architecture: data flow from ingestion into BigQuery and Cloud SQL.</span>
+          <button id="gcpNext" class="btn-chip" type="button">Next &rarr;</button>
+        </div>
+        <div class="gcp-components">
+          <div class="gcp-component">
+            <button class="gcp-component-head" type="button">Cloud Pub/Sub <span class="plus">+</span></button>
+            <div class="gcp-component-body"><p>Serverless publish/subscribe ingestion for transaction and customer interaction events the moment they occur, decoupling producers from downstream processing.</p></div>
+          </div>
+          <div class="gcp-component">
+            <button class="gcp-component-head" type="button">Cloud Dataflow <span class="plus">+</span></button>
+            <div class="gcp-component-body"><p>Serverless streaming and batch processing (Apache Beam) that validates and de-duplicates records before routing them to storage.</p></div>
+          </div>
+          <div class="gcp-component">
+            <button class="gcp-component-head" type="button">Cloud Storage <span class="plus">+</span></button>
+            <div class="gcp-component-body"><p>Raw data lake retaining an unmodified copy of every record, with a lifecycle policy moving older objects to cheaper storage tiers after 30 and 90 days.</p></div>
+          </div>
+          <div class="gcp-component">
+            <button class="gcp-component-head" type="button">BigQuery <span class="plus">+</span></button>
+            <div class="gcp-component-body"><p>Serverless analytics warehouse storing the data in a nested schema that mirrors the source JSON, avoiding a separate flattening step for BI queries.</p></div>
+          </div>
+          <div class="gcp-component">
+            <button class="gcp-component-head" type="button">Cloud SQL for PostgreSQL <span class="plus">+</span></button>
+            <div class="gcp-component-body"><p>Regional, high availability relational database storing the same data in a normalized 5-table schema for operational lookups and financial reporting.</p></div>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Data Modeling</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>ML Experiment Tracking Pipeline</h3>
+        <p class="desc">
+          A reproducible flight delay prediction pipeline: data versioned with DVC, experiments
+          tracked with MLflow, and deployment automated through GitLab CI/CD.
         </p>
         <div class="pipeline-tab-nav">
-          <button class="dag-op-btn pipeline-tab-btn active" data-target="op-stage" type="button">stage_redshift.py</button>
-          <button class="dag-op-btn pipeline-tab-btn" data-target="op-fact" type="button">load_fact.py</button>
-          <button class="dag-op-btn pipeline-tab-btn" data-target="op-dim" type="button">load_dimension.py</button>
-          <button class="dag-op-btn pipeline-tab-btn" data-target="op-quality" type="button">data_quality.py</button>
+          <button class="pipeline-tab-btn active" data-target="tab-import" type="button">Import</button>
+          <button class="pipeline-tab-btn" data-target="tab-clean" type="button">Clean</button>
+          <button class="pipeline-tab-btn" data-target="tab-train" type="button">Train</button>
+          <button class="pipeline-tab-btn" data-target="tab-track" type="button">Track</button>
+          <button class="pipeline-tab-btn" data-target="tab-deploy" type="button">Deploy</button>
         </div>
-        <div id="op-stage" class="pipeline-tab-panel active">
-          <div class="code-block open">
-            <div class="code-label">plugins/operators/stage_redshift.py</div>
-            <pre><code class="language-python">def execute(self, context):
-    aws_hook = AwsHook(self.aws_credentials_id)
-    credentials = aws_hook.get_credentials()
-    redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
-
-    if self.truncate_table:
-        self.log.info(f'Clearing data from destination Redshift table {self.table}')
-        redshift.run(f'TRUNCATE TABLE {self.table}')
-
-    s3_path = f's3://{self.s3_bucket}/{self.s3_key}'
-    self.log.info(f'Copying data from {s3_path} to Redshift table {self.table}')
-    formatted_sql = StageToRedshiftOperator.copy_sql.format(
-        self.table, s3_path, credentials.access_key,
-        credentials.secret_key, self.region, self.json_path,
-    )
-    redshift.run(formatted_sql)
-    self.log.info(f'Staging of {self.table} complete')</code></pre>
-          </div>
+        <div id="tab-import" class="pipeline-tab-panel active"><p>Pulls raw flight delay records from the Bureau of Transportation Statistics and versions the raw file with DVC.</p></div>
+        <div id="tab-clean" class="pipeline-tab-panel"><p>Filters and cleans the records, handling missing values and outliers, and versions the cleaned dataset separately.</p></div>
+        <div id="tab-train" class="pipeline-tab-panel"><p>Trains the delay prediction model and saves it as a versioned artifact.</p></div>
+        <div id="tab-track" class="pipeline-tab-panel">
+          <p>MLflow records parameters, metrics, and artifacts for every run automatically. Below is a real run from this project.</p>
+          <div class="media-frame" style="margin-top:10px;"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
         </div>
-        <div id="op-fact" class="pipeline-tab-panel">
-          <div class="code-block open">
-            <div class="code-label">plugins/operators/load_fact.py</div>
-            <pre><code class="language-python">class LoadFactOperator(BaseOperator):
-    """
-    Loads a fact table in Redshift by running a provided SQL SELECT and
-    inserting the results into the target table. Fact tables are large,
-    so this operator only ever appends, it never truncates the
-    destination table.
-    """
-    ui_color = '#F98866'
-
-    def execute(self, context):
-        redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
-        self.log.info(f'Loading fact table {self.table}')
-        formatted_sql = LoadFactOperator.insert_sql.format(self.table, self.sql_query)
-        redshift.run(formatted_sql)
-        self.log.info(f'Load of fact table {self.table} complete')</code></pre>
-          </div>
-        </div>
-        <div id="op-dim" class="pipeline-tab-panel">
-          <div class="code-block open">
-            <div class="code-label">plugins/operators/load_dimension.py</div>
-            <pre><code class="language-python">class LoadDimensionOperator(BaseOperator):
-    """
-    Loads a dimension table in Redshift from a provided SQL SELECT.
-    Defaults to the truncate-insert pattern (clear the table, then load
-    fresh), but truncate_table can be set to False for append-only mode.
-    """
-    ui_color = '#80BD9E'
-
-    def execute(self, context):
-        redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
-        if self.truncate_table:
-            self.log.info(f'Truncating dimension table {self.table}')
-            redshift.run(f'TRUNCATE TABLE {self.table}')
-        self.log.info(f'Loading dimension table {self.table}')
-        formatted_sql = LoadDimensionOperator.insert_sql.format(self.table, self.sql_query)
-        redshift.run(formatted_sql)</code></pre>
-          </div>
-        </div>
-        <div id="op-quality" class="pipeline-tab-panel">
-          <div class="code-block open">
-            <div class="code-label">plugins/operators/data_quality.py</div>
-            <pre><code class="language-python">def execute(self, context):
-    redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
-    if not self.dq_checks:
-        raise ValueError('DataQualityOperator was given no checks to run')
-
-    failing_checks = []
-    for check in self.dq_checks:
-        check_sql = check.get('check_sql')
-        expected_result = check.get('expected_result')
-        records = redshift.get_records(check_sql)
-        if not records or not records[0]:
-            failing_checks.append(f'Check returned no results. Query: {check_sql}')
-            continue
-        actual_result = records[0][0]
-        if actual_result != expected_result:
-            failing_checks.append(
-                f'Check failed. Query: {check_sql} -- expected {expected_result}, got {actual_result}'
-            )
-
-    if failing_checks:
-        raise ValueError('Data quality check(s) failed:\n' + '\n'.join(failing_checks))
-    self.log.info(f'All {len(self.dq_checks)} data quality checks passed')</code></pre>
-          </div>
+        <div id="tab-deploy" class="pipeline-tab-panel"><p>Packages the model behind a FastAPI endpoint in Docker, tested and deployed automatically through GitLab CI/CD.</p></div>
+        <div class="tag-row">
+          <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">GitLab CI/CD</span>
         </div>
       </div>
 
-      <div class="case-tags">
-        <span class="tag on-accent">Airflow</span><span class="tag on-accent">AWS Redshift</span><span class="tag on-accent">Python</span>
-      </div>
-      <div class="case-links">
-        <a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">View full source on GitHub &rarr;</a>
-      </div>
-    </div>
-
-    <div class="mini-grid">
-      <div class="mini-card">
-        <h3>Program Implementation Automation</h3>
-        <p>
-          A Python program that cleans a real business dataset, flags every company with a negative
-          debt to equity ratio, and safely computes a debt to income ratio, handling the case where
-          revenue is zero rather than crashing.
-        </p>
-        <div class="try-panel" style="margin-top:6px;">
-          <div class="try-label">Try It: Debt to Income Ratio</div>
-          <div class="try-row">
-            <div class="field">
-              <label for="debtInput">Total long-term debt ($)</label>
-              <input type="number" id="debtInput" value="450000" step="1000">
+      <div class="mini-grid">
+        <div class="mini-card">
+          <h3>Program Implementation Automation</h3>
+          <p>A Python program that cleans a business dataset, flags every company with a negative debt to equity ratio, and safely computes a debt to income ratio without dividing by zero.</p>
+          <div class="demo-panel">
+            <div class="demo-label">Model demo &middot; debt to income ratio</div>
+            <div class="demo-row">
+              <div class="field"><label for="debtInput">Debt ($)</label><input type="number" id="debtInput" value="450000" step="1000"></div>
+              <div class="field"><label for="revenueInput">Revenue ($)</label><input type="number" id="revenueInput" value="1200000" step="1000"></div>
+              <button class="btn-chip primary" id="ratioBtn" type="button">Calculate</button>
             </div>
-            <div class="field">
-              <label for="revenueInput">Total revenue ($)</label>
-              <input type="number" id="revenueInput" value="1200000" step="1000">
-            </div>
-            <button class="btn-chip accent" id="ratioBtn" type="button">Calculate</button>
+            <div class="demo-result" id="ratioResult">Enter figures and calculate.</div>
           </div>
-          <div class="try-result" id="ratioResult">Enter figures and click calculate.</div>
+          <div class="tag-row"><span class="tag">Python</span><span class="tag">pandas</span></div>
+          <div class="project-links"><a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">Source on GitLab</a></div>
         </div>
-        <div class="code-toggle">
-          <button class="btn-chip ghost" type="button" data-code-toggle="code-ratio">View the real code &rarr;</button>
-        </div>
-        <div class="code-block" id="code-ratio">
-          <div class="code-label">qkn1_task2_program_implementation.py</div>
-          <pre><code class="language-python">def calculate_debt_to_income_ratio(data_frame: pd.DataFrame) -> pd.DataFrame:
-    """
-    Calculate Debt to Income Ratio as Total Long-term Debt divided by
-    Total Revenue. If Total Revenue is zero, the result is set to NaN
-    to prevent division by zero and an invalid financial ratio.
-    """
-    ratio_results = data_frame[[
-        "Business ID", "Total Long-term Debt", "Total Revenue"
-    ]].copy()
 
-    ratio_results["Debt to Income Ratio"] = np.where(
-        ratio_results["Total Revenue"] == 0,
-        np.nan,
-        ratio_results["Total Long-term Debt"] / ratio_results["Total Revenue"]
-    )
-    return ratio_results</code></pre>
+        <div class="mini-card">
+          <h3>Continuous Monitoring &amp; Data Governance Plan</h3>
+          <p>A monitoring design layered onto a data engineering pipeline for a manufacturing acquisition, with measurable service levels instead of vague goals.</p>
+          <div class="mini-stats">
+            <span class="mini-stat"><b>&lt;0.5%</b> quarantine rate threshold</span>
+            <span class="mini-stat"><b>15 min</b> failure ack SLA</span>
+            <span class="mini-stat"><b>2 yr</b> audit retention</span>
+          </div>
+          <div class="tag-row"><span class="tag">Data Governance</span><span class="tag">Azure</span></div>
         </div>
-        <div class="mini-stats">
-          <span class="mini-stat"><b>Real dataset:</b> business financials by state</span>
-        </div>
-        <div class="case-tags">
-          <span class="tag on-accent">Python</span><span class="tag on-accent">pandas</span>
-        </div>
-        <div class="case-links"><a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">View on GitLab &rarr;</a></div>
-      </div>
 
-      <div class="mini-card">
-        <h3>Continuous Monitoring &amp; Data Governance Plan</h3>
-        <p>
-          A monitoring plan layered onto a data engineering pipeline for a manufacturing acquisition,
-          with concrete, measurable service levels rather than vague goals.
-        </p>
-        <div class="mini-stats">
-          <span class="mini-stat"><b>&lt; 0.5%</b> quarantine rate threshold per run</span>
-          <span class="mini-stat"><b>15 min</b> pipeline failure acknowledgment SLA</span>
-          <span class="mini-stat"><b>2 years</b> audit log retention</span>
+        <div class="mini-card">
+          <h3>Data Quality Rule Engine</h3>
+          <p>A small standalone version of the same checks my Airflow data quality operator runs: row counts, null rates, and load latency, each checked against a threshold and flagged instead of assumed fine.</p>
+          <div class="demo-panel">
+            <div class="demo-label">Sample run &middot; 4 warehouse tables</div>
+            <div id="dqTableWrap"></div>
+            <button class="btn-chip primary" id="dqRunBtn" type="button" style="margin-top:14px;">Run quality check</button>
+          </div>
+          <div class="tag-row"><span class="tag">Python</span><span class="tag">Airflow</span><span class="tag">Data Validation</span></div>
         </div>
-        <p style="font-size:13.5px;">
-          Every pipeline stage reports run status, row counts, and lineage into a central Azure
-          Monitor workspace; a quarantine table captures failed records with a reason code instead of
-          silently dropping them, so a data steward can triage exactly what failed and why.
-        </p>
-        <div class="case-tags">
-          <span class="tag on-accent">Data Governance</span><span class="tag on-accent">Azure</span>
+
+        <div class="mini-card">
+          <h3>SQL Query Console</h3>
+          <p>A small sample orders table and a few real queries against it. Pick one to run it and see the result set, or think of it as a preview of how I'd explore a warehouse table.</p>
+          <div class="demo-panel">
+            <div class="demo-label">Sample data &middot; 12 orders</div>
+            <div class="demo-row" style="margin-bottom:2px;">
+              <button class="btn-chip" data-sql="region" type="button">Revenue by region</button>
+              <button class="btn-chip" data-sql="delayed" type="button">Delayed orders</button>
+              <button class="btn-chip" data-sql="top" type="button">Top 5 by order value</button>
+            </div>
+            <pre id="sqlText" class="mono" style="font-size:12.5px; color:var(--muted); margin-top:12px; white-space:pre-wrap;">Select a query above.</pre>
+            <div id="sqlResultWrap"></div>
+          </div>
+          <div class="tag-row"><span class="tag">SQL</span><span class="tag">Data Analysis</span></div>
         </div>
       </div>
-    </div>
 
-  </div>
-</section>
+    </section>
 
-<section id="experience" class="reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">05 / Experience</div>
-      <h2>Professional Experience</h2>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>Product Enablement Specialist III &amp; Tech Services AI Gem Leader</h3>
-        <div class="meta">Modernizing Medicine, Inc. (Remote) &middot; Feb 2026 to Present</div>
-        <ul>
-          <li>Promoted to Level III to drive AI adoption within the department as a designated Gem Leader.</li>
-          <li>Developed the Fax Flow Assistant, an LLM tool automating compliance review of LOAs with structured document scanning logic.</li>
-          <li>Independently learned Python to build Ask PE, a desktop application with an integrated AI knowledge base for internal SOPs.</li>
-          <li>Analyzed fulfillment data using JQL and Salesforce reporting to identify and prove routing bottlenecks, presenting findings at the CS Town Hall.</li>
-        </ul>
+    <section id="contact" class="reveal">
+      <div class="section-title"><span class="num">04.</span> Contact <span class="rule"></span></div>
+      <div class="contact-box">
+        <p>Open to data engineering and data analytics roles. The fastest way to reach me is email.</p>
+        <div class="contact-links">
+          <a href="mailto:dmcneish365@gmail.com">Email</a>
+          <a href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Resume</a>
+          <a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
+          <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
+        </div>
       </div>
-      <div class="timeline-item">
-        <h3>Product Enablement Specialist II</h3>
-        <div class="meta">Modernizing Medicine, Inc. (Remote) &middot; Jan 2025 to Jan 2026</div>
-        <ul>
-          <li>Coordinated complex cross functional workflows across Cloud Services, Data Services, and Product Management.</li>
-          <li>Monitored system health logs and analyzed daily automation reporting for enterprise RPA bots.</li>
-          <li>Identified edge cases in Salesforce data and API timeouts, preventing client facing errors and reducing manual labor.</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <h3>Product Enablement Specialist I</h3>
-        <div class="meta">Modernizing Medicine, Inc. (Remote) &middot; Jan 2023 to Dec 2024</div>
-        <ul>
-          <li>Coordinated the order to activation lifecycle for enterprise clients, ensuring accurate data entry and SLA adherence.</li>
-          <li>Configured client environments using Sysadmin tools, Jenkins, and Jira to support automated onboarding workflows.</li>
-          <li>Awarded Best Team Lead on Implementation in the first year for client deployment and teamwork.</li>
-        </ul>
-      </div>
+    </section>
 
-      <div class="timeline-group">Earlier Experience</div>
+    <footer class="bottom">Built by D'Andre McNeish</footer>
 
-      <div class="timeline-item">
-        <h3>Pharmacy Service Representative</h3>
-        <div class="meta">CVS Specialty (Contract) &middot; Oct 2022 to Jan 2023</div>
-        <ul>
-          <li>Established patient eligibility, finalized insurance modifications, and communicated coverage details to patients.</li>
-          <li>Cleared rejected insurance claims to keep medication delivery on schedule.</li>
-          <li>Reconciled pharmacy prescription records against reimbursed claims to catch inconsistencies.</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <h3>Technical Support Specialist</h3>
-        <div class="meta">Houghton Mifflin Harcourt &middot; Jun 2022 to Nov 2022</div>
-        <ul>
-          <li>Supported district and school administrators, instructors, and corporate departments with technical and account issues.</li>
-          <li>Used the corporate database to manage customer accounts, update data, and reset passwords.</li>
-          <li>Supported school districts with bulk imports of student, teacher, and administrator accounts, and trained administrators on account management systems.</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <h3>AppleCare Technical Support Advisor</h3>
-        <div class="meta">Apple &middot; Sep 2021 to May 2022</div>
-        <ul>
-          <li>Diagnosed and resolved software issues on Mac computers using Activity Monitor, Console, and other diagnostic tools.</li>
-          <li>Helped customers configure and troubleshoot cloud sync across Apple devices.</li>
-          <li>Supported iPhone, iPad, and iPod customers with hardware repair scheduling and troubleshooting.</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <h3>Technical Support Specialist</h3>
-        <div class="meta">Teleperformance (Mercedes-Benz USA account) &middot; Aug 2020 to Jun 2021</div>
-        <ul>
-          <li>Supported Mercedes me connect app users on 2019 and newer models, managing cases for Mercedes-Benz USA.</li>
-          <li>Collaborated with the Maastricht, Germany IT department to resolve connected car application issues.</li>
-          <li>Investigated and resolved a wide range of software, hardware, and connectivity issues.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="education" class="alt-bg reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">06 / Education</div>
-      <h2>Academic Background</h2>
-    </div>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <h3>Master of Science, Data Analytics and Data Engineering</h3>
-        <div class="meta">Western Governors University &middot; Expected Summer 2027</div>
-      </div>
-      <div class="edu-card">
-        <h3>Bachelor of Applied Science, Data Analytics and Artificial Intelligence</h3>
-        <div class="meta">Broward College &middot; Graduated Dec 2025</div>
-      </div>
-      <div class="edu-card">
-        <h3>Associate of Arts and Sciences, Information Technology</h3>
-        <div class="meta">Broward College &middot; Aug 2016 to May 2019 &middot; 3.8 GPA</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact reveal">
-  <div class="container">
-    <div class="section-head">
-      <div class="index-label">07 / Contact</div>
-      <h2>Let's Connect</h2>
-    </div>
-    <p>
-      I am open to data analytics and data engineering opportunities. Feel free to reach out
-      or take a look at the work above.
-    </p>
-    <div class="contact-links">
-      <a href="mailto:dmcneish365@gmail.com">Email</a>
-      <a href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Resume</a>
-      <a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
-      <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
-    </div>
-  </div>
-</section>
-
-<footer class="bottom">
-  &copy; 2026 D'Andre McNeish. Built with data, coffee, and a lot of debugging.
-</footer>
+  </main>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
 <script>
 (function () {
   var root = document.documentElement;
   var saved = localStorage.getItem('theme');
-  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   if (saved) { root.setAttribute('data-theme', saved); }
-  else if (prefersDark) { root.setAttribute('data-theme', 'dark'); }
 
   document.addEventListener('DOMContentLoaded', function () {
 
-    if (window.hljs) { hljs.highlightAll(); }
-
     var toggle = document.getElementById('themeToggle');
     function updateToggleLabel() {
-      var isDark = root.getAttribute('data-theme') === 'dark';
-      toggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+      var isLight = root.getAttribute('data-theme') === 'light';
+      toggle.textContent = isLight ? 'Dark mode' : 'Light mode';
     }
     updateToggleLabel();
     toggle.addEventListener('click', function () {
-      var current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-      var next = current === 'dark' ? 'light' : 'dark';
+      var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      var next = current === 'light' ? 'dark' : 'light';
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       updateToggleLabel();
-    });
-
-    var navToggle = document.getElementById('navToggle');
-    var navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', function () { navLinks.classList.toggle('open'); });
-    navLinks.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { navLinks.classList.remove('open'); });
     });
 
     var revealEls = document.querySelectorAll('.reveal');
@@ -1186,25 +663,29 @@ def determine_retained_components(pca: PCA) -> int:
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
         });
-      }, { threshold: 0.08 });
+      }, { threshold: 0.05 });
       revealEls.forEach(function (el) { io.observe(el); });
     } else {
       revealEls.forEach(function (el) { el.classList.add('visible'); });
     }
 
-    /* Code toggle panels */
-    document.querySelectorAll('[data-code-toggle]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var block = document.getElementById(btn.getAttribute('data-code-toggle'));
-        var isOpen = block.classList.toggle('open');
-        btn.textContent = isOpen ? 'Hide the code' : 'View the real code →';
+    var navLinks = document.querySelectorAll('.side-nav a');
+    var sections = ['about', 'experience', 'work', 'contact'].map(function (id) { return document.getElementById(id); });
+    function setActive() {
+      var scrollPos = window.scrollY + 200;
+      var current = sections[0];
+      sections.forEach(function (s) { if (s && s.offsetTop <= scrollPos) current = s; });
+      navLinks.forEach(function (a) {
+        a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
       });
-    });
+    }
+    window.addEventListener('scroll', setActive);
+    setActive();
 
     /* GCP slideshow */
     var slides = document.querySelectorAll('#gcpSlideshow img');
     var captions = [
-      'Architecture diagram: how data flows from ingestion into BigQuery and Cloud SQL.',
+      'Architecture: data flow from ingestion into BigQuery and Cloud SQL.',
       'Logical data model: the normalized schema behind the warehouse.'
     ];
     var slideIndex = 0;
@@ -1221,181 +702,56 @@ def determine_retained_components(pca: PCA) -> int:
       showSlide(slideIndex);
     });
 
-    /* GCP component accordion */
     document.querySelectorAll('.gcp-component-head').forEach(function (head) {
-      head.addEventListener('click', function () {
-        head.parentElement.classList.toggle('open');
-      });
+      head.addEventListener('click', function () { head.parentElement.classList.toggle('open'); });
     });
 
-    /* Pipeline tabs (MLflow) */
-    var tabButtons = document.querySelectorAll('.pipeline-tab-btn:not(.dag-op-btn)');
+    var tabButtons = document.querySelectorAll('.pipeline-tab-btn');
+    var tabPanels = document.querySelectorAll('.pipeline-tab-panel');
     tabButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var group = btn.closest('.case, .mini-card');
-        var buttons = group.querySelectorAll('.pipeline-tab-btn:not(.dag-op-btn)');
-        var panels = [
-          document.getElementById('tab-import'), document.getElementById('tab-clean'),
-          document.getElementById('tab-train'), document.getElementById('tab-track'),
-          document.getElementById('tab-deploy')
-        ];
-        buttons.forEach(function (b) { b.classList.remove('active'); });
-        panels.forEach(function (p) { if (p) p.classList.remove('active'); });
+        tabButtons.forEach(function (b) { b.classList.remove('active'); });
+        tabPanels.forEach(function (p) { p.classList.remove('active'); });
         btn.classList.add('active');
         document.getElementById(btn.dataset.target).classList.add('active');
       });
     });
 
-    /* DAG operator code tabs */
-    document.querySelectorAll('.dag-op-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.dag-op-btn').forEach(function (b) { b.classList.remove('active'); });
-        document.querySelectorAll('#dagCodeTabs .pipeline-tab-panel').forEach(function (p) { p.classList.remove('active'); });
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.target).classList.add('active');
-      });
-    });
-
-    /* Drag and drop DAG builder (with click-to-place fallback) */
-    (function () {
-      var pool = document.getElementById('dagPool');
-      var slots = document.querySelectorAll('.dag-slot');
-      var feedback = document.getElementById('dagFeedback');
-      var codeTabs = document.getElementById('dagCodeTabs');
-      var correctOrder = ['stage', 'fact', 'dim', 'quality'];
-      var slotLabels = ['Drop step 1 here', 'Drop step 2 here', 'Drop step 3 here', 'Drop step 4 here'];
-      var dragged = null;
-
-      function makeTileDraggable(tile) {
-        tile.addEventListener('dragstart', function (e) {
-          dragged = tile;
-          e.dataTransfer.setData('text/plain', tile.dataset.key);
-        });
-        tile.addEventListener('click', function () {
-          var emptySlot = Array.prototype.find.call(slots, function (s) { return !s.dataset.filled; });
-          if (emptySlot) { placeTile(tile, emptySlot); }
-        });
-      }
-      document.querySelectorAll('.dag-tile').forEach(makeTileDraggable);
-
-      function placeTile(tile, slot) {
-        slot.innerHTML = '';
-        slot.appendChild(tile);
-        slot.dataset.filled = tile.dataset.key;
-        slot.classList.add('filled');
-        tile.classList.add('placed');
-        feedback.textContent = '';
-        feedback.className = 'dag-feedback';
-      }
-
-      slots.forEach(function (slot, idx) {
-        slot.addEventListener('dragover', function (e) { e.preventDefault(); slot.classList.add('drag-over'); });
-        slot.addEventListener('dragleave', function () { slot.classList.remove('drag-over'); });
-        slot.addEventListener('drop', function (e) {
-          e.preventDefault();
-          slot.classList.remove('drag-over');
-          if (dragged) { placeTile(dragged, slot); dragged = null; }
-        });
-        slot.addEventListener('click', function () {
-          if (slot.dataset.filled) {
-            var tile = slot.firstElementChild;
-            tile.classList.remove('placed');
-            pool.appendChild(tile);
-            slot.innerHTML = slotLabels[idx];
-            delete slot.dataset.filled;
-            slot.classList.remove('filled');
-          }
-        });
-      });
-
-      document.getElementById('dagCheckBtn').addEventListener('click', function () {
-        var current = Array.prototype.map.call(slots, function (s) { return s.dataset.filled || null; });
-        if (current.some(function (c) { return !c; })) {
-          feedback.textContent = 'Place all four steps first.';
-          feedback.className = 'dag-feedback error';
-          return;
-        }
-        var isCorrect = correctOrder.every(function (key, i) { return current[i] === key; });
-        if (isCorrect) {
-          feedback.textContent = 'Correct. That is exactly how the real DAG runs it.';
-          feedback.className = 'dag-feedback success';
-          codeTabs.classList.add('open');
-          if (window.hljs) { hljs.highlightAll(); }
-        } else {
-          feedback.textContent = 'Not quite the real order. Hint: data has to land before it can be checked.';
-          feedback.className = 'dag-feedback error';
-        }
-      });
-
-      document.getElementById('dagResetBtn').addEventListener('click', function () {
-        slots.forEach(function (slot, idx) {
-          if (slot.dataset.filled) {
-            var tile = slot.firstElementChild;
-            tile.classList.remove('placed');
-            pool.appendChild(tile);
-          }
-          slot.innerHTML = slotLabels[idx];
-          delete slot.dataset.filled;
-          slot.classList.remove('filled');
-        });
-        feedback.textContent = '';
-        feedback.className = 'dag-feedback';
-        codeTabs.classList.remove('open');
-      });
-    })();
-
-    /* Home price estimator + regression chart */
-    var regressionData = null;
     if (window.Chart) {
       fetch('assets/regression_sample.json').then(function (r) { return r.json(); }).then(function (data) {
-        regressionData = data;
         var scatterData = data.points.map(function (p) { return { x: p.x, y: p.y }; });
         var xs = data.points.map(function (p) { return p.x; });
         var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
-        var lineData = [
-          { x: minX, y: data.slope * minX + data.intercept },
-          { x: maxX, y: data.slope * maxX + data.intercept }
-        ];
+        var lineData = [{ x: minX, y: data.slope * minX + data.intercept }, { x: maxX, y: data.slope * maxX + data.intercept }];
         var ctx = document.getElementById('regressionChart');
-        var lineVisible = true;
         var chart = new Chart(ctx, {
           type: 'scatter',
           data: {
             datasets: [
-              { label: 'Homes (real data)', data: scatterData, backgroundColor: 'rgba(193,80,46,0.55)', pointRadius: 3 },
-              { label: 'Regression line', data: lineData, type: 'line', borderColor: '#23473f', borderWidth: 2, pointRadius: 0, fill: false },
-              { label: 'Your estimate', data: [], backgroundColor: '#23473f', borderColor: '#fff', borderWidth: 2, pointRadius: 8, pointStyle: 'rectRot' }
+              { label: 'Homes (real data)', data: scatterData, backgroundColor: 'rgba(45,212,191,0.45)', pointRadius: 3 },
+              { label: 'Regression line', data: lineData, type: 'line', borderColor: '#79879c', borderWidth: 2, pointRadius: 0, fill: false },
+              { label: 'Your estimate', data: [], backgroundColor: '#2dd4bf', borderColor: '#eef2f6', borderWidth: 2, pointRadius: 7, pointStyle: 'rectRot' }
             ]
           },
           options: {
             responsive: true,
-            plugins: { legend: { position: 'bottom' } },
+            plugins: { legend: { position: 'bottom', labels: { color: '#79879c' } } },
             scales: {
-              x: { title: { display: true, text: 'Square Footage' } },
-              y: { title: { display: true, text: 'Price ($)' } }
+              x: { title: { display: true, text: 'Square Footage', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } },
+              y: { title: { display: true, text: 'Price ($)', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } }
             }
           }
         });
-        document.getElementById('r2Stat').textContent = 'R² = ' + data.r2.toFixed(3);
-        document.getElementById('slopeStat').textContent = '+$' + Math.round(data.slope) + ' per sq ft';
-        document.getElementById('toggleLineBtn').addEventListener('click', function () {
-          lineVisible = !lineVisible;
-          chart.data.datasets[1].hidden = !lineVisible;
-          chart.update();
-          this.textContent = lineVisible ? 'Hide regression line' : 'Show regression line';
-        });
+        document.getElementById('r2Stat').textContent = data.r2.toFixed(3);
+        document.getElementById('slopeStat').textContent = '+$' + Math.round(data.slope) + '/sq ft';
 
         document.getElementById('estimateBtn').addEventListener('click', function () {
           var sqft = parseFloat(document.getElementById('sqftInput').value);
-          if (isNaN(sqft) || sqft <= 0) {
-            document.getElementById('estimateResult').innerHTML = 'Enter a valid square footage.';
-            return;
-          }
+          if (isNaN(sqft) || sqft <= 0) { document.getElementById('estimateResult').innerHTML = 'Enter a valid square footage.'; return; }
           var predicted = data.slope * sqft + data.intercept;
           document.getElementById('estimateResult').innerHTML =
             '$' + Math.round(predicted).toLocaleString() +
-            '<span class="muted">Predicted price = ' + data.slope.toFixed(2) + ' &times; ' + sqft +
-            ' + ' + Math.round(data.intercept).toLocaleString() + ' (the actual fitted equation)</span>';
+            '<span class="muted">price = ' + data.slope.toFixed(2) + ' &times; sqft + ' + Math.round(data.intercept).toLocaleString() + '</span>';
           chart.data.datasets[2].data = [{ x: sqft, y: predicted }];
           chart.update();
         });
@@ -1403,35 +759,27 @@ def determine_retained_components(pca: PCA) -> int:
 
       fetch('assets/pca_full.json').then(function (r) { return r.json(); }).then(function (data) {
         var ctx2 = document.getElementById('pcaChart');
-        var pcaChart = new Chart(ctx2, {
+        new Chart(ctx2, {
           type: 'bar',
           data: {
             labels: data.components,
-            datasets: [{
-              label: 'Eigenvalue',
-              data: data.eigenvalues,
-              backgroundColor: data.eigenvalues.map(function (v) { return v > 1 ? '#c1502e' : '#ddd2ba'; })
-            }]
+            datasets: [{ label: 'Eigenvalue', data: data.eigenvalues, backgroundColor: data.eigenvalues.map(function (v) { return v > 1 ? '#2dd4bf' : '#2a3444'; }) }]
           },
           options: {
             responsive: true,
-            onClick: function (evt, elements) {
-              if (!elements.length) return;
-              showLoadings(elements[0].index);
-            },
-            plugins: {
-              legend: { display: false },
-              tooltip: { callbacks: { label: function (c) { return 'Eigenvalue: ' + c.parsed.y.toFixed(3) + ' (click to see loadings)'; } } }
-            },
-            scales: { y: { title: { display: true, text: 'Eigenvalue' } } }
+            onClick: function (evt, elements) { if (elements.length) { showLoadings(elements[0].index); } },
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { ticks: { color: '#79879c' }, grid: { display: false } },
+              y: { title: { display: true, text: 'Eigenvalue', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } }
+            }
           }
         });
 
         var interpretations = {
-          'PC1': 'This component loads most heavily on Distance to City Center and Age of Home (both positive) and Square Footage (negative). In plain terms, homes that are farther out and older tend to move together on this component, separately from newer, larger homes.',
-          'PC2': 'This component loads most heavily on Employment Rate (positive) and Crime Rate (negative). It separates areas by local economic and safety conditions rather than by the physical size of the home.'
+          'PC1': 'Loads most heavily on Distance to City Center and Age of Home (positive) and Square Footage (negative). Farther out, older homes move together on this component, separate from newer, larger homes.',
+          'PC2': 'Loads most heavily on Employment Rate (positive) and Crime Rate (negative). Separates areas by local economic and safety conditions rather than by home size.'
         };
-
         function showLoadings(index) {
           var pc = data.components[index];
           var loadings = data.loadings[pc];
@@ -1439,41 +787,122 @@ def determine_retained_components(pca: PCA) -> int:
           rows.sort(function (a, b) { return Math.abs(b.value) - Math.abs(a.value); });
           var retained = data.retained[index];
           var html = '<table class="loadings-table"><thead><tr><th>Variable</th><th>Loading on ' + pc + '</th></tr></thead><tbody>';
-          rows.forEach(function (r) {
-            html += '<tr><td>' + r.name + '</td><td class="num">' + (r.value >= 0 ? '+' : '') + r.value.toFixed(4) + '</td></tr>';
-          });
+          rows.forEach(function (r) { html += '<tr><td>' + r.name + '</td><td class="num">' + (r.value >= 0 ? '+' : '') + r.value.toFixed(4) + '</td></tr>'; });
           html += '</tbody></table>';
-          html += '<p class="loadings-note">' +
-            (retained ? (interpretations[pc] || 'This component was retained under the Kaiser rule (eigenvalue greater than 1).') :
-              'This component was not retained. Its eigenvalue is below 1, so under the Kaiser rule it explains less variance than a single original variable and was dropped from the final model.') +
-            '</p>';
+          html += '<p class="loadings-note">' + (retained ? (interpretations[pc] || 'Retained under the Kaiser rule (eigenvalue greater than 1).') : 'Not retained. Eigenvalue is below 1, so under the Kaiser rule it explains less variance than a single original variable.') + '</p>';
           document.getElementById('pcaLoadingsPanel').innerHTML = html;
         }
         showLoadings(0);
       });
     }
 
-    /* Debt to income ratio calculator */
+    /* Data Quality Rule Engine */
+    var dqTables = [
+      { name: 'stg_events', rows: 48213, expectedMin: 10000, nullRate: 0.002, nullThreshold: 0.01, latency: 42, sla: 60 },
+      { name: 'stg_songs', rows: 14896, expectedMin: 10000, nullRate: 0.014, nullThreshold: 0.01, latency: 38, sla: 60 },
+      { name: 'fact_songplays', rows: 6821, expectedMin: 1000, nullRate: 0.001, nullThreshold: 0.01, latency: 51, sla: 60 },
+      { name: 'dim_users', rows: 0, expectedMin: 50, nullRate: 0.0, nullThreshold: 0.01, latency: 6, sla: 60 }
+    ];
+    function renderDqTable(withResults) {
+      var html = '<table class="dq-table"><thead><tr><th>Table</th><th>Rows</th><th>Null rate</th><th>Load time</th>' + (withResults ? '<th>Result</th>' : '') + '</tr></thead><tbody>';
+      dqTables.forEach(function (t) {
+        var rowFail = t.rows < t.expectedMin;
+        var nullFail = t.nullRate > t.nullThreshold;
+        var latFail = t.latency > t.sla;
+        var failed = rowFail || nullFail || latFail;
+        html += '<tr><td>' + t.name + '</td><td class="mono">' + t.rows.toLocaleString() + '</td><td class="mono">' + (t.nullRate * 100).toFixed(1) + '%</td><td class="mono">' + t.latency + 's</td>';
+        if (withResults) {
+          if (failed) {
+            var reasons = [];
+            if (rowFail) reasons.push('row count below ' + t.expectedMin.toLocaleString());
+            if (nullFail) reasons.push('null rate above ' + (t.nullThreshold * 100).toFixed(0) + '%');
+            if (latFail) reasons.push('latency above ' + t.sla + 's SLA');
+            html += '<td class="status-fail">FAIL &middot; ' + reasons.join(', ') + '</td>';
+          } else {
+            html += '<td class="status-pass">PASS</td>';
+          }
+        }
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      document.getElementById('dqTableWrap').innerHTML = html;
+    }
+    renderDqTable(false);
+    document.getElementById('dqRunBtn').addEventListener('click', function () { renderDqTable(true); });
+
+    /* SQL Query Console */
+    var orders = [
+      { id: 1001, customer: 'Harbor Retail', region: 'Southeast', amount: 4820, status: 'fulfilled' },
+      { id: 1002, customer: 'Quill & Co', region: 'Northeast', amount: 1290, status: 'fulfilled' },
+      { id: 1003, customer: 'Basecamp Supply', region: 'Midwest', amount: 760, status: 'delayed' },
+      { id: 1004, customer: 'Harbor Retail', region: 'Southeast', amount: 3110, status: 'fulfilled' },
+      { id: 1005, customer: 'Norwood Group', region: 'West', amount: 9840, status: 'fulfilled' },
+      { id: 1006, customer: 'Quill & Co', region: 'Northeast', amount: 540, status: 'delayed' },
+      { id: 1007, customer: 'Pier Six Foods', region: 'West', amount: 2210, status: 'fulfilled' },
+      { id: 1008, customer: 'Basecamp Supply', region: 'Midwest', amount: 1875, status: 'fulfilled' },
+      { id: 1009, customer: 'Norwood Group', region: 'West', amount: 6430, status: 'fulfilled' },
+      { id: 1010, customer: 'Harbor Retail', region: 'Southeast', amount: 990, status: 'delayed' },
+      { id: 1011, customer: 'Pier Six Foods', region: 'West', amount: 3420, status: 'fulfilled' },
+      { id: 1012, customer: 'Quill & Co', region: 'Northeast', amount: 5150, status: 'fulfilled' }
+    ];
+    var sqlDefs = {
+      region: {
+        sql: 'SELECT region, SUM(amount) AS revenue\nFROM orders\nGROUP BY region\nORDER BY revenue DESC;',
+        run: function () {
+          var totals = {};
+          orders.forEach(function (o) { totals[o.region] = (totals[o.region] || 0) + o.amount; });
+          return Object.keys(totals).map(function (r) { return { region: r, revenue: totals[r] }; })
+            .sort(function (a, b) { return b.revenue - a.revenue; });
+        }
+      },
+      delayed: {
+        sql: "SELECT id, customer, region, amount\nFROM orders\nWHERE status = 'delayed';",
+        run: function () {
+          return orders.filter(function (o) { return o.status === 'delayed'; })
+            .map(function (o) { return { id: o.id, customer: o.customer, region: o.region, amount: o.amount }; });
+        }
+      },
+      top: {
+        sql: 'SELECT id, customer, amount\nFROM orders\nORDER BY amount DESC\nLIMIT 5;',
+        run: function () {
+          return orders.slice().sort(function (a, b) { return b.amount - a.amount; }).slice(0, 5)
+            .map(function (o) { return { id: o.id, customer: o.customer, amount: o.amount }; });
+        }
+      }
+    };
+    function renderSqlRows(rows) {
+      if (!rows.length) { return '<p style="color:var(--muted); font-size:13px; margin-top:10px;">No rows.</p>'; }
+      var cols = Object.keys(rows[0]);
+      var html = '<table class="sql-table"><thead><tr>' + cols.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '</tr></thead><tbody>';
+      rows.forEach(function (r) {
+        html += '<tr>' + cols.map(function (c) {
+          var v = r[c];
+          if (c === 'amount' || c === 'revenue') { v = '$' + v.toLocaleString(); }
+          return '<td>' + v + '</td>';
+        }).join('') + '</tr>';
+      });
+      html += '</tbody></table>';
+      return html;
+    }
+    document.querySelectorAll('[data-sql]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var def = sqlDefs[btn.dataset.sql];
+        document.getElementById('sqlText').textContent = def.sql;
+        document.getElementById('sqlResultWrap').innerHTML = renderSqlRows(def.run());
+      });
+    });
+
     document.getElementById('ratioBtn').addEventListener('click', function () {
       var debt = parseFloat(document.getElementById('debtInput').value);
       var revenue = parseFloat(document.getElementById('revenueInput').value);
       var el = document.getElementById('ratioResult');
-      if (isNaN(debt) || isNaN(revenue)) {
-        el.innerHTML = 'Enter numbers for both fields.';
-        return;
-      }
-      if (revenue === 0) {
-        el.innerHTML = 'NaN <span class="muted">Total Revenue was zero, so the real code returns NaN here instead of crashing on a division by zero.</span>';
-        return;
-      }
-      var ratio = debt / revenue;
-      el.innerHTML = ratio.toFixed(3) +
-        '<span class="muted">Debt to Income Ratio = Total Long-term Debt &divide; Total Revenue, the exact formula from the real script.</span>';
+      if (isNaN(debt) || isNaN(revenue)) { el.innerHTML = 'Enter numbers for both fields.'; return; }
+      if (revenue === 0) { el.innerHTML = 'NaN<span class="muted">Revenue was zero; the real code returns NaN instead of dividing by zero.</span>'; return; }
+      el.innerHTML = (debt / revenue).toFixed(3) + '<span class="muted">Debt &divide; Revenue</span>';
     });
 
   });
 })();
 </script>
-
 </body>
 </html>
