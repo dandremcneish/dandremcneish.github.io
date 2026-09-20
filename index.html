@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D'Andre McNeish | Data Engineer</title>
-<meta name="description" content="D'Andre McNeish, data engineer. Pipelines, cloud architecture, and applied modeling, with working demos built on real data.">
+<title>D'Andre McNeish | Data &amp; Analytics Engineering</title>
+<meta name="description" content="D'Andre McNeish, data and analytics engineering. Pipelines, cloud architecture, and applied modeling, with working demos built on real data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -50,6 +50,10 @@
   .sidebar {
     width: 340px; flex-shrink: 0; padding: 64px 40px; position: sticky; top: 0; height: 100vh;
     display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border);
+  }
+  .profile-photo {
+    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
+    border: 2px solid var(--border);
   }
   .sidebar-top h1 { font-size: 27px; margin-bottom: 8px; }
   .sidebar-top .role { font-size: 16px; color: var(--text); margin-bottom: 18px; }
@@ -288,11 +292,13 @@
 <div class="layout">
   <aside class="sidebar">
     <div class="sidebar-top">
+      <img class="profile-photo" src="assets/headshot.png" alt="Photo of D'Andre McNeish">
       <h1>D'Andre McNeish</h1>
-      <div class="role">Data Engineer</div>
+      <div class="role">Data &amp; Analytics Engineering</div>
       <p class="blurb">
-        The complete workbook of my WGU Data Management &amp; Data Engineering degree: every
-        course, the real schemas, pipelines, models and cloud systems I built, in order.
+        Hey, I'm D'Andre. I like turning messy data into something useful, real databases,
+        real pipelines, real models, tested on real data. This page walks through what I've
+        built with the actual code, dashboards, and results behind it. Take a look around.
       </p>
       <ul class="side-nav">
         <li><a href="#about"><span class="num">01</span> About</a></li>
@@ -322,17 +328,17 @@
         that moves and validates it, and building the model or query that turns it into a decision.
       </p>
       <p class="body-text">
-        I'm completing a Master of Science in Data Analytics and Data Engineering at Western
-        Governors University. This site is the full workbook for that degree, not a highlight reel:
-        every course is documented below with the actual schemas, code, pipelines, and statistical
-        tests behind it, in the order I built them, so the progression from database design through
-        to a hypothesis-driven capstone is visible end to end.
+        I just graduated with a Master's in Data Analytics and Data Engineering, and this page is
+        basically my lab notebook made public: real schemas, real code, real pipelines, and the
+        statistical tests behind them, laid out in the order I actually built them, so the
+        progression from database design through to a hypothesis-driven capstone is visible end to
+        end. No slideshow, just the work.
       </p>
       <p class="body-text">
-        Before this program I spent several years in technical support and IT operations, and hold
-        an Associate of Arts and Sciences in Information Technology and a Bachelor's in Data
-        Analytics and Artificial Intelligence. That operational background is part of why the work
-        below leans toward production concerns, monitoring, validation, reproducibility, rather than
+        Before that I spent several years in technical support and IT operations, and hold an
+        Associate of Arts and Sciences in Information Technology and a Bachelor's in Data Analytics
+        and Artificial Intelligence. That operational background is part of why the work below
+        leans toward production concerns, monitoring, validation, reproducibility, rather than
         stopping once a model runs once.
       </p>
 
@@ -386,70 +392,70 @@
     <section id="journey" class="reveal">
       <div class="section-title"><span class="num">02.</span> Journey <span class="rule"></span></div>
       <p class="lede" style="margin-bottom:30px;">
-        Ten courses, in the order I completed them. Each one builds on the last: databases before
+        Ten projects, in the order I built them. Each one builds on the last: databases before
         pipelines, pipelines before models, models before the cloud architecture that serves them at
         scale, all of it before a capstone that had to justify itself with a statistical test rather
-        than an opinion. Click any course to jump to the full case study.
+        than an opinion. Click any one to jump to the full write-up.
       </p>
 
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-dot">01</div>
-          <a class="tcourse" href="#case-01">D597 &middot; Database Foundations</a>
+          <a class="tcourse" href="#case-01">Database Foundations</a>
           <div class="ttitle">Relational (PostgreSQL) &amp; Non-Relational (MongoDB) Design</div>
           <div class="tdesc">Designed and implemented a normalized relational schema and a document-based NoSQL schema for two different business problems, to learn firsthand when each model is the right fit.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">02</div>
-          <a class="tcourse" href="#case-02">D598 &middot; Scripting and Programming</a>
+          <a class="tcourse" href="#case-02">Scripting and Programming</a>
           <div class="ttitle">Automated Analysis Pipeline in Python</div>
           <div class="tdesc">Built a Python program end to end from a flowchart and pseudocode: cleaning, descriptive statistics, a safe custom ratio calculation, and a multi-sheet Excel export.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">03</div>
-          <a class="tcourse" href="#case-03">D599 &middot; Data Preparation &amp; Exploration</a>
+          <a class="tcourse" href="#case-03">Data Preparation &amp; Exploration</a>
           <div class="ttitle">Data Cleaning, Profiling &amp; Market Basket Analysis</div>
           <div class="tdesc">Cleaned and profiled a 10,199-record employee dataset, then ran a market basket analysis with the Apriori algorithm to surface real product-association rules.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">04</div>
-          <a class="tcourse" href="#case-04">D600 &middot; Predictive Modeling</a>
+          <a class="tcourse" href="#case-04">Predictive Modeling</a>
           <div class="ttitle">Linear Regression, Logistic Regression &amp; PCA</div>
           <div class="tdesc">Built and validated regression and classification models plus an unsupervised PCA on a 7,000-record housing dataset, with real train/test splits and assumption checks.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">05</div>
-          <a class="tcourse" href="#case-05">D601 &middot; Data Analytics</a>
+          <a class="tcourse" href="#case-05">Data Analytics</a>
           <div class="ttitle">Interactive Dashboard &amp; Presentation</div>
           <div class="tdesc">Designed and built an interactive Tableau dashboard against defined KPIs, then presented the findings on video.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">06</div>
-          <a class="tcourse" href="#case-06">D602 &middot; MLOps &amp; Automation</a>
+          <a class="tcourse" href="#case-06">MLOps &amp; Automation</a>
           <div class="ttitle">Version-Controlled, Deployed ML Pipeline</div>
           <div class="tdesc">Took a flight-delay prediction model from raw data to a version-controlled, experiment-tracked, containerized API, deployed through GitLab CI/CD.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">07</div>
-          <a class="tcourse" href="#case-07">D607 &middot; Cloud Databases</a>
+          <a class="tcourse" href="#case-07">Cloud Databases</a>
           <div class="ttitle">GCP Architecture &amp; BigQuery Implementation</div>
           <div class="tdesc">Proposed a GCP cloud architecture, then implemented it directly: a nested/repeated BigQuery schema populated with real records and queried live.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">08</div>
-          <a class="tcourse" href="#case-08">D608 &middot; Advanced Data Management</a>
+          <a class="tcourse" href="#case-08">Advanced Data Management</a>
           <div class="ttitle">Governance Plan &amp; Automated Pipeline</div>
           <div class="tdesc">Wrote a continuous monitoring plan with measurable SLAs, then built an Airflow-orchestrated pipeline with automated data-quality gates to back it up.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">09</div>
-          <a class="tcourse" href="#case-09">D609 &middot; Data Analytics at Scale</a>
+          <a class="tcourse" href="#case-09">Data Analytics at Scale</a>
           <div class="ttitle">Big Data Architecture &amp; Applied Lakehouse</div>
           <div class="tdesc">Proposed a full Azure/Fabric big data architecture for a real case study, then independently built a working AWS Glue/Athena lakehouse on the same medallion pattern.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">10</div>
-          <a class="tcourse" href="#case-10">D610 &middot; Data Engineering Capstone</a>
+          <a class="tcourse" href="#case-10">Data Engineering Capstone</a>
           <div class="ttitle">Hypothesis-Driven Validation Pipeline</div>
           <div class="tdesc">Designed and ran a full hypothesis-driven experiment: an automated BigQuery validation pipeline tested against manual review with a two-proportion z-test.</div>
         </div>
@@ -459,19 +465,19 @@
     <section id="case-studies" class="reveal">
       <div class="section-title"><span class="num">03.</span> Case Studies <span class="rule"></span></div>
       <p class="lede" style="margin-bottom:36px;">
-        The full write-up for each course: the problem, what I built, the real technical decisions
-        behind it, and the evidence. Where a course produced something interactive, you can run it
-        yourself.
+        The full write-up for each project: the problem, what I built, the real technical decisions
+        behind it, and the evidence. Where a project produced something interactive, you can run it
+        yourself below.
       </p>
 
       <!-- CASE 01: D597 -->
       <div class="project" id="case-01">
         <div class="case-head"><span class="case-num">01</span><h3>Database Foundations: Relational &amp; Non-Relational Design</h3></div>
-        <div class="case-course"><span class="case-course">D597 &middot; Data Management</span></div>
+        <div class="case-course"><span class="case-course">Data Management</span></div>
         <p class="case-sub">EcoMart (PostgreSQL) &amp; HealthTrack (MongoDB)</p>
 
         <p class="desc">
-          D597 was the first course in the program, and it was built around a direct comparison: take
+          This was the first project in the program, and it was built around a direct comparison: take
           two different business problems and solve each one with the database model that actually
           fits, instead of defaulting to one tool for everything.
         </p>
@@ -526,11 +532,11 @@ db.getCollectionNames();</div>
       <!-- CASE 02: D598 -->
       <div class="project" id="case-02">
         <div class="case-head"><span class="case-num">02</span><h3>Scripting and Programming: Automated Analysis Pipeline</h3></div>
-        <div class="case-course"><span class="case-course">D598 &middot; Analytics Programming</span></div>
+        <div class="case-course"><span class="case-course">Analytics Programming</span></div>
         <p class="case-sub">Equity fund dataset, 156 U.S. companies</p>
 
         <p class="desc">
-          D598 started with a flowchart and pseudocode and ended with a working Python program that
+          This project started with a flowchart and pseudocode and ended with a working Python program that
           implements it exactly. The program takes a dataset of 156 U.S. equity fund companies and runs
           it through six deterministic steps: import the Excel source into a pandas DataFrame, remove
           duplicate rows while keeping one valid copy of each, group the cleaned data by business state
@@ -570,12 +576,12 @@ db.getCollectionNames();</div>
       <!-- CASE 03: D599 -->
       <div class="project" id="case-03">
         <div class="case-head"><span class="case-num">03</span><h3>Data Preparation, Exploration &amp; Market Basket Analysis</h3></div>
-        <div class="case-course"><span class="case-course">D599 &middot; Data Preparation and Exploration</span></div>
+        <div class="case-course"><span class="case-course">Data Preparation and Exploration</span></div>
         <p class="case-sub">Employee Turnover (10,199 records) &amp; Allias Megastore transactions</p>
 
         <p class="desc">
-          D599 covered the two ends of exploratory data work: getting a messy dataset into a trustworthy
-          state, and finding non-obvious patterns once it is. The first task started with a raw Employee
+          This project covered the two ends of exploratory data work: getting a messy dataset into a trustworthy
+          state, and finding non-obvious patterns once it is. The first part started with a raw Employee
           Turnover dataset, 10,199 records across 16 variables. Before any analysis, every variable had
           to be profiled and typed correctly, quantitative vs. qualitative, continuous vs. discrete,
           nominal vs. ordinal, and checked for the kind of problems that quietly break downstream models:
@@ -614,29 +620,29 @@ top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
       <!-- CASE 04: D600 -->
       <div class="project" id="case-04">
         <div class="case-head"><span class="case-num">04</span><h3>Predictive Modeling: Regression &amp; Principal Component Analysis</h3></div>
-        <div class="case-course"><span class="case-course">D600 &middot; Predictive Modeling</span></div>
+        <div class="case-course"><span class="case-course">Predictive Modeling</span></div>
         <p class="case-sub">Housing dataset, 7,000 records, 22 variables</p>
 
         <p class="desc">
-          D600 was three tasks built on the same 7,000-record housing dataset, each asking a different
-          kind of question of it. Task 1 fit a multiple linear regression model to predict home price,
+          This project was three parts built on the same 7,000-record housing dataset, each asking a different
+          kind of question of it. The first part fit a multiple linear regression model to predict home price,
           starting from all candidate predictors and using backward stepwise elimination to arrive at an
           optimized 9-variable model, then validated it against a held-out test set and reported RMSE
           with scikit-learn rather than trusting the training fit alone.
         </p>
         <p class="desc">
-          Task 2 reframed the same kind of data as a classification problem: a logistic regression model
+          The second part reframed the same kind of data as a classification problem: a logistic regression model
           with 17 independent variables predicting whether a home falls into a luxury or non-luxury
           category, evaluated with McFadden's pseudo R-squared, AIC/BIC, and a confusion matrix on a
-          stratified 80/20 train/test split. This task went through several revisions after an evaluator
+          stratified 80/20 train/test split. This part went through several revisions after an evaluator
           flagged a subtle data-leakage bug: an early cleaning step let information from the target
           variable influence a predictor before the split, inflating the model's apparent performance.
           Finding that, fixing it, and regenerating every downstream statistic and screenshot from the
-          corrected run was the real work of that task, and the one that taught me to check for leakage
+          corrected run was the real work of it, and the one that taught me to check for leakage
           as a first step, not an afterthought.
         </p>
         <p class="desc">
-          Task 3 dropped the target variable entirely and ran an unsupervised PCA on seven standardized
+          The third part dropped the target variable entirely and ran an unsupervised PCA on seven standardized
           predictors, using the Kaiser rule (retain any component with an eigenvalue greater than 1) to
           decide how many components to keep. Two were retained, PC1 (eigenvalue 1.4388) and PC2
           (eigenvalue 1.0393), together explaining 35.40% of total variance, with PC1 loading most
@@ -647,7 +653,7 @@ top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
 
         <div class="result-callout">
           <div class="rc-item"><span class="rc-num">7,000</span><span class="rc-label">Records</span></div>
-          <div class="rc-item"><span class="rc-num">9 / 22</span><span class="rc-label">Predictors retained (Task 1)</span></div>
+          <div class="rc-item"><span class="rc-num">9 / 22</span><span class="rc-label">Predictors retained (regression)</span></div>
           <div class="rc-item"><span class="rc-num">2</span><span class="rc-label">Principal components retained</span></div>
           <div class="rc-item"><span class="rc-num">35.40%</span><span class="rc-label">Variance explained (PC1+PC2)</span></div>
         </div>
@@ -691,26 +697,27 @@ top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
       <!-- CASE 05: D601 -->
       <div class="project" id="case-05">
         <div class="case-head"><span class="case-num">05</span><h3>Data Analytics &amp; Visualization</h3></div>
-        <div class="case-course"><span class="case-course">D601 &middot; Data Analytics</span></div>
+        <div class="case-course"><span class="case-course">Data Analytics</span></div>
         <p class="case-sub">Interactive Tableau KPI dashboard</p>
 
         <p class="desc">
-          D601 was a two-task course: design and build a dashboard, then present it. For Task 1, I built
-          an interactive Tableau workbook against a business KPI dataset, with four coordinated
-          visualizations and a set of filters, date range, category, and region, that update every chart
+          This one was two parts: design and build a dashboard, then present it. For the first part, I built
+          an interactive Tableau workbook against a customer churn dataset, with four coordinated
+          visualizations and a set of filters, contract type, internet service, tenure, and state, that update every chart
           on the dashboard at once rather than requiring a separate view per slice of the data. The
-          accompanying paper documented the reasoning behind each visualization choice and each KPI,
+          accompanying write-up documented the reasoning behind each visualization choice and each KPI,
           tying every chart back to a specific business question rather than including a chart because
           the software made one easy.
         </p>
         <p class="desc">
-          For Task 2, I recorded a presentation walking through the finished dashboard: what each KPI
+          For the second part, I recorded a presentation walking through the finished dashboard: what each KPI
           means, what the filters reveal when used, and what the data actually supports recommending.
-          Because a Tableau workbook is a packaged desktop file rather than a webpage, it isn't embedded
-          live on this site, but the underlying design work, four linked visuals driven by shared
-          filters, built from a real KPI dataset, is the same skill the interactive charts elsewhere on
-          this page are built on.
+          The screenshot below is pulled straight from the live workbook: an overall churn rate of 26.5%,
+          an average monthly charge of $172.62, and the contract type and internet service breakdowns that
+          explain most of the swing between them.
         </p>
+        <div class="figure-frame"><img src="assets/tableau-dashboard.jpg" alt="Tableau customer churn dashboard with KPI cards and four linked charts"></div>
+        <div class="figure-cap">Live workbook, presentation mode: churn rate and average monthly charge broken out by contract type, internet service, and tenure.</div>
         <div class="tag-row">
           <span class="tag">Tableau</span><span class="tag">Data Visualization</span><span class="tag">KPI Design</span><span class="tag">Dashboarding</span>
         </div>
@@ -721,24 +728,24 @@ top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
       <!-- CASE 06: D602 -->
       <div class="project" id="case-06">
         <div class="case-head"><span class="case-num">06</span><h3>MLOps &amp; Automation: Flight Delay Prediction Pipeline</h3></div>
-        <div class="case-course"><span class="case-course">D602 &middot; Machine Learning DevOps</span></div>
+        <div class="case-course"><span class="case-course">Machine Learning DevOps</span></div>
         <p class="case-sub">BTS flight-delay data, GitLab CI/CD</p>
 
         <p class="desc">
-          D602 asked a different question than the modeling courses before it: not just can you build a
+          This project asked a different question than the modeling work before it: not just can you build a
           model, but can you make it reproducible, trackable, and deployable by someone other than you.
           Working from real Bureau of Transportation Statistics flight-delay data for a chosen airport, I
-          built the pipeline across three tasks and three GitLab merge requests.
+          built the pipeline across three parts and three GitLab merge requests.
         </p>
         <p class="desc">
-          Task 1 built the modeling pipeline itself: import and format scripts with DVC versioning both
+          The first part built the modeling pipeline itself: import and format scripts with DVC versioning both
           the raw and cleaned datasets so any run can be traced back to the exact data it used, a
           cleaning and filtering stage, and an MLflow-tracked training script that logs parameters,
-          metrics, and the model artifact for every run automatically, not just the best one. Task 2 was
-          largely a resubmission built around real verification: rather than trust the pipeline worked, I
+          metrics, and the model artifact for every run automatically, not just the best one. The second part leaned
+          on real verification: rather than trust the pipeline worked, I
           ran it end to end against the actual project and captured fresh evidence, a genuine successful
-          run, shown below, after an evaluator flagged that the first submission's evidence didn't
-          clearly demonstrate a full run. Task 3 packaged the trained model behind a FastAPI endpoint,
+          run, shown below, after catching that the first pass through didn't
+          clearly demonstrate a full run. The third part packaged the trained model behind a FastAPI endpoint,
           containerized it with Docker, and wired a GitLab CI/CD pipeline to build, test, and deploy it
           automatically on every push to the working branch, with an automated test suite guarding the
           API contract.
@@ -772,12 +779,12 @@ top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
       <!-- CASE 07: D607 -->
       <div class="project" id="case-07">
         <div class="case-head"><span class="case-num">07</span><h3>Cloud Database Design &amp; Implementation</h3></div>
-        <div class="case-course"><span class="case-course">D607 &middot; Cloud Databases</span></div>
+        <div class="case-course"><span class="case-course">Cloud Databases</span></div>
         <p class="case-sub">Alliah Company &mdash; GCP architecture &amp; BigQuery</p>
 
         <p class="desc">
-          D607 was two tasks: propose a cloud architecture, then actually build the database it calls
-          for. For Task 1, I designed a Google Cloud Platform architecture for a retailer, Alliah
+          This project was two parts: propose a cloud architecture, then actually build the database it calls
+          for. For the first part, I designed a Google Cloud Platform architecture for a retailer, Alliah
           Company, processing roughly 10 TB of transaction data per day: Cloud Pub/Sub for streaming
           ingestion, Cloud Dataflow for validation and deduplication, Cloud Storage as the raw data lake
           with a tiered lifecycle policy, and two different serving layers for two different needs, a
@@ -817,8 +824,8 @@ top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
         </div>
 
         <p class="desc" style="margin-top:22px;">
-          For Task 2, I implemented the BigQuery half of that proposal directly in the WGU GCP Database
-          Playground rather than just describing it. The schema uses a customer STRUCT and a repeated
+          For the second part, I implemented the BigQuery half of that proposal directly in a hosted GCP
+          sandbox rather than just describing it. The schema uses a customer STRUCT and a repeated
           shopping_cart ARRAY&lt;STRUCT&gt; in a single transactions table, which lets one row hold a full
           order, including a variable number of cart items, without a join to a separate line-items
           table. Ten real records were loaded with an INSERT ... SELECT FROM UNNEST([...]) statement,
@@ -857,11 +864,11 @@ shopping_cart ARRAY&lt;STRUCT&lt;
       <!-- CASE 08: D608 -->
       <div class="project" id="case-08">
         <div class="case-head"><span class="case-num">08</span><h3>Data Governance &amp; Automated Data Pipelines</h3></div>
-        <div class="case-course"><span class="case-course">D608 &middot; Advanced Data Management</span></div>
+        <div class="case-course"><span class="case-course">Advanced Data Management</span></div>
         <p class="case-sub">SmallFirm, Inc. monitoring plan &amp; Airflow/Redshift pipeline</p>
 
         <p class="desc">
-          D608 paired a written governance deliverable with a working one. Task 1 designed a full
+          This project paired a written governance deliverable with a working one. The first part designed a full
           data-processing solution for SmallFirm, Inc., a scenario with multiple on-premises source
           systems, MS Access databases for payroll, personnel, and vendors, and Excel files for products,
           production batches, tooling, and raw materials, that needed to land in a centralized Azure
@@ -874,7 +881,7 @@ shopping_cart ARRAY&lt;STRUCT&lt;
         <div class="figure-cap">Level 1 process and data flow diagram: extract &rarr; cleanse/validate &rarr; quarantine or load &rarr; integrate &amp; serve, with continuous monitoring hooked into every stage.</div>
 
         <p class="desc">
-          Task 2 built directly on that diagram: a continuous monitoring plan with concrete, measurable
+          The second part built directly on that diagram: a continuous monitoring plan with concrete, measurable
           thresholds instead of vague goals, shown below, plus specific benchmarks and a troubleshooting
           runbook for when a threshold is breached.
         </p>
@@ -922,11 +929,11 @@ shopping_cart ARRAY&lt;STRUCT&lt;
       <!-- CASE 09: D609 -->
       <div class="project" id="case-09">
         <div class="case-head"><span class="case-num">09</span><h3>Big Data Architecture at Scale</h3></div>
-        <div class="case-course"><span class="case-course">D609 &middot; Data Analytics at Scale</span></div>
+        <div class="case-course"><span class="case-course">Data Analytics at Scale</span></div>
         <p class="case-sub">STEDI Human Balance Analytics &mdash; Azure proposal &amp; applied AWS Glue lakehouse</p>
 
         <p class="desc">
-          D609's task was a big data architecture proposal for STEDI, a balance-training device company
+          This project was a big data architecture proposal for STEDI, a balance-training device company
           whose Step Trainer hardware and companion mobile app produce three raw data streams: customer
           profile data, mobile accelerometer readings, and Step Trainer sensor readings. The scenario's
           real constraint shaped the whole design: STEDI is contractually restricted from building on
@@ -967,11 +974,11 @@ shopping_cart ARRAY&lt;STRUCT&lt;
       <!-- CASE 10: D610 -->
       <div class="project" id="case-10">
         <div class="case-head"><span class="case-num">10</span><h3>Data Engineering Capstone: Automated Data Quality Validation</h3></div>
-        <div class="case-course"><span class="case-course">D610 &middot; Data Engineering Capstone</span></div>
+        <div class="case-course"><span class="case-course">Data Engineering Capstone</span></div>
         <p class="case-sub">Meridian Retail Co. &mdash; hypothesis-driven validation pipeline</p>
 
         <p class="desc">
-          The capstone tied every earlier course together into one hypothesis-driven project. The
+          The capstone tied everything earlier together into one hypothesis-driven project. The
           premise: Meridian Retail Co., a fictional multi-vendor e-commerce retailer, relies on manual
           review to catch defective order records, a missing customer ID, a negative quantity, a
           non-numeric price, an invalid shipping method, and manual review at volume inevitably misses
@@ -982,7 +989,7 @@ shopping_cart ARRAY&lt;STRUCT&lt;
         <p class="desc">
           To test it properly rather than just assert it, I generated a synthetic dataset of 10,000 order
           records, nested customer profile, repeated shopping-cart array, the same BigQuery modeling
-          pattern from D607, with 800 defects deliberately injected, evenly split across the four defect
+          pattern I'd used in an earlier cloud database project, with 800 defects deliberately injected, evenly split across the four defect
           types. I loaded the data into BigQuery and built a rule-based validation query checking every
           record against all four conditions, then separately simulated Meridian's existing manual
           process at a 35% catch probability, a conservative estimate grounded in documented human-review
@@ -1015,7 +1022,7 @@ shopping_cart ARRAY&lt;STRUCT&lt;
       <div class="section-title"><span class="num">04.</span> Education <span class="rule"></span></div>
       <div class="edu-row">
         <span class="name">M.S. Data Analytics and Data Engineering, Western Governors University</span>
-        <span class="when">Expected 2026</span>
+        <span class="when">2026</span>
       </div>
       <div class="edu-row">
         <span class="name"><a href="https://wgu.badges.parchment.com/public/assertions/yElPAIW8Q4CeBBZWt6LjKw?identity__email=dmcnei29@wgu.edu" target="_blank" rel="noopener">WGU Data Engineering Professional Specialization</a><span class="badge-tag">Verified</span></span>
