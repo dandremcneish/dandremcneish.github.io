@@ -127,6 +127,9 @@
   .edu-row:last-child { border-bottom: none; }
   .edu-row .name { color: var(--heading); font-weight: 600; font-size: 14.5px; }
   .edu-row .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .edu-row .name a { color: var(--heading); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .edu-row .name a:hover { color: var(--accent); border-color: var(--accent); }
+  .edu-row .badge-tag { display: inline-block; margin-left: 10px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 2px 6px; vertical-align: middle; }
 
   /* Project cards */
   .project { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 32px; margin-bottom: 28px; }
@@ -239,8 +242,47 @@
     .content { padding: 40px 28px 80px; }
     .job { grid-template-columns: 1fr; }
   }
+
+  /* Journey timeline */
+  .timeline { position: relative; margin-top: 10px; }
+  .timeline::before { content: ''; position: absolute; left: 19px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; padding: 0 0 26px 56px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--bg-raised); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--accent);
+  }
+  .timeline-item a.tcourse { color: var(--heading); font-weight: 700; font-size: 15px; }
+  .timeline-item a.tcourse:hover { color: var(--accent); text-decoration: none; }
+  .timeline-item .ttitle { color: var(--muted); font-size: 13.5px; margin: 2px 0 4px; }
+  .timeline-item .tdesc { color: var(--muted); font-size: 13.5px; max-width: 620px; }
+
+  /* Case study headers */
+  .case-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+  .case-num { font-family: var(--mono); color: var(--accent); font-size: 14px; font-weight: 700; }
+  .case-course { font-family: var(--mono); font-size: 11.5px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; }
+  .case-sub { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; font-style: italic; }
+
+  /* Code block */
+  .code-block {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; overflow-x: auto;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text); line-height: 1.55; margin: 14px 0; white-space: pre;
+  }
+  .figure-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg); margin: 16px 0; }
+  .figure-frame img { width: 100%; display: block; }
+  .figure-cap { font-size: 12.5px; color: var(--muted); padding: 8px 2px 0; font-style: italic; }
+  .case-divider { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+  .result-callout {
+    display: flex; flex-wrap: wrap; gap: 22px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 18px 20px; margin: 16px 0;
+  }
+  .result-callout .rc-item { min-width: 140px; }
+  .result-callout .rc-num { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); display: block; }
+  .result-callout .rc-label { font-size: 12px; color: var(--muted); }
 </style>
 </head>
+
 <body>
 
 <div class="layout">
@@ -249,14 +291,15 @@
       <h1>D'Andre McNeish</h1>
       <div class="role">Data Engineer</div>
       <p class="blurb">
-        I build data pipelines, cloud architectures, and applied models. This site is a working
-        demonstration of that, not a slideshow of it.
+        The complete workbook of my WGU Data Management &amp; Data Engineering degree: every
+        course, the real schemas, pipelines, models and cloud systems I built, in order.
       </p>
       <ul class="side-nav">
         <li><a href="#about"><span class="num">01</span> About</a></li>
-        <li><a href="#experience"><span class="num">02</span> Experience</a></li>
-        <li><a href="#work"><span class="num">03</span> Work</a></li>
-        <li><a href="#contact"><span class="num">04</span> Contact</a></li>
+        <li><a href="#journey"><span class="num">02</span> Journey</a></li>
+        <li><a href="#case-studies"><span class="num">03</span> Case Studies</a></li>
+        <li><a href="#education"><span class="num">04</span> Education</a></li>
+        <li><a href="#contact"><span class="num">05</span> Contact</a></li>
       </ul>
     </div>
     <div class="sidebar-bottom">
@@ -275,23 +318,22 @@
       <div class="section-title"><span class="num">01.</span> About <span class="rule"></span></div>
       <p class="lede">
         I work at the intersection of <strong>data engineering, cloud architecture, and applied
-        analytics</strong>: building pipelines that move and validate data, designing systems that
-        store it correctly, and building the models that turn it into a decision.
+        analytics</strong>: designing the schema that stores data correctly, building the pipeline
+        that moves and validates it, and building the model or query that turns it into a decision.
       </p>
       <p class="body-text">
-        Day to day, I work in product enablement at Modernizing Medicine, where I build internal
-        LLM tooling in Python, analyze operational data with SQL and JQL, and troubleshoot
-        integration issues across cloud services. Outside of that role, I design and ship
-        end to end data systems on my own: orchestrated ETL pipelines in Apache Airflow, a proposed
-        cloud data warehouse architecture on GCP, and regression and PCA models trained on real
-        datasets, all of which you can see and run for yourself below.
+        I'm completing a Master of Science in Data Analytics and Data Engineering at Western
+        Governors University. This site is the full workbook for that degree, not a highlight reel:
+        every course is documented below with the actual schemas, code, pipelines, and statistical
+        tests behind it, in the order I built them, so the progression from database design through
+        to a hypothesis-driven capstone is visible end to end.
       </p>
       <p class="body-text">
-        Before moving into data work, I spent several years in technical support and IT operations
-        at Apple, Teleperformance, and Houghton Mifflin Harcourt, and hold an Associate of Arts and
-        Sciences in Information Technology in addition to a Bachelor's in Data Analytics and
-        Artificial Intelligence. I am currently completing a Master of Science in Data Analytics and
-        Data Engineering.
+        Before this program I spent several years in technical support and IT operations, and hold
+        an Associate of Arts and Sciences in Information Technology and a Bachelor's in Data
+        Analytics and Artificial Intelligence. That operational background is part of why the work
+        below leans toward production concerns, monitoring, validation, reproducibility, rather than
+        stopping once a model runs once.
       </p>
 
       <div class="skills-grid">
@@ -302,21 +344,27 @@
           </div>
         </div>
         <div class="skill-group">
+          <h4>Databases</h4>
+          <div class="tag-row">
+            <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">BigQuery</span><span class="tag">Cloud SQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
           <h4>Data Engineering</h4>
           <div class="tag-row">
-            <span class="tag">Apache Airflow</span><span class="tag">ETL / ELT</span><span class="tag">AWS Redshift</span><span class="tag">DVC</span><span class="tag">MLflow</span>
+            <span class="tag">Apache Airflow</span><span class="tag">ETL / ELT</span><span class="tag">AWS Redshift</span><span class="tag">AWS Glue</span><span class="tag">DVC</span><span class="tag">MLflow</span>
           </div>
         </div>
         <div class="skill-group">
           <h4>Cloud &amp; Infrastructure</h4>
           <div class="tag-row">
-            <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">AWS S3</span><span class="tag">Docker</span><span class="tag">GitLab CI/CD</span>
+            <span class="tag">GCP</span><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">GitLab CI/CD</span>
           </div>
         </div>
         <div class="skill-group">
           <h4>Analytics &amp; Modeling</h4>
           <div class="tag-row">
-            <span class="tag">Regression</span><span class="tag">PCA</span><span class="tag">Statistical Analysis</span><span class="tag">Tableau</span>
+            <span class="tag">Regression</span><span class="tag">PCA</span><span class="tag">Hypothesis Testing</span><span class="tag">Market Basket Analysis</span><span class="tag">Tableau</span>
           </div>
         </div>
       </div>
@@ -335,126 +383,274 @@
       </div>
     </section>
 
-    <section id="experience" class="reveal">
-      <div class="section-title"><span class="num">02.</span> Experience <span class="rule"></span></div>
+    <section id="journey" class="reveal">
+      <div class="section-title"><span class="num">02.</span> Journey <span class="rule"></span></div>
+      <p class="lede" style="margin-bottom:30px;">
+        Ten courses, in the order I completed them. Each one builds on the last: databases before
+        pipelines, pipelines before models, models before the cloud architecture that serves them at
+        scale, all of it before a capstone that had to justify itself with a statistical test rather
+        than an opinion. Click any course to jump to the full case study.
+      </p>
 
-      <div class="job">
-        <div class="period">Feb 2026 &ndash; Present</div>
-        <div>
-          <h3>Product Enablement Specialist III &amp; Tech Services AI Gem Leader</h3>
-          <div class="org">Modernizing Medicine, Inc. &middot; Remote</div>
-          <ul>
-            <li>Lead AI tool adoption for the department as designated Gem Leader, including intake, rollout, and internal enablement of new tools.</li>
-            <li>Built the Fax Flow Assistant, an LLM tool automating compliance review of legal documents with structured document scanning logic.</li>
-            <li>Independently learned Python to build Ask PE, a desktop application with an integrated AI knowledge base for internal documentation.</li>
-            <li>Used JQL and Salesforce reporting to identify and prove a recurring routing bottleneck, presenting findings and a fix at the CS Town Hall.</li>
-          </ul>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">01</div>
+          <a class="tcourse" href="#case-01">D597 &middot; Database Foundations</a>
+          <div class="ttitle">Relational (PostgreSQL) &amp; Non-Relational (MongoDB) Design</div>
+          <div class="tdesc">Designed and implemented a normalized relational schema and a document-based NoSQL schema for two different business problems, to learn firsthand when each model is the right fit.</div>
         </div>
-      </div>
-
-      <div class="job">
-        <div class="period">Jan 2025 &ndash; Jan 2026</div>
-        <div>
-          <h3>Product Enablement Specialist II</h3>
-          <div class="org">Modernizing Medicine, Inc. &middot; Remote</div>
-          <ul>
-            <li>Central point of contact for cross functional workflows across Cloud Services, Data Services, and Product Management.</li>
-            <li>Monitored system health logs and automation reporting for enterprise RPA bots, flagging anomalies before they reached clients.</li>
-            <li>Identified data quality edge cases (missing records, API timeouts), reclaiming roughly 20 minutes of manual work per client.</li>
-          </ul>
+        <div class="timeline-item">
+          <div class="timeline-dot">02</div>
+          <a class="tcourse" href="#case-02">D598 &middot; Scripting and Programming</a>
+          <div class="ttitle">Automated Analysis Pipeline in Python</div>
+          <div class="tdesc">Built a Python program end to end from a flowchart and pseudocode: cleaning, descriptive statistics, a safe custom ratio calculation, and a multi-sheet Excel export.</div>
         </div>
-      </div>
-
-      <div class="job">
-        <div class="period">Jan 2023 &ndash; Dec 2024</div>
-        <div>
-          <h3>Product Enablement Specialist I</h3>
-          <div class="org">Modernizing Medicine, Inc. &middot; Remote</div>
-          <ul>
-            <li>Coordinated the order to activation lifecycle for enterprise clients, maintaining accurate data and SLA adherence.</li>
-            <li>Configured client environments using internal Sysadmin tools, Jenkins, and Jira for automated onboarding.</li>
-            <li>Recognized with Best Team Lead on Implementation for client deployment coordination.</li>
-          </ul>
+        <div class="timeline-item">
+          <div class="timeline-dot">03</div>
+          <a class="tcourse" href="#case-03">D599 &middot; Data Preparation &amp; Exploration</a>
+          <div class="ttitle">Data Cleaning, Profiling &amp; Market Basket Analysis</div>
+          <div class="tdesc">Cleaned and profiled a 10,199-record employee dataset, then ran a market basket analysis with the Apriori algorithm to surface real product-association rules.</div>
         </div>
-      </div>
-
-      <div class="job-group-label">Earlier</div>
-
-      <div class="job">
-        <div class="period">Oct 2022 &ndash; Jan 2023</div>
-        <div>
-          <h3>Pharmacy Service Representative</h3>
-          <div class="org">CVS Specialty &middot; Contract</div>
-          <ul>
-            <li>Reconciled pharmacy prescription records against reimbursed claims and resolved rejected claims to keep deliveries on schedule.</li>
-          </ul>
+        <div class="timeline-item">
+          <div class="timeline-dot">04</div>
+          <a class="tcourse" href="#case-04">D600 &middot; Predictive Modeling</a>
+          <div class="ttitle">Linear Regression, Logistic Regression &amp; PCA</div>
+          <div class="tdesc">Built and validated regression and classification models plus an unsupervised PCA on a 7,000-record housing dataset, with real train/test splits and assumption checks.</div>
         </div>
-      </div>
-
-      <div class="job">
-        <div class="period">2020 &ndash; 2022</div>
-        <div>
-          <h3>Technical Support Specialist</h3>
-          <div class="org">Houghton Mifflin Harcourt, Apple, Teleperformance</div>
-          <ul>
-            <li>Diagnosed and resolved software, hardware, and connectivity issues for enterprise and consumer accounts, including account systems administration for school districts and API/case management for a Mercedes-Benz USA account.</li>
-          </ul>
+        <div class="timeline-item">
+          <div class="timeline-dot">05</div>
+          <a class="tcourse" href="#case-05">D601 &middot; Data Analytics</a>
+          <div class="ttitle">Interactive Dashboard &amp; Presentation</div>
+          <div class="tdesc">Designed and built an interactive Tableau dashboard against defined KPIs, then presented the findings on video.</div>
         </div>
-      </div>
-
-      <div style="margin-top: 30px;">
-        <div class="job-group-label">Education</div>
-        <div class="edu-row">
-          <span class="name">M.S. Data Analytics and Data Engineering, Western Governors University</span>
-          <span class="when">Expected 2027</span>
+        <div class="timeline-item">
+          <div class="timeline-dot">06</div>
+          <a class="tcourse" href="#case-06">D602 &middot; MLOps &amp; Automation</a>
+          <div class="ttitle">Version-Controlled, Deployed ML Pipeline</div>
+          <div class="tdesc">Took a flight-delay prediction model from raw data to a version-controlled, experiment-tracked, containerized API, deployed through GitLab CI/CD.</div>
         </div>
-        <div class="edu-row">
-          <span class="name">B.A.S. Data Analytics and Artificial Intelligence, Broward College</span>
-          <span class="when">2025</span>
+        <div class="timeline-item">
+          <div class="timeline-dot">07</div>
+          <a class="tcourse" href="#case-07">D607 &middot; Cloud Databases</a>
+          <div class="ttitle">GCP Architecture &amp; BigQuery Implementation</div>
+          <div class="tdesc">Proposed a GCP cloud architecture, then implemented it directly: a nested/repeated BigQuery schema populated with real records and queried live.</div>
         </div>
-        <div class="edu-row">
-          <span class="name">A.A.S. Information Technology, Broward College</span>
-          <span class="when">2019 &middot; 3.8 GPA</span>
+        <div class="timeline-item">
+          <div class="timeline-dot">08</div>
+          <a class="tcourse" href="#case-08">D608 &middot; Advanced Data Management</a>
+          <div class="ttitle">Governance Plan &amp; Automated Pipeline</div>
+          <div class="tdesc">Wrote a continuous monitoring plan with measurable SLAs, then built an Airflow-orchestrated pipeline with automated data-quality gates to back it up.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">09</div>
+          <a class="tcourse" href="#case-09">D609 &middot; Data Analytics at Scale</a>
+          <div class="ttitle">Big Data Architecture &amp; Applied Lakehouse</div>
+          <div class="tdesc">Proposed a full Azure/Fabric big data architecture for a real case study, then independently built a working AWS Glue/Athena lakehouse on the same medallion pattern.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">10</div>
+          <a class="tcourse" href="#case-10">D610 &middot; Data Engineering Capstone</a>
+          <div class="ttitle">Hypothesis-Driven Validation Pipeline</div>
+          <div class="tdesc">Designed and ran a full hypothesis-driven experiment: an automated BigQuery validation pipeline tested against manual review with a two-proportion z-test.</div>
         </div>
       </div>
     </section>
 
-    <section id="work" class="reveal">
-      <div class="section-title"><span class="num">03.</span> Work <span class="rule"></span></div>
+    <section id="case-studies" class="reveal">
+      <div class="section-title"><span class="num">03.</span> Case Studies <span class="rule"></span></div>
       <p class="lede" style="margin-bottom:36px;">
-        A few things I've built, in plain terms: a pipeline that moves and checks data automatically,
-        a couple of models trained on real numbers, a cloud architecture proposal, and two small tools
-        below you can actually try. No slides needed, just click around.
+        The full write-up for each course: the problem, what I built, the real technical decisions
+        behind it, and the evidence. Where a course produced something interactive, you can run it
+        yourself.
       </p>
 
-      <div class="project">
-        <h3>Data Pipelines with Airflow</h3>
+      <!-- CASE 01: D597 -->
+      <div class="project" id="case-01">
+        <div class="case-head"><span class="case-num">01</span><h3>Database Foundations: Relational &amp; Non-Relational Design</h3></div>
+        <div class="case-course"><span class="case-course">D597 &middot; Data Management</span></div>
+        <p class="case-sub">EcoMart (PostgreSQL) &amp; HealthTrack (MongoDB)</p>
+
         <p class="desc">
-          Four custom Apache Airflow operators and a fully orchestrated DAG that stages JSON event
-          data from Amazon S3, loads it into an Amazon Redshift data warehouse, and validates the
-          result with automated data quality checks. Built and verified as a Udacity nanodegree
-          certificate project.
+          D597 was the first course in the program, and it was built around a direct comparison: take
+          two different business problems and solve each one with the database model that actually
+          fits, instead of defaulting to one tool for everything.
         </p>
-        <div class="pipeline-steps">
-          <div class="pipeline-step"><div class="n">01</div><div class="t">Stage</div><div class="d">Copy raw JSON from S3 into Redshift staging tables via a custom operator.</div></div>
-          <div class="pipeline-step"><div class="n">02</div><div class="t">Load Fact</div><div class="d">Build the songplays fact table from the staged event data.</div></div>
-          <div class="pipeline-step"><div class="n">03</div><div class="t">Load Dimensions</div><div class="d">Build the users, songs, artists, and time dimension tables in parallel.</div></div>
-          <div class="pipeline-step"><div class="n">04</div><div class="t">Validate</div><div class="d">Run row count and null checks; fail the DAG loudly if data quality does not pass.</div></div>
-        </div>
+        <p class="desc">
+          For the first scenario, EcoMart, an online marketplace selling sustainable products, needed
+          to move off a single flat CSV of sales records and into something that could support repeated
+          reporting without breaking. I designed a normalized PostgreSQL schema: a staging table that
+          loads the raw CSV as text first, then a populate script that casts and moves the data into
+          three typed tables, orders, products, and sales, linked by order_id and item_type. That
+          separation means a bad row in the raw import never corrupts the typed tables, and business
+          questions like which category sells best or which region is most profitable become a
+          straightforward join and aggregate instead of a full-file scan.
+        </p>
+        <div class="code-block">CREATE TABLE orders (
+  order_id BIGINT PRIMARY KEY,
+  order_date DATE NOT NULL,
+  ship_date DATE,
+  order_priority CHAR(1),
+  sales_channel VARCHAR(20),
+  country VARCHAR(100),
+  region VARCHAR(100)
+);
+
+CREATE TABLE products (
+  item_type VARCHAR(50) PRIMARY KEY,
+  unit_price NUMERIC(10,2),
+  unit_cost NUMERIC(10,2)
+);</div>
+        <p class="desc">
+          For the second scenario, HealthTrack, the problem had the opposite shape: patient medical
+          records and wearable fitness-tracker data arriving as JSON, with fields that don't look the
+          same from one document to the next. I designed a MongoDB database with patients and
+          fitness_trackers collections, imported the source JSON directly, and queried the nested
+          document structure without flattening it first, which is exactly the case NoSQL is built for.
+        </p>
+        <div class="code-block">use("D597_Task_2");
+db.createCollection("patients");
+db.createCollection("fitness_trackers");
+db.getCollectionNames();</div>
+        <p class="desc">
+          Building both back to back, in the same course, made the tradeoff concrete instead of
+          theoretical: relational when the data is uniform and the relationships matter, document-based
+          when the data is semi-structured and the shape varies from record to record.
+        </p>
         <div class="tag-row">
-          <span class="tag">Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Python</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">Source on GitHub</a>
+          <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Relational Design</span><span class="tag">NoSQL</span><span class="tag">Data Modeling</span>
         </div>
       </div>
 
-      <div class="project">
-        <h3>Predictive Modeling: Regression &amp; PCA</h3>
+      <hr class="case-divider">
+
+      <!-- CASE 02: D598 -->
+      <div class="project" id="case-02">
+        <div class="case-head"><span class="case-num">02</span><h3>Scripting and Programming: Automated Analysis Pipeline</h3></div>
+        <div class="case-course"><span class="case-course">D598 &middot; Analytics Programming</span></div>
+        <p class="case-sub">Equity fund dataset, 156 U.S. companies</p>
+
         <p class="desc">
-          A multiple linear regression model and a principal component analysis, both trained on
-          7,000 real housing records. The demo below runs the actual fitted equation, live.
+          D598 started with a flowchart and pseudocode and ended with a working Python program that
+          implements it exactly. The program takes a dataset of 156 U.S. equity fund companies and runs
+          it through six deterministic steps: import the Excel source into a pandas DataFrame, remove
+          duplicate rows while keeping one valid copy of each, group the cleaned data by business state
+          and compute full descriptive statistics for every numeric field, isolate every business with a
+          negative debt-to-equity ratio into its own table for review, compute a debt-to-income ratio for
+          every business, and export all of it to a multi-sheet Excel workbook.
         </p>
+        <p class="desc">
+          The detail that mattered most was the division itself: debt-to-income is long-term debt
+          divided by revenue, and a handful of businesses in the dataset report zero revenue. Dividing by
+          zero there doesn't just throw an exception, it can silently produce an infinite value if you're
+          not careful, which then poisons any aggregate built on top of it. The program checks for a zero
+          denominator explicitly and returns NaN instead, so downstream statistics correctly ignore it
+          rather than being distorted. You can run that exact check below.
+        </p>
+
+        <div class="demo-panel">
+          <div class="demo-label">Model demo &middot; debt to income ratio</div>
+          <div class="demo-row">
+            <div class="field"><label for="debtInput">Debt ($)</label><input type="number" id="debtInput" value="450000" step="1000"></div>
+            <div class="field"><label for="revenueInput">Revenue ($)</label><input type="number" id="revenueInput" value="1200000" step="1000"></div>
+            <button class="btn-chip primary" id="ratioBtn" type="button">Calculate</button>
+          </div>
+          <div class="demo-result" id="ratioResult">Enter figures and calculate.</div>
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Data Cleaning</span><span class="tag">Program Design</span>
+        </div>
+        <div class="project-links">
+          <a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">Source on GitLab</a>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- CASE 03: D599 -->
+      <div class="project" id="case-03">
+        <div class="case-head"><span class="case-num">03</span><h3>Data Preparation, Exploration &amp; Market Basket Analysis</h3></div>
+        <div class="case-course"><span class="case-course">D599 &middot; Data Preparation and Exploration</span></div>
+        <p class="case-sub">Employee Turnover (10,199 records) &amp; Allias Megastore transactions</p>
+
+        <p class="desc">
+          D599 covered the two ends of exploratory data work: getting a messy dataset into a trustworthy
+          state, and finding non-obvious patterns once it is. The first task started with a raw Employee
+          Turnover dataset, 10,199 records across 16 variables. Before any analysis, every variable had
+          to be profiled and typed correctly, quantitative vs. qualitative, continuous vs. discrete,
+          nominal vs. ordinal, and checked for the kind of problems that quietly break downstream models:
+          missing values, inconsistent categories, and outliers that are really data-entry errors rather
+          than real extremes.
+        </p>
+        <p class="desc">
+          The second task moved from cleaning to pattern discovery with market basket analysis on a real
+          transactional dataset from Allias Megastore, where each row is one product within one customer
+          order. I used the Apriori algorithm to mine frequent itemsets at a minimum support of 0.05,
+          generate association rules at a minimum lift of 1.0, and rank the results by lift rather than
+          support or confidence alone, because lift is the metric that actually measures whether two
+          products are purchased together more often than chance would predict.
+        </p>
+        <div class="code-block">frequent_itemsets = apriori(basket_encoded, min_support=0.05, use_colnames=True)
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0)
+top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
+        <p class="desc">
+          The strongest rule the algorithm surfaced: customers who bought the Childrens Cutlery Spaceboy
+          set also bought the Childrens Cutlery Dolly Girl set in 92.59% of those orders, about 14 times
+          more often than random chance would predict, a genuine, actionable cross-sell signal rather
+          than a coincidence of two popular items.
+        </p>
+        <div class="result-callout">
+          <div class="rc-item"><span class="rc-num">0.0567</span><span class="rc-label">Support</span></div>
+          <div class="rc-item"><span class="rc-num">92.59%</span><span class="rc-label">Confidence</span></div>
+          <div class="rc-item"><span class="rc-num">14.08&times;</span><span class="rc-label">Lift</span></div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">mlxtend</span><span class="tag">Apriori</span><span class="tag">Data Profiling</span>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- CASE 04: D600 -->
+      <div class="project" id="case-04">
+        <div class="case-head"><span class="case-num">04</span><h3>Predictive Modeling: Regression &amp; Principal Component Analysis</h3></div>
+        <div class="case-course"><span class="case-course">D600 &middot; Predictive Modeling</span></div>
+        <p class="case-sub">Housing dataset, 7,000 records, 22 variables</p>
+
+        <p class="desc">
+          D600 was three tasks built on the same 7,000-record housing dataset, each asking a different
+          kind of question of it. Task 1 fit a multiple linear regression model to predict home price,
+          starting from all candidate predictors and using backward stepwise elimination to arrive at an
+          optimized 9-variable model, then validated it against a held-out test set and reported RMSE
+          with scikit-learn rather than trusting the training fit alone.
+        </p>
+        <p class="desc">
+          Task 2 reframed the same kind of data as a classification problem: a logistic regression model
+          with 17 independent variables predicting whether a home falls into a luxury or non-luxury
+          category, evaluated with McFadden's pseudo R-squared, AIC/BIC, and a confusion matrix on a
+          stratified 80/20 train/test split. This task went through several revisions after an evaluator
+          flagged a subtle data-leakage bug: an early cleaning step let information from the target
+          variable influence a predictor before the split, inflating the model's apparent performance.
+          Finding that, fixing it, and regenerating every downstream statistic and screenshot from the
+          corrected run was the real work of that task, and the one that taught me to check for leakage
+          as a first step, not an afterthought.
+        </p>
+        <p class="desc">
+          Task 3 dropped the target variable entirely and ran an unsupervised PCA on seven standardized
+          predictors, using the Kaiser rule (retain any component with an eigenvalue greater than 1) to
+          decide how many components to keep. Two were retained, PC1 (eigenvalue 1.4388) and PC2
+          (eigenvalue 1.0393), together explaining 35.40% of total variance, with PC1 loading most
+          heavily on distance to city center and home age, and PC2 loading on local employment rate and
+          crime rate, two genuinely different underlying dimensions the seven raw variables were
+          compressing.
+        </p>
+
+        <div class="result-callout">
+          <div class="rc-item"><span class="rc-num">7,000</span><span class="rc-label">Records</span></div>
+          <div class="rc-item"><span class="rc-num">9 / 22</span><span class="rc-label">Predictors retained (Task 1)</span></div>
+          <div class="rc-item"><span class="rc-num">2</span><span class="rc-label">Principal components retained</span></div>
+          <div class="rc-item"><span class="rc-num">35.40%</span><span class="rc-label">Variance explained (PC1+PC2)</span></div>
+        </div>
 
         <div class="demo-panel">
           <div class="demo-label">Model demo &middot; home price estimator</div>
@@ -476,24 +672,117 @@
 
         <h3 style="margin-top:32px; font-size:16px;">Principal Component Analysis</h3>
         <p class="desc" style="margin-top:8px;">
-          Same dataset, reduced to 7 standardized variables. Click a bar to see the loading weights
-          for that component.
+          Same dataset, reduced to 7 standardized variables. Click a bar to see the loading weights for
+          that component.
         </p>
         <div class="chart-wrap"><canvas id="pcaChart" height="200"></canvas></div>
         <div id="pcaLoadingsPanel"></div>
 
+        <div class="figure-frame"><img src="assets/d600-scree.png" alt="PCA scree plot with Kaiser criterion"></div>
+        <div class="figure-cap">Scree plot of eigenvalues by principal component, with the Kaiser criterion (eigenvalue = 1) marked.</div>
+
         <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">scikit-learn</span>
+          <span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">scikit-learn</span><span class="tag">Linear Regression</span><span class="tag">Logistic Regression</span><span class="tag">PCA</span>
         </div>
       </div>
 
-      <div class="project">
-        <h3>Cloud Data Architecture on GCP</h3>
+      <hr class="case-divider">
+
+      <!-- CASE 05: D601 -->
+      <div class="project" id="case-05">
+        <div class="case-head"><span class="case-num">05</span><h3>Data Analytics &amp; Visualization</h3></div>
+        <div class="case-course"><span class="case-course">D601 &middot; Data Analytics</span></div>
+        <p class="case-sub">Interactive Tableau KPI dashboard</p>
+
         <p class="desc">
-          A proposed Google Cloud Platform architecture for a retailer processing 10 TB of
-          transaction data per day: streaming ingestion, a normalized operational database, and a
-          nested analytics warehouse. Flip between the architecture and logical data views, and open
-          a component below to see the reasoning behind it.
+          D601 was a two-task course: design and build a dashboard, then present it. For Task 1, I built
+          an interactive Tableau workbook against a business KPI dataset, with four coordinated
+          visualizations and a set of filters, date range, category, and region, that update every chart
+          on the dashboard at once rather than requiring a separate view per slice of the data. The
+          accompanying paper documented the reasoning behind each visualization choice and each KPI,
+          tying every chart back to a specific business question rather than including a chart because
+          the software made one easy.
+        </p>
+        <p class="desc">
+          For Task 2, I recorded a presentation walking through the finished dashboard: what each KPI
+          means, what the filters reveal when used, and what the data actually supports recommending.
+          Because a Tableau workbook is a packaged desktop file rather than a webpage, it isn't embedded
+          live on this site, but the underlying design work, four linked visuals driven by shared
+          filters, built from a real KPI dataset, is the same skill the interactive charts elsewhere on
+          this page are built on.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Tableau</span><span class="tag">Data Visualization</span><span class="tag">KPI Design</span><span class="tag">Dashboarding</span>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- CASE 06: D602 -->
+      <div class="project" id="case-06">
+        <div class="case-head"><span class="case-num">06</span><h3>MLOps &amp; Automation: Flight Delay Prediction Pipeline</h3></div>
+        <div class="case-course"><span class="case-course">D602 &middot; Machine Learning DevOps</span></div>
+        <p class="case-sub">BTS flight-delay data, GitLab CI/CD</p>
+
+        <p class="desc">
+          D602 asked a different question than the modeling courses before it: not just can you build a
+          model, but can you make it reproducible, trackable, and deployable by someone other than you.
+          Working from real Bureau of Transportation Statistics flight-delay data for a chosen airport, I
+          built the pipeline across three tasks and three GitLab merge requests.
+        </p>
+        <p class="desc">
+          Task 1 built the modeling pipeline itself: import and format scripts with DVC versioning both
+          the raw and cleaned datasets so any run can be traced back to the exact data it used, a
+          cleaning and filtering stage, and an MLflow-tracked training script that logs parameters,
+          metrics, and the model artifact for every run automatically, not just the best one. Task 2 was
+          largely a resubmission built around real verification: rather than trust the pipeline worked, I
+          ran it end to end against the actual project and captured fresh evidence, a genuine successful
+          run, shown below, after an evaluator flagged that the first submission's evidence didn't
+          clearly demonstrate a full run. Task 3 packaged the trained model behind a FastAPI endpoint,
+          containerized it with Docker, and wired a GitLab CI/CD pipeline to build, test, and deploy it
+          automatically on every push to the working branch, with an automated test suite guarding the
+          API contract.
+        </p>
+
+        <div class="pipeline-tab-nav">
+          <button class="pipeline-tab-btn active" data-target="tab-import" type="button">Import</button>
+          <button class="pipeline-tab-btn" data-target="tab-clean" type="button">Clean</button>
+          <button class="pipeline-tab-btn" data-target="tab-train" type="button">Train</button>
+          <button class="pipeline-tab-btn" data-target="tab-track" type="button">Track</button>
+          <button class="pipeline-tab-btn" data-target="tab-deploy" type="button">Deploy</button>
+        </div>
+        <div id="tab-import" class="pipeline-tab-panel active"><p>Pulls raw flight delay records from the Bureau of Transportation Statistics and versions the raw file with DVC.</p></div>
+        <div id="tab-clean" class="pipeline-tab-panel"><p>Filters and cleans the records, handling missing values and outliers, and versions the cleaned dataset separately.</p></div>
+        <div id="tab-train" class="pipeline-tab-panel"><p>Trains the delay prediction model and saves it as a versioned artifact.</p></div>
+        <div id="tab-track" class="pipeline-tab-panel">
+          <p>MLflow records parameters, metrics, and artifacts for every run automatically. Below is a real run from this project.</p>
+          <div class="media-frame" style="margin-top:10px;"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
+        </div>
+        <div id="tab-deploy" class="pipeline-tab-panel"><p>Packages the model behind a FastAPI endpoint in Docker, tested and deployed automatically through GitLab CI/CD.</p></div>
+        <div class="tag-row">
+          <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">GitLab CI/CD</span>
+        </div>
+        <div class="project-links">
+          <a href="https://gitlab.com/wgu-gitlab-environment/student-repos/dmcnei29/d602-deployment-task-3/-/tree/working-branch" target="_blank">Working branch on GitLab</a>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- CASE 07: D607 -->
+      <div class="project" id="case-07">
+        <div class="case-head"><span class="case-num">07</span><h3>Cloud Database Design &amp; Implementation</h3></div>
+        <div class="case-course"><span class="case-course">D607 &middot; Cloud Databases</span></div>
+        <p class="case-sub">Alliah Company &mdash; GCP architecture &amp; BigQuery</p>
+
+        <p class="desc">
+          D607 was two tasks: propose a cloud architecture, then actually build the database it calls
+          for. For Task 1, I designed a Google Cloud Platform architecture for a retailer, Alliah
+          Company, processing roughly 10 TB of transaction data per day: Cloud Pub/Sub for streaming
+          ingestion, Cloud Dataflow for validation and deduplication, Cloud Storage as the raw data lake
+          with a tiered lifecycle policy, and two different serving layers for two different needs, a
+          nested BigQuery warehouse mirroring the source JSON for analytics, and a normalized Cloud SQL
+          for PostgreSQL database for operational lookups.
         </p>
         <div class="media-frame" id="gcpSlideshow">
           <img src="assets/gcp-architecture.png" alt="GCP architecture diagram" style="display:block;">
@@ -526,97 +815,224 @@
             <div class="gcp-component-body"><p>Regional, high availability relational database storing the same data in a normalized 5-table schema for operational lookups and financial reporting.</p></div>
           </div>
         </div>
-        <div class="tag-row">
-          <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Data Modeling</span>
-        </div>
-      </div>
 
-      <div class="project">
-        <h3>ML Experiment Tracking Pipeline</h3>
-        <p class="desc">
-          A reproducible flight delay prediction pipeline: data versioned with DVC, experiments
-          tracked with MLflow, and deployment automated through GitLab CI/CD.
+        <p class="desc" style="margin-top:22px;">
+          For Task 2, I implemented the BigQuery half of that proposal directly in the WGU GCP Database
+          Playground rather than just describing it. The schema uses a customer STRUCT and a repeated
+          shopping_cart ARRAY&lt;STRUCT&gt; in a single transactions table, which lets one row hold a full
+          order, including a variable number of cart items, without a join to a separate line-items
+          table. Ten real records were loaded with an INSERT ... SELECT FROM UNNEST([...]) statement,
+          BigQuery's pattern for inserting several complete nested rows in one statement, since it
+          doesn't support a plain multi-row VALUES list, and I wrote and ran three queries against the
+          live table: a DISTINCT query flattening unique customers, an UNNEST query flattening one
+          customer's shopping cart into individual item rows, and a GROUP BY aggregate ranking customers
+          by total spend.
         </p>
-        <div class="pipeline-tab-nav">
-          <button class="pipeline-tab-btn active" data-target="tab-import" type="button">Import</button>
-          <button class="pipeline-tab-btn" data-target="tab-clean" type="button">Clean</button>
-          <button class="pipeline-tab-btn" data-target="tab-train" type="button">Train</button>
-          <button class="pipeline-tab-btn" data-target="tab-track" type="button">Track</button>
-          <button class="pipeline-tab-btn" data-target="tab-deploy" type="button">Deploy</button>
+        <div class="code-block">customer STRUCT&lt;
+  customer_id STRING, name STRING, email STRING, phone STRING, address STRING
+&gt;,
+shopping_cart ARRAY&lt;STRUCT&lt;
+  product_id STRING, vendor STRING, product_category STRING,
+  product_name STRING, quantity INT64, price FLOAT64
+&gt;&gt;</div>
+
+        <div class="demo-panel">
+          <div class="demo-label">Try a similar query pattern &middot; 12 sample orders</div>
+          <div class="demo-row" style="margin-bottom:2px;">
+            <button class="btn-chip" data-sql="region" type="button">Revenue by region</button>
+            <button class="btn-chip" data-sql="delayed" type="button">Delayed orders</button>
+            <button class="btn-chip" data-sql="top" type="button">Top 5 by order value</button>
+          </div>
+          <pre id="sqlText" class="mono" style="font-size:12.5px; color:var(--muted); margin-top:12px; white-space:pre-wrap;">Select a query above.</pre>
+          <div id="sqlResultWrap"></div>
         </div>
-        <div id="tab-import" class="pipeline-tab-panel active"><p>Pulls raw flight delay records from the Bureau of Transportation Statistics and versions the raw file with DVC.</p></div>
-        <div id="tab-clean" class="pipeline-tab-panel"><p>Filters and cleans the records, handling missing values and outliers, and versions the cleaned dataset separately.</p></div>
-        <div id="tab-train" class="pipeline-tab-panel"><p>Trains the delay prediction model and saves it as a versioned artifact.</p></div>
-        <div id="tab-track" class="pipeline-tab-panel">
-          <p>MLflow records parameters, metrics, and artifacts for every run automatically. Below is a real run from this project.</p>
-          <div class="media-frame" style="margin-top:10px;"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
-        </div>
-        <div id="tab-deploy" class="pipeline-tab-panel"><p>Packages the model behind a FastAPI endpoint in Docker, tested and deployed automatically through GitLab CI/CD.</p></div>
+
         <div class="tag-row">
-          <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">GitLab CI/CD</span>
+          <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Cloud Architecture</span><span class="tag">Data Modeling</span><span class="tag">SQL</span>
         </div>
       </div>
 
-      <div class="mini-grid">
-        <div class="mini-card">
-          <h3>Program Implementation Automation</h3>
-          <p>A Python program that cleans a business dataset, flags every company with a negative debt to equity ratio, and safely computes a debt to income ratio without dividing by zero.</p>
-          <div class="demo-panel">
-            <div class="demo-label">Model demo &middot; debt to income ratio</div>
-            <div class="demo-row">
-              <div class="field"><label for="debtInput">Debt ($)</label><input type="number" id="debtInput" value="450000" step="1000"></div>
-              <div class="field"><label for="revenueInput">Revenue ($)</label><input type="number" id="revenueInput" value="1200000" step="1000"></div>
-              <button class="btn-chip primary" id="ratioBtn" type="button">Calculate</button>
-            </div>
-            <div class="demo-result" id="ratioResult">Enter figures and calculate.</div>
-          </div>
-          <div class="tag-row"><span class="tag">Python</span><span class="tag">pandas</span></div>
-          <div class="project-links"><a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">Source on GitLab</a></div>
+      <hr class="case-divider">
+
+      <!-- CASE 08: D608 -->
+      <div class="project" id="case-08">
+        <div class="case-head"><span class="case-num">08</span><h3>Data Governance &amp; Automated Data Pipelines</h3></div>
+        <div class="case-course"><span class="case-course">D608 &middot; Advanced Data Management</span></div>
+        <p class="case-sub">SmallFirm, Inc. monitoring plan &amp; Airflow/Redshift pipeline</p>
+
+        <p class="desc">
+          D608 paired a written governance deliverable with a working one. Task 1 designed a full
+          data-processing solution for SmallFirm, Inc., a scenario with multiple on-premises source
+          systems, MS Access databases for payroll, personnel, and vendors, and Excel files for products,
+          production batches, tooling, and raw materials, that needed to land in a centralized Azure
+          Synapse warehouse. I mapped the source-to-target attributes explicitly, then diagrammed the
+          full process below: extract, cleanse and validate through Azure Data Factory, quarantine
+          anything that fails validation rather than silently dropping or guessing at it, load into the
+          appropriate target system, and integrate into the warehouse for reporting.
+        </p>
+        <div class="figure-frame"><img src="assets/d608-flow1.png" alt="SmallFirm Inc. process and data flow diagram"></div>
+        <div class="figure-cap">Level 1 process and data flow diagram: extract &rarr; cleanse/validate &rarr; quarantine or load &rarr; integrate &amp; serve, with continuous monitoring hooked into every stage.</div>
+
+        <p class="desc">
+          Task 2 built directly on that diagram: a continuous monitoring plan with concrete, measurable
+          thresholds instead of vague goals, shown below, plus specific benchmarks and a troubleshooting
+          runbook for when a threshold is breached.
+        </p>
+        <div class="mini-stats" style="margin-bottom:22px;">
+          <span class="mini-stat"><b>&lt;0.5%</b> quarantine rate threshold</span>
+          <span class="mini-stat"><b>15 min</b> failure ack SLA</span>
+          <span class="mini-stat"><b>2 yr</b> audit retention</span>
         </div>
 
-        <div class="mini-card">
-          <h3>Continuous Monitoring &amp; Data Governance Plan</h3>
-          <p>A monitoring design layered onto a data engineering pipeline for a manufacturing acquisition, with measurable service levels instead of vague goals.</p>
-          <div class="mini-stats">
-            <span class="mini-stat"><b>&lt;0.5%</b> quarantine rate threshold</span>
-            <span class="mini-stat"><b>15 min</b> failure ack SLA</span>
-            <span class="mini-stat"><b>2 yr</b> audit retention</span>
-          </div>
-          <div class="tag-row"><span class="tag">Data Governance</span><span class="tag">Azure</span></div>
+        <p class="desc">
+          To demonstrate the same governance pattern in working code rather than only on paper, I also
+          built and ran an Apache Airflow-orchestrated data pipeline, included here because it implements
+          exactly the kind of automated data-quality gate this plan calls for: four custom Airflow
+          operators staging JSON events from S3 into Redshift, building fact and dimension tables, and a
+          dedicated data-quality operator that runs row-count and null checks after every load and fails
+          the DAG loudly, rather than silently, if the data doesn't pass.
+        </p>
+        <div class="pipeline-steps">
+          <div class="pipeline-step"><div class="n">01</div><div class="t">Stage</div><div class="d">Copy raw JSON from S3 into Redshift staging tables via a custom operator.</div></div>
+          <div class="pipeline-step"><div class="n">02</div><div class="t">Load Fact</div><div class="d">Build the fact table from the staged event data.</div></div>
+          <div class="pipeline-step"><div class="n">03</div><div class="t">Load Dimensions</div><div class="d">Build the dimension tables in parallel.</div></div>
+          <div class="pipeline-step"><div class="n">04</div><div class="t">Validate</div><div class="d">Run row count and null checks; fail the DAG loudly if data quality does not pass.</div></div>
         </div>
 
-        <div class="mini-card">
-          <h3>Data Quality Rule Engine</h3>
-          <p>A small standalone version of the same checks my Airflow data quality operator runs: row counts, null rates, and load latency, each checked against a threshold and flagged instead of assumed fine.</p>
+        <div class="mini-card" style="margin-top:22px; padding:26px;">
+          <h3 style="font-size:16px;">Data Quality Rule Engine</h3>
+          <p style="color:var(--muted); font-size:14px; margin-bottom:12px;">A standalone version of the same checks the data-quality operator runs: row counts, null rates, and load latency, each checked against a threshold and flagged instead of assumed fine.</p>
           <div class="demo-panel">
             <div class="demo-label">Sample run &middot; 4 warehouse tables</div>
             <div id="dqTableWrap"></div>
             <button class="btn-chip primary" id="dqRunBtn" type="button" style="margin-top:14px;">Run quality check</button>
           </div>
-          <div class="tag-row"><span class="tag">Python</span><span class="tag">Airflow</span><span class="tag">Data Validation</span></div>
         </div>
 
-        <div class="mini-card">
-          <h3>SQL Query Console</h3>
-          <p>A small sample orders table and a few real queries against it. Pick one to run it and see the result set, or think of it as a preview of how I'd explore a warehouse table.</p>
-          <div class="demo-panel">
-            <div class="demo-label">Sample data &middot; 12 orders</div>
-            <div class="demo-row" style="margin-bottom:2px;">
-              <button class="btn-chip" data-sql="region" type="button">Revenue by region</button>
-              <button class="btn-chip" data-sql="delayed" type="button">Delayed orders</button>
-              <button class="btn-chip" data-sql="top" type="button">Top 5 by order value</button>
-            </div>
-            <pre id="sqlText" class="mono" style="font-size:12.5px; color:var(--muted); margin-top:12px; white-space:pre-wrap;">Select a query above.</pre>
-            <div id="sqlResultWrap"></div>
-          </div>
-          <div class="tag-row"><span class="tag">SQL</span><span class="tag">Data Analysis</span></div>
+        <div class="tag-row" style="margin-top:18px;">
+          <span class="tag">Azure Data Factory</span><span class="tag">Data Governance</span><span class="tag">Apache Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Data Quality</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">Pipeline source on GitHub</a>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- CASE 09: D609 -->
+      <div class="project" id="case-09">
+        <div class="case-head"><span class="case-num">09</span><h3>Big Data Architecture at Scale</h3></div>
+        <div class="case-course"><span class="case-course">D609 &middot; Data Analytics at Scale</span></div>
+        <p class="case-sub">STEDI Human Balance Analytics &mdash; Azure proposal &amp; applied AWS Glue lakehouse</p>
+
+        <p class="desc">
+          D609's task was a big data architecture proposal for STEDI, a balance-training device company
+          whose Step Trainer hardware and companion mobile app produce three raw data streams: customer
+          profile data, mobile accelerometer readings, and Step Trainer sensor readings. The scenario's
+          real constraint shaped the whole design: STEDI is contractually restricted from building on
+          AWS, so the proposal runs entirely on Microsoft Azure and Microsoft Fabric, ingesting and
+          privacy-filtering all three streams, dropping any customer who hasn't consented to share data
+          before it reaches anything else, into a single trusted, machine-learning-ready dataset for the
+          step-detection model at the core of STEDI's product.
+        </p>
+        <p class="desc">
+          To go beyond the written proposal, I separately built a hands-on implementation of the same
+          landing &rarr; trusted &rarr; curated medallion pattern on a different, freely-available stack:
+          an AWS Glue and Athena data lakehouse, with five Glue ETL jobs moving the same three STEDI data
+          streams through progressively more trustworthy layers, each stage verified with real row counts
+          in the AWS console rather than assumed to have worked.
+        </p>
+
+        <div class="result-callout">
+          <div class="rc-item"><span class="rc-num">956</span><span class="rc-label">Customers landed</span></div>
+          <div class="rc-item"><span class="rc-num">482</span><span class="rc-label">Consented, trusted</span></div>
+          <div class="rc-item"><span class="rc-num">43,681</span><span class="rc-label">Curated ML-ready rows</span></div>
+        </div>
+
+        <div class="figure-frame"><img src="assets/stedi-landing.jpg" alt="STEDI landing zone customer count in AWS Glue console"></div>
+        <div class="figure-cap">Landing zone: raw customer records confirmed in S3/Glue before any privacy filtering.</div>
+        <div class="figure-frame"><img src="assets/stedi-curated.jpg" alt="STEDI curated machine learning dataset count"></div>
+        <div class="figure-cap">Curated layer: 43,681 joined accelerometer and step-trainer readings, ready to train the step-detection model.</div>
+
+        <div class="tag-row">
+          <span class="tag">Azure</span><span class="tag">Microsoft Fabric</span><span class="tag">AWS Glue</span><span class="tag">Athena</span><span class="tag">Data Lakehouse</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/dandremcneish/stedi-human-balance-analytics" target="_blank">Lakehouse source on GitHub</a>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- CASE 10: D610 -->
+      <div class="project" id="case-10">
+        <div class="case-head"><span class="case-num">10</span><h3>Data Engineering Capstone: Automated Data Quality Validation</h3></div>
+        <div class="case-course"><span class="case-course">D610 &middot; Data Engineering Capstone</span></div>
+        <p class="case-sub">Meridian Retail Co. &mdash; hypothesis-driven validation pipeline</p>
+
+        <p class="desc">
+          The capstone tied every earlier course together into one hypothesis-driven project. The
+          premise: Meridian Retail Co., a fictional multi-vendor e-commerce retailer, relies on manual
+          review to catch defective order records, a missing customer ID, a negative quantity, a
+          non-numeric price, an invalid shipping method, and manual review at volume inevitably misses
+          some of them. My hypothesis was that an automated, rule-based validation pipeline would catch a
+          statistically significantly higher percentage of those defects than manual review, measured by
+          the residual error rate reaching downstream reporting.
+        </p>
+        <p class="desc">
+          To test it properly rather than just assert it, I generated a synthetic dataset of 10,000 order
+          records, nested customer profile, repeated shopping-cart array, the same BigQuery modeling
+          pattern from D607, with 800 defects deliberately injected, evenly split across the four defect
+          types. I loaded the data into BigQuery and built a rule-based validation query checking every
+          record against all four conditions, then separately simulated Meridian's existing manual
+          process at a 35% catch probability, a conservative estimate grounded in documented human-review
+          performance at volume.
+        </p>
+        <p class="desc">
+          The automated pipeline caught all 800 of 800 injected defects, a 100% catch rate, bringing the
+          residual error rate reaching the reporting layer down to 0%. The simulated manual process
+          caught 279 of 800 (34.9%), leaving a 5.21% residual error rate still reaching downstream
+          reports. A two-proportion z-test comparing the two error rates returned z = 23.129, p &lt; .001,
+          rejecting the null hypothesis: the gap is not attributable to chance. I presented the full
+          analysis, the pipeline, the statistical test, and the business recommendation, in a written
+          report, a slide deck, and a recorded presentation.
+        </p>
+
+        <div class="result-callout">
+          <div class="rc-item"><span class="rc-num">100%</span><span class="rc-label">Automated catch rate</span></div>
+          <div class="rc-item"><span class="rc-num">34.9%</span><span class="rc-label">Simulated manual catch rate</span></div>
+          <div class="rc-item"><span class="rc-num">z=23.13</span><span class="rc-label">p &lt; .001</span></div>
+        </div>
+
+        <div class="tag-row">
+          <span class="tag">BigQuery</span><span class="tag">Python</span><span class="tag">Hypothesis Testing</span><span class="tag">Statistical Analysis</span><span class="tag">Data Validation</span>
         </div>
       </div>
 
     </section>
 
+    <section id="education" class="reveal">
+      <div class="section-title"><span class="num">04.</span> Education <span class="rule"></span></div>
+      <div class="edu-row">
+        <span class="name">M.S. Data Analytics and Data Engineering, Western Governors University</span>
+        <span class="when">Expected 2026</span>
+      </div>
+      <div class="edu-row">
+        <span class="name"><a href="https://wgu.badges.parchment.com/public/assertions/yElPAIW8Q4CeBBZWt6LjKw?identity__email=dmcnei29@wgu.edu" target="_blank" rel="noopener">WGU Data Engineering Professional Specialization</a><span class="badge-tag">Verified</span></span>
+        <span class="when">Issued Sep 2026</span>
+      </div>
+      <div class="edu-row">
+        <span class="name">B.A.S. Data Analytics and Artificial Intelligence, Broward College</span>
+        <span class="when">2025</span>
+      </div>
+      <div class="edu-row">
+        <span class="name">A.A.S. Information Technology, Broward College</span>
+        <span class="when">2019 &middot; 3.8 GPA</span>
+      </div>
+    </section>
+
     <section id="contact" class="reveal">
-      <div class="section-title"><span class="num">04.</span> Contact <span class="rule"></span></div>
+      <div class="section-title"><span class="num">05.</span> Contact <span class="rule"></span></div>
       <div class="contact-box">
         <p>Open to data engineering and data analytics roles. The fastest way to reach me is email.</p>
         <div class="contact-links">
@@ -670,7 +1086,7 @@
     }
 
     var navLinks = document.querySelectorAll('.side-nav a');
-    var sections = ['about', 'experience', 'work', 'contact'].map(function (id) { return document.getElementById(id); });
+    var sections = ['about', 'journey', 'case-studies', 'education', 'contact'].map(function (id) { return document.getElementById(id); });
     function setActive() {
       var scrollPos = window.scrollY + 200;
       var current = sections[0];
@@ -905,4 +1321,5 @@
 })();
 </script>
 </body>
+
 </html>
