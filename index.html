@@ -9,1331 +9,1331 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0e14;
-    --bg-raised: #111722;
-    --text: #b9c2cf;
-    --heading: #eef2f6;
-    --muted: #79879c;
-    --accent: #2dd4bf;
-    --border: #1e2733;
-    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-  }
-  [data-theme="light"] {
-    --bg: #f7f9fb;
-    --bg-raised: #ffffff;
-    --text: #47536b;
-    --heading: #10141c;
-    --muted: #6b7688;
-    --accent: #0e8074;
-    --border: #e2e7ee;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    font-size: 16px;
-    transition: background .2s ease, color .2s ease;
-  }
-  h1, h2, h3 { font-family: var(--sans); font-weight: 700; color: var(--heading); letter-spacing: -0.01em; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  img { max-width: 100%; display: block; }
-  code, .mono { font-family: var(--mono); }
-  ::selection { background: var(--accent); color: #04201c; }
+:root {
+--bg: #0a0e14;
+--bg-raised: #111722;
+--text: #b9c2cf;
+--heading: #eef2f6;
+--muted: #79879c;
+--accent: #2dd4bf;
+--border: #1e2733;
+--sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+}
+[data-theme="light"] {
+--bg: #f7f9fb;
+--bg-raised: #ffffff;
+--text: #47536b;
+--heading: #10141c;
+--muted: #6b7688;
+--accent: #0e8074;
+--border: #e2e7ee;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+font-family: var(--sans);
+background: var(--bg);
+color: var(--text);
+line-height: 1.65;
+font-size: 16px;
+transition: background .2s ease, color .2s ease;
+}
+h1, h2, h3 { font-family: var(--sans); font-weight: 700; color: var(--heading); letter-spacing: -0.01em; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; display: block; }
+code, .mono { font-family: var(--mono); }
+::selection { background: var(--accent); color: #04201c; }
 
-  .layout { max-width: 1200px; margin: 0 auto; display: flex; gap: 0; min-height: 100vh; }
-  .sidebar {
-    width: 340px; flex-shrink: 0; padding: 64px 40px; position: sticky; top: 0; height: 100vh;
-    display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border);
-  }
-  .profile-photo {
-    width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
-    border: 2px solid var(--border);
-  }
-  .sidebar-top h1 { font-size: 27px; margin-bottom: 8px; }
-  .sidebar-top .role { font-size: 16px; color: var(--text); margin-bottom: 18px; }
-  .sidebar-top p.blurb { font-size: 14.5px; color: var(--muted); margin-bottom: 34px; max-width: 280px; }
-  .side-nav { list-style: none; }
-  .side-nav li { margin-bottom: 4px; }
-  .side-nav a {
-    display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; font-weight: 600;
-    padding: 9px 0; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
-  }
-  .side-nav a .num { font-family: var(--mono); color: var(--muted); font-size: 12px; }
-  .side-nav a:hover, .side-nav a.active { color: var(--heading); text-decoration: none; }
-  .side-nav a:hover .num, .side-nav a.active .num { color: var(--accent); }
+.layout { max-width: 1200px; margin: 0 auto; display: flex; gap: 0; min-height: 100vh; }
+.sidebar {
+width: 340px; flex-shrink: 0; padding: 64px 40px; position: sticky; top: 0; height: 100vh;
+display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--border);
+}
+.profile-photo {
+width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
+border: 2px solid var(--border);
+}
+.sidebar-top h1 { font-size: 27px; margin-bottom: 8px; }
+.sidebar-top .role { font-size: 16px; color: var(--text); margin-bottom: 18px; }
+.sidebar-top p.blurb { font-size: 14.5px; color: var(--muted); margin-bottom: 34px; max-width: 280px; }
+.side-nav { list-style: none; }
+.side-nav li { margin-bottom: 4px; }
+.side-nav a {
+display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; font-weight: 600;
+padding: 9px 0; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+}
+.side-nav a .num { font-family: var(--mono); color: var(--muted); font-size: 12px; }
+.side-nav a:hover, .side-nav a.active { color: var(--heading); text-decoration: none; }
+.side-nav a:hover .num, .side-nav a.active .num { color: var(--accent); }
 
-  .sidebar-bottom { display: flex; flex-direction: column; gap: 18px; }
-  .social-row { display: flex; gap: 18px; }
-  .social-row a { color: var(--muted); font-size: 13px; font-weight: 600; }
-  .social-row a:hover { color: var(--accent); text-decoration: none; }
-  .theme-toggle {
-    align-self: flex-start; background: none; border: 1px solid var(--border); color: var(--muted);
-    border-radius: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
-    font-family: var(--sans);
-  }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.sidebar-bottom { display: flex; flex-direction: column; gap: 18px; }
+.social-row { display: flex; gap: 18px; }
+.social-row a { color: var(--muted); font-size: 13px; font-weight: 600; }
+.social-row a:hover { color: var(--accent); text-decoration: none; }
+.theme-toggle {
+align-self: flex-start; background: none; border: 1px solid var(--border); color: var(--muted);
+border-radius: 4px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+font-family: var(--sans);
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-  .content { flex: 1; min-width: 0; padding: 64px 56px 120px; }
-  section { padding-bottom: 96px; scroll-margin-top: 24px; }
-  .section-title {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 30px;
-    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--heading);
-  }
-  .section-title .num { color: var(--accent); font-family: var(--mono); font-weight: 500; }
-  .section-title .rule { flex: 1; height: 1px; background: var(--border); }
+.content { flex: 1; min-width: 0; padding: 64px 56px 120px; }
+section { padding-bottom: 96px; scroll-margin-top: 24px; }
+.section-title {
+display: flex; align-items: center; gap: 14px; margin-bottom: 30px;
+font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--heading);
+}
+.section-title .num { color: var(--accent); font-family: var(--mono); font-weight: 500; }
+.section-title .rule { flex: 1; height: 1px; background: var(--border); }
 
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+.reveal { opacity: 0; transition: opacity .5s ease; }
+.reveal.visible { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transition: none; } html { scroll-behavior: auto; } }
 
-  .lede { font-size: 17px; color: var(--text); max-width: 640px; margin-bottom: 20px; }
-  .lede strong { color: var(--heading); }
-  p.body-text { color: var(--muted); font-size: 15px; max-width: 640px; margin-bottom: 16px; }
+.lede { font-size: 17px; color: var(--text); max-width: 640px; margin-bottom: 20px; }
+.lede strong { color: var(--heading); }
+p.body-text { color: var(--muted); font-size: 15px; max-width: 640px; margin-bottom: 16px; }
 
-  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .tag {
-    font-family: var(--mono); font-size: 12px; color: var(--accent); border: 1px solid var(--border);
-    background: var(--bg-raised); padding: 5px 10px; border-radius: 4px;
-  }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.tag {
+font-family: var(--mono); font-size: 12px; color: var(--accent); border: 1px solid var(--border);
+background: var(--bg-raised); padding: 5px 10px; border-radius: 4px;
+}
 
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 8px; }
-  .skill-group h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
-  .skill-group .tag-row { margin-top: 0; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 8px; }
+.skill-group h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
+.skill-group .tag-row { margin-top: 0; }
 
-  .credentials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-  .credential-chip {
-    display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--bg-raised);
-    padding: 8px 12px; border-radius: 6px; font-size: 13px; color: var(--text);
-  }
-  .credential-chip img { width: 20px; height: 20px; border-radius: 2px; }
-  .credential-chip a { color: var(--text); font-weight: 600; }
-  .credential-chip a:hover { color: var(--accent); }
+.credentials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.credential-chip {
+display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: var(--bg-raised);
+padding: 8px 12px; border-radius: 6px; font-size: 13px; color: var(--text);
+}
+.credential-chip img { width: 20px; height: 20px; border-radius: 2px; }
+.credential-chip a { color: var(--text); font-weight: 600; }
+.credential-chip a:hover { color: var(--accent); }
 
-  /* Experience */
-  .job { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
-  .job:last-child { border-bottom: none; }
-  .job .period { font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 3px; }
-  .job h3 { font-size: 16px; margin-bottom: 4px; }
-  .job .org { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
-  .job ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
-  .job li { margin-bottom: 6px; }
-  .job-group-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 22px 0 4px; font-weight: 700; }
-  @media (max-width: 640px) { .job { grid-template-columns: 1fr; gap: 6px; } }
+/* Experience */
+.job { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.job:last-child { border-bottom: none; }
+.job .period { font-family: var(--mono); font-size: 12.5px; color: var(--muted); padding-top: 3px; }
+.job h3 { font-size: 16px; margin-bottom: 4px; }
+.job .org { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+.job ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
+.job li { margin-bottom: 6px; }
+.job-group-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 22px 0 4px; font-weight: 700; }
+@media (max-width: 640px) { .job { grid-template-columns: 1fr; gap: 6px; } }
 
-  /* Education compact */
-  .edu-row { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-  .edu-row:last-child { border-bottom: none; }
-  .edu-row .name { color: var(--heading); font-weight: 600; font-size: 14.5px; }
-  .edu-row .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
-  .edu-row .name a { color: var(--heading); text-decoration: none; border-bottom: 1px solid var(--border); }
-  .edu-row .name a:hover { color: var(--accent); border-color: var(--accent); }
-  .edu-row .badge-tag { display: inline-block; margin-left: 10px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 2px 6px; vertical-align: middle; }
+/* Education compact */
+.edu-row { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.edu-row:last-child { border-bottom: none; }
+.edu-row .name { color: var(--heading); font-weight: 600; font-size: 14.5px; }
+.edu-row .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.edu-row .name a { color: var(--heading); text-decoration: none; border-bottom: 1px solid var(--border); }
+.edu-row .name a:hover { color: var(--accent); border-color: var(--accent); }
+.edu-row .badge-tag { display: inline-block; margin-left: 10px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 2px 6px; vertical-align: middle; }
 
-  /* Project cards */
-  .project { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 32px; margin-bottom: 28px; }
-  .project h3 { font-size: 19px; margin-bottom: 10px; }
-  .project .desc { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; max-width: 640px; }
-  .project-links { margin-top: 18px; font-size: 13.5px; font-weight: 600; display: flex; gap: 18px; }
+/* Project cards */
+.project { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 32px; margin-bottom: 28px; }
+.project h3 { font-size: 19px; margin-bottom: 10px; }
+.project .desc { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; max-width: 640px; }
+.project-links { margin-top: 18px; font-size: 13.5px; font-weight: 600; display: flex; gap: 18px; }
 
-  .media-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg); }
-  .media-frame img { width: 100%; }
-  .slideshow-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 12px; }
-  #gcpCaption { font-size: 13px; color: var(--muted); flex: 1; }
-  .btn-chip {
-    background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px;
-    font-weight: 600; font-size: 12.5px; cursor: pointer; font-family: var(--sans);
-  }
-  .btn-chip:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-chip.primary { background: var(--accent); border-color: var(--accent); color: #04201c; }
-  .btn-chip.primary:hover { opacity: .9; color: #04201c; }
+.media-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg); }
+.media-frame img { width: 100%; }
+.slideshow-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 12px; }
+#gcpCaption { font-size: 13px; color: var(--muted); flex: 1; }
+.btn-chip {
+background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px;
+font-weight: 600; font-size: 12.5px; cursor: pointer; font-family: var(--sans);
+}
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.btn-chip.primary { background: var(--accent); border-color: var(--accent); color: #04201c; }
+.btn-chip.primary:hover { opacity: .9; color: #04201c; }
 
-  .gcp-components { margin-top: 20px; }
-  .gcp-component { border-bottom: 1px solid var(--border); }
-  .gcp-component-head {
-    width: 100%; text-align: left; background: none; border: none; padding: 14px 0; cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center; font-size: 14.5px; font-weight: 600; color: var(--heading);
-    font-family: var(--sans);
-  }
-  .gcp-component-head .plus { color: var(--accent); font-weight: 700; font-size: 18px; }
-  .gcp-component-body { display: none; padding: 0 0 16px; color: var(--muted); font-size: 14px; max-width: 620px; }
-  .gcp-component.open .gcp-component-body { display: block; }
+.gcp-components { margin-top: 20px; }
+.gcp-component { border-bottom: 1px solid var(--border); }
+.gcp-component-head {
+width: 100%; text-align: left; background: none; border: none; padding: 14px 0; cursor: pointer;
+display: flex; justify-content: space-between; align-items: center; font-size: 14.5px; font-weight: 600; color: var(--heading);
+font-family: var(--sans);
+}
+.gcp-component-head .plus { color: var(--accent); font-weight: 700; font-size: 18px; }
+.gcp-component-body { display: none; padding: 0 0 16px; color: var(--muted); font-size: 14px; max-width: 620px; }
+.gcp-component.open .gcp-component-body { display: block; }
 
-  .pipeline-tab-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .pipeline-tab-btn {
-    background: var(--bg); border: 1px solid var(--border); color: var(--muted);
-    padding: 7px 13px; border-radius: 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: var(--sans);
-  }
-  .pipeline-tab-btn.active { background: var(--accent); border-color: var(--accent); color: #04201c; }
-  .pipeline-tab-panel { display: none; }
-  .pipeline-tab-panel.active { display: block; }
-  .pipeline-tab-panel p { color: var(--muted); font-size: 14px; }
+.pipeline-tab-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.pipeline-tab-btn {
+background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+padding: 7px 13px; border-radius: 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: var(--sans);
+}
+.pipeline-tab-btn.active { background: var(--accent); border-color: var(--accent); color: #04201c; }
+.pipeline-tab-panel { display: none; }
+.pipeline-tab-panel.active { display: block; }
+.pipeline-tab-panel p { color: var(--muted); font-size: 14px; }
 
-  .demo-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 20px; margin: 18px 0; }
-  .demo-label { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 14px; }
-  .demo-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
-  .field { display: flex; flex-direction: column; gap: 6px; }
-  .field label { font-size: 12px; color: var(--muted); font-weight: 600; }
-  .field input {
-    font-family: var(--mono); font-size: 14px; padding: 8px 10px; border-radius: 4px;
-    border: 1px solid var(--border); background: var(--bg-raised); color: var(--heading); width: 150px;
-  }
-  .field input:focus { outline: none; border-color: var(--accent); }
-  .demo-result {
-    margin-top: 14px; font-family: var(--mono); font-size: 16px; color: var(--heading);
-    padding: 12px 14px; background: var(--bg-raised); border-left: 2px solid var(--accent); border-radius: 4px;
-  }
-  .demo-result .muted { font-family: var(--sans); font-size: 12.5px; color: var(--muted); display: block; margin-top: 6px; }
+.demo-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 20px; margin: 18px 0; }
+.demo-label { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 14px; }
+.demo-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 12px; color: var(--muted); font-weight: 600; }
+.field input {
+font-family: var(--mono); font-size: 14px; padding: 8px 10px; border-radius: 4px;
+border: 1px solid var(--border); background: var(--bg-raised); color: var(--heading); width: 150px;
+}
+.field input:focus { outline: none; border-color: var(--accent); }
+.demo-result {
+margin-top: 14px; font-family: var(--mono); font-size: 16px; color: var(--heading);
+padding: 12px 14px; background: var(--bg-raised); border-left: 2px solid var(--accent); border-radius: 4px;
+}
+.demo-result .muted { font-family: var(--sans); font-size: 12.5px; color: var(--muted); display: block; margin-top: 6px; }
 
-  .stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
-  .stat-pill { background: var(--bg); border: 1px solid var(--border); color: var(--heading); font-weight: 600; font-size: 13px; padding: 7px 12px; border-radius: 4px; font-family: var(--mono); }
+.stat-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
+.stat-pill { background: var(--bg); border: 1px solid var(--border); color: var(--heading); font-weight: 600; font-size: 13px; padding: 7px 12px; border-radius: 4px; font-family: var(--mono); }
 
-  .chart-wrap { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin: 14px 0; }
-  canvas { max-width: 100%; }
-  .loadings-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
-  .loadings-table th, .loadings-table td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); }
-  .loadings-table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: .5px; }
-  .loadings-table td.num { font-family: var(--mono); color: var(--heading); }
-  .loadings-note { margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+.chart-wrap { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin: 14px 0; }
+canvas { max-width: 100%; }
+.loadings-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+.loadings-table th, .loadings-table td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); }
+.loadings-table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: .5px; }
+.loadings-table td.num { font-family: var(--mono); color: var(--heading); }
+.loadings-note { margin-top: 12px; font-size: 13.5px; color: var(--muted); }
 
-  .dq-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .dq-table th, .dq-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
-  .dq-table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 10.5px; letter-spacing: .5px; }
-  .dq-table td.status-pass { color: var(--accent); font-weight: 600; font-family: var(--mono); font-size: 12px; }
-  .dq-table td.status-fail { color: #e0654f; font-weight: 600; font-family: var(--mono); font-size: 12px; }
-  .sql-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
-  .sql-table th, .sql-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); font-family: var(--mono); }
-  .sql-table th { color: var(--muted); text-transform: uppercase; font-size: 10.5px; letter-spacing: .5px; }
+.dq-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dq-table th, .dq-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+.dq-table th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 10.5px; letter-spacing: .5px; }
+.dq-table td.status-pass { color: var(--accent); font-weight: 600; font-family: var(--mono); font-size: 12px; }
+.dq-table td.status-fail { color: #e0654f; font-weight: 600; font-family: var(--mono); font-size: 12px; }
+.sql-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
+.sql-table th, .sql-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); font-family: var(--mono); }
+.sql-table th { color: var(--muted); text-transform: uppercase; font-size: 10.5px; letter-spacing: .5px; }
 
-  .mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .mini-card { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 26px; }
-  .mini-card h3 { font-size: 16px; margin-bottom: 10px; }
-  .mini-card p { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
-  .mini-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-  .mini-stat { font-family: var(--mono); font-size: 12px; background: var(--bg); border: 1px solid var(--border); padding: 5px 9px; border-radius: 4px; color: var(--muted); }
-  .mini-stat b { color: var(--heading); }
+.mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.mini-card { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 26px; }
+.mini-card h3 { font-size: 16px; margin-bottom: 10px; }
+.mini-card p { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+.mini-stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.mini-stat { font-family: var(--mono); font-size: 12px; background: var(--bg); border: 1px solid var(--border); padding: 5px 9px; border-radius: 4px; color: var(--muted); }
+.mini-stat b { color: var(--heading); }
 
-  .pipeline-steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
-  .pipeline-step {
-    flex: 1; min-width: 140px; border: 1px solid var(--border); border-radius: 6px; padding: 14px; background: var(--bg);
-  }
-  .pipeline-step .n { font-family: var(--mono); color: var(--accent); font-size: 12px; }
-  .pipeline-step .t { font-size: 13.5px; font-weight: 600; color: var(--heading); margin: 4px 0 3px; }
-  .pipeline-step .d { font-size: 12.5px; color: var(--muted); }
+.pipeline-steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+.pipeline-step {
+flex: 1; min-width: 140px; border: 1px solid var(--border); border-radius: 6px; padding: 14px; background: var(--bg);
+}
+.pipeline-step .n { font-family: var(--mono); color: var(--accent); font-size: 12px; }
+.pipeline-step .t { font-size: 13.5px; font-weight: 600; color: var(--heading); margin: 4px 0 3px; }
+.pipeline-step .d { font-size: 12.5px; color: var(--muted); }
 
-  .contact-box { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 40px; text-align: left; }
-  .contact-box p { color: var(--muted); font-size: 15px; max-width: 520px; margin-bottom: 24px; }
-  .contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .contact-links a {
-    color: var(--heading); border: 1px solid var(--border); padding: 9px 16px;
-    border-radius: 6px; font-weight: 600; font-size: 13.5px; text-decoration: none;
-  }
-  .contact-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-  footer.bottom { text-align: center; padding: 30px 0; font-size: 12.5px; color: var(--muted); font-family: var(--mono); }
+.contact-box { border: 1px solid var(--border); border-radius: 8px; background: var(--bg-raised); padding: 40px; text-align: left; }
+.contact-box p { color: var(--muted); font-size: 15px; max-width: 520px; margin-bottom: 24px; }
+.contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.contact-links a {
+color: var(--heading); border: 1px solid var(--border); padding: 9px 16px;
+border-radius: 6px; font-weight: 600; font-size: 13.5px; text-decoration: none;
+}
+.contact-links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+footer.bottom { text-align: center; padding: 30px 0; font-size: 12.5px; color: var(--muted); font-family: var(--mono); }
 
-  .mobile-nav { display: none; }
+.mobile-nav { display: none; }
 
-  @media (max-width: 940px) {
-    .layout { flex-direction: column; }
-    .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 40px 28px; }
-    .side-nav { display: none; }
-    .sidebar-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
-    .content { padding: 40px 28px 80px; }
-    .job { grid-template-columns: 1fr; }
-  }
+@media (max-width: 940px) {
+.layout { flex-direction: column; }
+.sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 40px 28px; }
+.side-nav { display: none; }
+.sidebar-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+.content { padding: 40px 28px 80px; }
+.job { grid-template-columns: 1fr; }
+}
 
-  /* Journey timeline */
-  .timeline { position: relative; margin-top: 10px; }
-  .timeline::before { content: ''; position: absolute; left: 19px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
-  .timeline-item { position: relative; padding: 0 0 26px 56px; }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-dot {
-    position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
-    background: var(--bg-raised); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--accent);
-  }
-  .timeline-item a.tcourse { color: var(--heading); font-weight: 700; font-size: 15px; }
-  .timeline-item a.tcourse:hover { color: var(--accent); text-decoration: none; }
-  .timeline-item .ttitle { color: var(--muted); font-size: 13.5px; margin: 2px 0 4px; }
-  .timeline-item .tdesc { color: var(--muted); font-size: 13.5px; max-width: 620px; }
+/* Journey timeline */
+.timeline { position: relative; margin-top: 10px; }
+.timeline::before { content: ''; position: absolute; left: 19px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+.timeline-item { position: relative; padding: 0 0 26px 56px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot {
+position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
+background: var(--bg-raised); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--accent);
+}
+.timeline-item a.tcourse { color: var(--heading); font-weight: 700; font-size: 15px; }
+.timeline-item a.tcourse:hover { color: var(--accent); text-decoration: none; }
+.timeline-item .ttitle { color: var(--muted); font-size: 13.5px; margin: 2px 0 4px; }
+.timeline-item .tdesc { color: var(--muted); font-size: 13.5px; max-width: 620px; }
 
-  /* Case study headers */
-  .case-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
-  .case-num { font-family: var(--mono); color: var(--accent); font-size: 14px; font-weight: 700; }
-  .case-course { font-family: var(--mono); font-size: 11.5px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; }
-  .case-sub { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; font-style: italic; }
+/* Case study headers */
+.case-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+.case-num { font-family: var(--mono); color: var(--accent); font-size: 14px; font-weight: 700; }
+.case-course { font-family: var(--mono); font-size: 11.5px; color: var(--muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; }
+.case-sub { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; font-style: italic; }
 
-  /* Code block */
-  .code-block {
-    background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; overflow-x: auto;
-    font-family: var(--mono); font-size: 12.5px; color: var(--text); line-height: 1.55; margin: 14px 0; white-space: pre;
-  }
-  .figure-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg); margin: 16px 0; }
-  .figure-frame img { width: 100%; display: block; }
-  .figure-cap { font-size: 12.5px; color: var(--muted); padding: 8px 2px 0; font-style: italic; }
-  .case-divider { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
-  .result-callout {
-    display: flex; flex-wrap: wrap; gap: 22px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
-    padding: 18px 20px; margin: 16px 0;
-  }
-  .result-callout .rc-item { min-width: 140px; }
-  .result-callout .rc-num { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); display: block; }
-  .result-callout .rc-label { font-size: 12px; color: var(--muted); }
+/* Code block */
+.code-block {
+background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; overflow-x: auto;
+font-family: var(--mono); font-size: 12.5px; color: var(--text); line-height: 1.55; margin: 14px 0; white-space: pre;
+}
+.figure-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg); margin: 16px 0; }
+.figure-frame img { width: 100%; display: block; }
+.figure-cap { font-size: 12.5px; color: var(--muted); padding: 8px 2px 0; font-style: italic; }
+.case-divider { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+.result-callout {
+display: flex; flex-wrap: wrap; gap: 22px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+padding: 18px 20px; margin: 16px 0;
+}
+.result-callout .rc-item { min-width: 140px; }
+.result-callout .rc-num { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); display: block; }
+.result-callout .rc-label { font-size: 12px; color: var(--muted); }
 </style>
 </head>
 
 <body>
 
 <div class="layout">
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <img class="profile-photo" src="assets/headshot.png" alt="Photo of D'Andre McNeish">
-      <h1>D'Andre McNeish</h1>
-      <div class="role">Data &amp; Analytics Engineering</div>
-      <p class="blurb">
-        Hey, I'm D'Andre. I like turning messy data into something useful, real databases,
-        real pipelines, real models, tested on real data. This page walks through what I've
-        built with the actual code, dashboards, and results behind it. Take a look around.
-      </p>
-      <ul class="side-nav">
-        <li><a href="#about"><span class="num">01</span> About</a></li>
-        <li><a href="#journey"><span class="num">02</span> Journey</a></li>
-        <li><a href="#case-studies"><span class="num">03</span> Case Studies</a></li>
-        <li><a href="#education"><span class="num">04</span> Education</a></li>
-        <li><a href="#contact"><span class="num">05</span> Contact</a></li>
-      </ul>
-    </div>
-    <div class="sidebar-bottom">
-      <div class="social-row">
-        <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
-        <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
-        <a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
-      </div>
-      <button class="theme-toggle" id="themeToggle" type="button">Light mode</button>
-    </div>
-  </aside>
+<aside class="sidebar">
+<div class="sidebar-top">
+<img class="profile-photo" src="assets/headshot.png" alt="Photo of D'Andre McNeish">
+<h1>D'Andre McNeish</h1>
+<div class="role">Data &amp; Analytics Engineering</div>
+<p class="blurb">
+Hey, I'm D'Andre. I like turning messy data into something useful, real databases,
+real pipelines, real models, tested on real data. This page walks through what I've
+built with the actual code, dashboards, and results behind it. Take a look around.
+</p>
+<ul class="side-nav">
+<li><a href="#about"><span class="num">01</span> About</a></li>
+<li><a href="#journey"><span class="num">02</span> Journey</a></li>
+<li><a href="#case-studies"><span class="num">03</span> Case Studies</a></li>
+<li><a href="#education"><span class="num">04</span> Education</a></li>
+<li><a href="#contact"><span class="num">05</span> Contact</a></li>
+</ul>
+</div>
+<div class="sidebar-bottom">
+<div class="social-row">
+<a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
+<a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
+<a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
+</div>
+<button class="theme-toggle" id="themeToggle" type="button">Light mode</button>
+</div>
+</aside>
 
-  <main class="content">
+<main class="content">
 
-    <section id="about" class="reveal">
-      <div class="section-title"><span class="num">01.</span> About <span class="rule"></span></div>
-      <p class="lede">
-        I work at the intersection of <strong>data engineering, cloud architecture, and applied
-        analytics</strong>: designing the schema that stores data correctly, building the pipeline
-        that moves and validates it, and building the model or query that turns it into a decision.
-      </p>
-      <p class="body-text">
-        I just graduated with a Master's in Data Analytics and Data Engineering, and this page is
-        basically my lab notebook made public: real schemas, real code, real pipelines, and the
-        statistical tests behind them, laid out in the order I actually built them, so the
-        progression from database design through to a hypothesis-driven capstone is visible end to
-        end. No slideshow, just the work.
-      </p>
-      <p class="body-text">
-        Before that I spent several years in technical support and IT operations, and hold an
-        Associate of Arts and Sciences in Information Technology and a Bachelor's in Data Analytics
-        and Artificial Intelligence. That operational background is part of why the work below
-        leans toward production concerns, monitoring, validation, reproducibility, rather than
-        stopping once a model runs once.
-      </p>
+<section id="about">
+<div class="section-title"><span class="num">01.</span> About <span class="rule"></span></div>
+<p class="lede">
+I work at the intersection of <strong>data engineering, cloud architecture, and applied
+analytics</strong>: designing the schema that stores data correctly, building the pipeline
+that moves and validates it, and building the model or query that turns it into a decision.
+</p>
+<p class="body-text">
+I just graduated with a Master's in Data Analytics and Data Engineering, and this page is
+basically my lab notebook made public: real schemas, real code, real pipelines, and the
+statistical tests behind them, laid out in the order I actually built them, so the
+progression from database design through to a hypothesis-driven capstone is visible end to
+end. No slideshow, just the work.
+</p>
+<p class="body-text">
+Before that I spent several years in technical support and IT operations, and hold an
+Associate of Arts and Sciences in Information Technology and a Bachelor's in Data Analytics
+and Artificial Intelligence. That operational background is part of why the work below
+leans toward production concerns, monitoring, validation, reproducibility, rather than
+stopping once a model runs once.
+</p>
 
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <div class="tag-row">
-            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Bash</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Databases</h4>
-          <div class="tag-row">
-            <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">BigQuery</span><span class="tag">Cloud SQL</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Data Engineering</h4>
-          <div class="tag-row">
-            <span class="tag">Apache Airflow</span><span class="tag">ETL / ELT</span><span class="tag">AWS Redshift</span><span class="tag">AWS Glue</span><span class="tag">DVC</span><span class="tag">MLflow</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Cloud &amp; Infrastructure</h4>
-          <div class="tag-row">
-            <span class="tag">GCP</span><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">GitLab CI/CD</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Analytics &amp; Modeling</h4>
-          <div class="tag-row">
-            <span class="tag">Regression</span><span class="tag">PCA</span><span class="tag">Hypothesis Testing</span><span class="tag">Market Basket Analysis</span><span class="tag">Tableau</span>
-          </div>
-        </div>
-      </div>
+<div class="skills-grid">
+<div class="skill-group">
+<h4>Languages</h4>
+<div class="tag-row">
+<span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Bash</span>
+</div>
+</div>
+<div class="skill-group">
+<h4>Databases</h4>
+<div class="tag-row">
+<span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">BigQuery</span><span class="tag">Cloud SQL</span>
+</div>
+</div>
+<div class="skill-group">
+<h4>Data Engineering</h4>
+<div class="tag-row">
+<span class="tag">Apache Airflow</span><span class="tag">ETL / ELT</span><span class="tag">AWS Redshift</span><span class="tag">AWS Glue</span><span class="tag">DVC</span><span class="tag">MLflow</span>
+</div>
+</div>
+<div class="skill-group">
+<h4>Cloud &amp; Infrastructure</h4>
+<div class="tag-row">
+<span class="tag">GCP</span><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">GitLab CI/CD</span>
+</div>
+</div>
+<div class="skill-group">
+<h4>Analytics &amp; Modeling</h4>
+<div class="tag-row">
+<span class="tag">Regression</span><span class="tag">PCA</span><span class="tag">Hypothesis Testing</span><span class="tag">Market Basket Analysis</span><span class="tag">Tableau</span>
+</div>
+</div>
+</div>
 
-      <div class="credentials">
-        <div class="credential-chip">
-          <img src="assets/wgu-badge.png" alt="">
-          <a href="https://wgu.badges.parchment.com/public/assertions/HulL6v6HTrytM9MMs82xQA?identity__email=dmcnei29@wgu.edu" target="_blank">Data Analytics Professional Certificate</a>
-        </div>
-        <div class="credential-chip">
-          <img src="assets/wgu-badge-dataeng.png" alt="">
-          <a href="https://wgu.badges.parchment.com/public/assertions/yElPAIW8Q4CeBBZWt6LjKw?identity__email=dmcnei29@wgu.edu" target="_blank">Data Engineering Professional Specialization</a>
-        </div>
-        <div class="credential-chip">
-          <img src="assets/udacity-badge.png" alt="">
-          <a href="https://www.udacity.com/certificate/e/55353290-a8a8-11f1-a1b3-37c52abf07c4" target="_blank">Udacity: Data Pipelines with Airflow</a>
-        </div>
-        <div class="credential-chip">
-          <img src="assets/udacity-badge.png" alt="">
-          <a href="https://www.udacity.com/certificate/e/432462d6-ac88-11f1-a6ef-cf640d80f228" target="_blank">Udacity: Big Data Architecture at Scale</a>
-        </div>
-        <div class="credential-chip">
-          <a href="https://certification.platform.comptia.org/verifycert/6-3C6-DTEWP" target="_blank">CompTIA: AI Agent Essentials</a>
-        </div>
-      </div>
-    </section>
+<div class="credentials">
+<div class="credential-chip">
+<img src="assets/wgu-badge.png" alt="">
+<a href="https://wgu.badges.parchment.com/public/assertions/HulL6v6HTrytM9MMs82xQA?identity__email=dmcnei29@wgu.edu" target="_blank">Data Analytics Professional Certificate</a>
+</div>
+<div class="credential-chip">
+<img src="assets/wgu-badge-dataeng.png" alt="">
+<a href="https://wgu.badges.parchment.com/public/assertions/yElPAIW8Q4CeBBZWt6LjKw?identity__email=dmcnei29@wgu.edu" target="_blank">Data Engineering Professional Specialization</a>
+</div>
+<div class="credential-chip">
+<img src="assets/udacity-badge.png" alt="">
+<a href="https://www.udacity.com/certificate/e/55353290-a8a8-11f1-a1b3-37c52abf07c4" target="_blank">Udacity: Data Pipelines with Airflow</a>
+</div>
+<div class="credential-chip">
+<img src="assets/udacity-badge.png" alt="">
+<a href="https://www.udacity.com/certificate/e/432462d6-ac88-11f1-a6ef-cf640d80f228" target="_blank">Udacity: Big Data Architecture at Scale</a>
+</div>
+<div class="credential-chip">
+<a href="https://certification.platform.comptia.org/verifycert/6-3C6-DTEWP" target="_blank">CompTIA: AI Agent Essentials</a>
+</div>
+</div>
+</section>
 
-    <section id="journey" class="reveal">
-      <div class="section-title"><span class="num">02.</span> Journey <span class="rule"></span></div>
-      <p class="lede" style="margin-bottom:30px;">
-        Ten projects, in the order I built them. Each one builds on the last: databases before
-        pipelines, pipelines before models, models before the cloud architecture that serves them at
-        scale, all of it before a capstone that had to justify itself with a statistical test rather
-        than an opinion. Click any one to jump to the full write-up.
-      </p>
+<section id="journey">
+<div class="section-title"><span class="num">02.</span> Journey <span class="rule"></span></div>
+<p class="lede" style="margin-bottom:30px;">
+Ten projects, in the order I built them. Each one builds on the last: databases before
+pipelines, pipelines before models, models before the cloud architecture that serves them at
+scale, all of it before a capstone that had to justify itself with a statistical test rather
+than an opinion. Click any one to jump to the full write-up.
+</p>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot">01</div>
-          <a class="tcourse" href="#case-01">Database Foundations</a>
-          <div class="ttitle">Relational (PostgreSQL) &amp; Non-Relational (MongoDB) Design</div>
-          <div class="tdesc">Designed and implemented a normalized relational schema and a document-based NoSQL schema for two different business problems, to learn firsthand when each model is the right fit.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">02</div>
-          <a class="tcourse" href="#case-02">Scripting and Programming</a>
-          <div class="ttitle">Automated Analysis Pipeline in Python</div>
-          <div class="tdesc">Built a Python program end to end from a flowchart and pseudocode: cleaning, descriptive statistics, a safe custom ratio calculation, and a multi-sheet Excel export.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">03</div>
-          <a class="tcourse" href="#case-03">Data Preparation &amp; Exploration</a>
-          <div class="ttitle">Data Cleaning, Profiling &amp; Market Basket Analysis</div>
-          <div class="tdesc">Cleaned and profiled a 10,199-record employee dataset, then ran a market basket analysis with the Apriori algorithm to surface real product-association rules.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">04</div>
-          <a class="tcourse" href="#case-04">Predictive Modeling</a>
-          <div class="ttitle">Linear Regression, Logistic Regression &amp; PCA</div>
-          <div class="tdesc">Built and validated regression and classification models plus an unsupervised PCA on a 7,000-record housing dataset, with real train/test splits and assumption checks.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">05</div>
-          <a class="tcourse" href="#case-05">Data Analytics</a>
-          <div class="ttitle">Interactive Dashboard &amp; Presentation</div>
-          <div class="tdesc">Designed and built an interactive Tableau dashboard against defined KPIs, then presented the findings on video.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">06</div>
-          <a class="tcourse" href="#case-06">MLOps &amp; Automation</a>
-          <div class="ttitle">Version-Controlled, Deployed ML Pipeline</div>
-          <div class="tdesc">Took a flight-delay prediction model from raw data to a version-controlled, experiment-tracked, containerized API, deployed through GitLab CI/CD.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">07</div>
-          <a class="tcourse" href="#case-07">Cloud Databases</a>
-          <div class="ttitle">GCP Architecture &amp; BigQuery Implementation</div>
-          <div class="tdesc">Proposed a GCP cloud architecture, then implemented it directly: a nested/repeated BigQuery schema populated with real records and queried live.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">08</div>
-          <a class="tcourse" href="#case-08">Advanced Data Management</a>
-          <div class="ttitle">Governance Plan &amp; Automated Pipeline</div>
-          <div class="tdesc">Wrote a continuous monitoring plan with measurable SLAs, then built an Airflow-orchestrated pipeline with automated data-quality gates to back it up.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">09</div>
-          <a class="tcourse" href="#case-09">Data Analytics at Scale</a>
-          <div class="ttitle">Big Data Architecture &amp; Applied Lakehouse</div>
-          <div class="tdesc">Proposed a full Azure/Fabric big data architecture for a real case study, then independently built a working AWS Glue/Athena lakehouse on the same medallion pattern.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">10</div>
-          <a class="tcourse" href="#case-10">Data Engineering Capstone</a>
-          <div class="ttitle">Hypothesis-Driven Validation Pipeline</div>
-          <div class="tdesc">Designed and ran a full hypothesis-driven experiment: an automated BigQuery validation pipeline tested against manual review with a two-proportion z-test.</div>
-        </div>
-      </div>
-    </section>
+<div class="timeline">
+<div class="timeline-item reveal">
+<div class="timeline-dot">01</div>
+<a class="tcourse" href="#case-01">Database Foundations</a>
+<div class="ttitle">Relational (PostgreSQL) &amp; Non-Relational (MongoDB) Design</div>
+<div class="tdesc">Designed and implemented a normalized relational schema and a document-based NoSQL schema for two different business problems, to learn firsthand when each model is the right fit.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">02</div>
+<a class="tcourse" href="#case-02">Scripting and Programming</a>
+<div class="ttitle">Automated Analysis Pipeline in Python</div>
+<div class="tdesc">Built a Python program end to end from a flowchart and pseudocode: cleaning, descriptive statistics, a safe custom ratio calculation, and a multi-sheet Excel export.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">03</div>
+<a class="tcourse" href="#case-03">Data Preparation &amp; Exploration</a>
+<div class="ttitle">Data Cleaning, Profiling &amp; Market Basket Analysis</div>
+<div class="tdesc">Cleaned and profiled a 10,199-record employee dataset, then ran a market basket analysis with the Apriori algorithm to surface real product-association rules.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">04</div>
+<a class="tcourse" href="#case-04">Predictive Modeling</a>
+<div class="ttitle">Linear Regression, Logistic Regression &amp; PCA</div>
+<div class="tdesc">Built and validated regression and classification models plus an unsupervised PCA on a 7,000-record housing dataset, with real train/test splits and assumption checks.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">05</div>
+<a class="tcourse" href="#case-05">Data Analytics</a>
+<div class="ttitle">Interactive Dashboard &amp; Presentation</div>
+<div class="tdesc">Designed and built an interactive Tableau dashboard against defined KPIs, then presented the findings on video.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">06</div>
+<a class="tcourse" href="#case-06">MLOps &amp; Automation</a>
+<div class="ttitle">Version-Controlled, Deployed ML Pipeline</div>
+<div class="tdesc">Took a flight-delay prediction model from raw data to a version-controlled, experiment-tracked, containerized API, deployed through GitLab CI/CD.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">07</div>
+<a class="tcourse" href="#case-07">Cloud Databases</a>
+<div class="ttitle">GCP Architecture &amp; BigQuery Implementation</div>
+<div class="tdesc">Proposed a GCP cloud architecture, then implemented it directly: a nested/repeated BigQuery schema populated with real records and queried live.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">08</div>
+<a class="tcourse" href="#case-08">Advanced Data Management</a>
+<div class="ttitle">Governance Plan &amp; Automated Pipeline</div>
+<div class="tdesc">Wrote a continuous monitoring plan with measurable SLAs, then built an Airflow-orchestrated pipeline with automated data-quality gates to back it up.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">09</div>
+<a class="tcourse" href="#case-09">Data Analytics at Scale</a>
+<div class="ttitle">Big Data Architecture &amp; Applied Lakehouse</div>
+<div class="tdesc">Proposed a full Azure/Fabric big data architecture for a real case study, then independently built a working AWS Glue/Athena lakehouse on the same medallion pattern.</div>
+</div>
+<div class="timeline-item reveal">
+<div class="timeline-dot">10</div>
+<a class="tcourse" href="#case-10">Data Engineering Capstone</a>
+<div class="ttitle">Hypothesis-Driven Validation Pipeline</div>
+<div class="tdesc">Designed and ran a full hypothesis-driven experiment: an automated BigQuery validation pipeline tested against manual review with a two-proportion z-test.</div>
+</div>
+</div>
+</section>
 
-    <section id="case-studies" class="reveal">
-      <div class="section-title"><span class="num">03.</span> Case Studies <span class="rule"></span></div>
-      <p class="lede" style="margin-bottom:36px;">
-        The full write-up for each project: the problem, what I built, the real technical decisions
-        behind it, and the evidence. Where a project produced something interactive, you can run it
-        yourself below.
-      </p>
+<section id="case-studies">
+<div class="section-title"><span class="num">03.</span> Case Studies <span class="rule"></span></div>
+<p class="lede" style="margin-bottom:36px;">
+The full write-up for each project: the problem, what I built, the real technical decisions
+behind it, and the evidence. Where a project produced something interactive, you can run it
+yourself below.
+</p>
 
-      <!-- CASE 01: D597 -->
-      <div class="project" id="case-01">
-        <div class="case-head"><span class="case-num">01</span><h3>Database Foundations: Relational &amp; Non-Relational Design</h3></div>
-        <div class="case-course"><span class="case-course">Data Management</span></div>
-        <p class="case-sub">EcoMart (PostgreSQL) &amp; HealthTrack (MongoDB)</p>
+<!-- CASE 01: D597 -->
+<div class="project reveal" id="case-01">
+<div class="case-head"><span class="case-num">01</span><h3>Database Foundations: Relational &amp; Non-Relational Design</h3></div>
+<div class="case-course"><span class="case-course">Data Management</span></div>
+<p class="case-sub">EcoMart (PostgreSQL) &amp; HealthTrack (MongoDB)</p>
 
-        <p class="desc">
-          This was the first project in the program, and it was built around a direct comparison: take
-          two different business problems and solve each one with the database model that actually
-          fits, instead of defaulting to one tool for everything.
-        </p>
-        <p class="desc">
-          For the first scenario, EcoMart, an online marketplace selling sustainable products, needed
-          to move off a single flat CSV of sales records and into something that could support repeated
-          reporting without breaking. I designed a normalized PostgreSQL schema: a staging table that
-          loads the raw CSV as text first, then a populate script that casts and moves the data into
-          three typed tables, orders, products, and sales, linked by order_id and item_type. That
-          separation means a bad row in the raw import never corrupts the typed tables, and business
-          questions like which category sells best or which region is most profitable become a
-          straightforward join and aggregate instead of a full-file scan.
-        </p>
-        <div class="code-block">CREATE TABLE orders (
-  order_id BIGINT PRIMARY KEY,
-  order_date DATE NOT NULL,
-  ship_date DATE,
-  order_priority CHAR(1),
-  sales_channel VARCHAR(20),
-  country VARCHAR(100),
-  region VARCHAR(100)
+<p class="desc">
+This was the first project in the program, and it was built around a direct comparison: take
+two different business problems and solve each one with the database model that actually
+fits, instead of defaulting to one tool for everything.
+</p>
+<p class="desc">
+For the first scenario, EcoMart, an online marketplace selling sustainable products, needed
+to move off a single flat CSV of sales records and into something that could support repeated
+reporting without breaking. I designed a normalized PostgreSQL schema: a staging table that
+loads the raw CSV as text first, then a populate script that casts and moves the data into
+three typed tables, orders, products, and sales, linked by order_id and item_type. That
+separation means a bad row in the raw import never corrupts the typed tables, and business
+questions like which category sells best or which region is most profitable become a
+straightforward join and aggregate instead of a full-file scan.
+</p>
+<div class="code-block">CREATE TABLE orders (
+order_id BIGINT PRIMARY KEY,
+order_date DATE NOT NULL,
+ship_date DATE,
+order_priority CHAR(1),
+sales_channel VARCHAR(20),
+country VARCHAR(100),
+region VARCHAR(100)
 );
 
 CREATE TABLE products (
-  item_type VARCHAR(50) PRIMARY KEY,
-  unit_price NUMERIC(10,2),
-  unit_cost NUMERIC(10,2)
+item_type VARCHAR(50) PRIMARY KEY,
+unit_price NUMERIC(10,2),
+unit_cost NUMERIC(10,2)
 );</div>
-        <p class="desc">
-          For the second scenario, HealthTrack, the problem had the opposite shape: patient medical
-          records and wearable fitness-tracker data arriving as JSON, with fields that don't look the
-          same from one document to the next. I designed a MongoDB database with patients and
-          fitness_trackers collections, imported the source JSON directly, and queried the nested
-          document structure without flattening it first, which is exactly the case NoSQL is built for.
-        </p>
-        <div class="code-block">use("D597_Task_2");
+<p class="desc">
+For the second scenario, HealthTrack, the problem had the opposite shape: patient medical
+records and wearable fitness-tracker data arriving as JSON, with fields that don't look the
+same from one document to the next. I designed a MongoDB database with patients and
+fitness_trackers collections, imported the source JSON directly, and queried the nested
+document structure without flattening it first, which is exactly the case NoSQL is built for.
+</p>
+<div class="code-block">use("D597_Task_2");
 db.createCollection("patients");
 db.createCollection("fitness_trackers");
 db.getCollectionNames();</div>
-        <p class="desc">
-          Building both back to back, in the same course, made the tradeoff concrete instead of
-          theoretical: relational when the data is uniform and the relationships matter, document-based
-          when the data is semi-structured and the shape varies from record to record.
-        </p>
-        <div class="tag-row">
-          <span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Relational Design</span><span class="tag">NoSQL</span><span class="tag">Data Modeling</span>
-        </div>
-      </div>
+<p class="desc">
+Building both back to back, in the same course, made the tradeoff concrete instead of
+theoretical: relational when the data is uniform and the relationships matter, document-based
+when the data is semi-structured and the shape varies from record to record.
+</p>
+<div class="tag-row">
+<span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Relational Design</span><span class="tag">NoSQL</span><span class="tag">Data Modeling</span>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 02: D598 -->
-      <div class="project" id="case-02">
-        <div class="case-head"><span class="case-num">02</span><h3>Scripting and Programming: Automated Analysis Pipeline</h3></div>
-        <div class="case-course"><span class="case-course">Analytics Programming</span></div>
-        <p class="case-sub">Equity fund dataset, 156 U.S. companies</p>
+<!-- CASE 02: D598 -->
+<div class="project reveal" id="case-02">
+<div class="case-head"><span class="case-num">02</span><h3>Scripting and Programming: Automated Analysis Pipeline</h3></div>
+<div class="case-course"><span class="case-course">Analytics Programming</span></div>
+<p class="case-sub">Equity fund dataset, 156 U.S. companies</p>
 
-        <p class="desc">
-          This project started with a flowchart and pseudocode and ended with a working Python program that
-          implements it exactly. The program takes a dataset of 156 U.S. equity fund companies and runs
-          it through six deterministic steps: import the Excel source into a pandas DataFrame, remove
-          duplicate rows while keeping one valid copy of each, group the cleaned data by business state
-          and compute full descriptive statistics for every numeric field, isolate every business with a
-          negative debt-to-equity ratio into its own table for review, compute a debt-to-income ratio for
-          every business, and export all of it to a multi-sheet Excel workbook.
-        </p>
-        <p class="desc">
-          The detail that mattered most was the division itself: debt-to-income is long-term debt
-          divided by revenue, and a handful of businesses in the dataset report zero revenue. Dividing by
-          zero there doesn't just throw an exception, it can silently produce an infinite value if you're
-          not careful, which then poisons any aggregate built on top of it. The program checks for a zero
-          denominator explicitly and returns NaN instead, so downstream statistics correctly ignore it
-          rather than being distorted. You can run that exact check below.
-        </p>
+<p class="desc">
+This project started with a flowchart and pseudocode and ended with a working Python program that
+implements it exactly. The program takes a dataset of 156 U.S. equity fund companies and runs
+it through six deterministic steps: import the Excel source into a pandas DataFrame, remove
+duplicate rows while keeping one valid copy of each, group the cleaned data by business state
+and compute full descriptive statistics for every numeric field, isolate every business with a
+negative debt-to-equity ratio into its own table for review, compute a debt-to-income ratio for
+every business, and export all of it to a multi-sheet Excel workbook.
+</p>
+<p class="desc">
+The detail that mattered most was the division itself: debt-to-income is long-term debt
+divided by revenue, and a handful of businesses in the dataset report zero revenue. Dividing by
+zero there doesn't just throw an exception, it can silently produce an infinite value if you're
+not careful, which then poisons any aggregate built on top of it. The program checks for a zero
+denominator explicitly and returns NaN instead, so downstream statistics correctly ignore it
+rather than being distorted. You can run that exact check below.
+</p>
 
-        <div class="demo-panel">
-          <div class="demo-label">Model demo &middot; debt to income ratio</div>
-          <div class="demo-row">
-            <div class="field"><label for="debtInput">Debt ($)</label><input type="number" id="debtInput" value="450000" step="1000"></div>
-            <div class="field"><label for="revenueInput">Revenue ($)</label><input type="number" id="revenueInput" value="1200000" step="1000"></div>
-            <button class="btn-chip primary" id="ratioBtn" type="button">Calculate</button>
-          </div>
-          <div class="demo-result" id="ratioResult">Enter figures and calculate.</div>
-        </div>
+<div class="demo-panel">
+<div class="demo-label">Model demo &middot; debt to income ratio</div>
+<div class="demo-row">
+<div class="field"><label for="debtInput">Debt ($)</label><input type="number" id="debtInput" value="450000" step="1000"></div>
+<div class="field"><label for="revenueInput">Revenue ($)</label><input type="number" id="revenueInput" value="1200000" step="1000"></div>
+<button class="btn-chip primary" id="ratioBtn" type="button">Calculate</button>
+</div>
+<div class="demo-result" id="ratioResult">Enter figures and calculate.</div>
+</div>
 
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Data Cleaning</span><span class="tag">Program Design</span>
-        </div>
-        <div class="project-links">
-          <a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">Source on GitLab</a>
-        </div>
-      </div>
+<div class="tag-row">
+<span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Data Cleaning</span><span class="tag">Program Design</span>
+</div>
+<div class="project-links">
+<a href="https://gitlab.com/dmcnei29/qkn1-task-2-program-implementation" target="_blank">Source on GitLab</a>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 03: D599 -->
-      <div class="project" id="case-03">
-        <div class="case-head"><span class="case-num">03</span><h3>Data Preparation, Exploration &amp; Market Basket Analysis</h3></div>
-        <div class="case-course"><span class="case-course">Data Preparation and Exploration</span></div>
-        <p class="case-sub">Employee Turnover (10,199 records) &amp; Allias Megastore transactions</p>
+<!-- CASE 03: D599 -->
+<div class="project reveal" id="case-03">
+<div class="case-head"><span class="case-num">03</span><h3>Data Preparation, Exploration &amp; Market Basket Analysis</h3></div>
+<div class="case-course"><span class="case-course">Data Preparation and Exploration</span></div>
+<p class="case-sub">Employee Turnover (10,199 records) &amp; Allias Megastore transactions</p>
 
-        <p class="desc">
-          This project covered the two ends of exploratory data work: getting a messy dataset into a trustworthy
-          state, and finding non-obvious patterns once it is. The first part started with a raw Employee
-          Turnover dataset, 10,199 records across 16 variables. Before any analysis, every variable had
-          to be profiled and typed correctly, quantitative vs. qualitative, continuous vs. discrete,
-          nominal vs. ordinal, and checked for the kind of problems that quietly break downstream models:
-          missing values, inconsistent categories, and outliers that are really data-entry errors rather
-          than real extremes.
-        </p>
-        <p class="desc">
-          The second task moved from cleaning to pattern discovery with market basket analysis on a real
-          transactional dataset from Allias Megastore, where each row is one product within one customer
-          order. I used the Apriori algorithm to mine frequent itemsets at a minimum support of 0.05,
-          generate association rules at a minimum lift of 1.0, and rank the results by lift rather than
-          support or confidence alone, because lift is the metric that actually measures whether two
-          products are purchased together more often than chance would predict.
-        </p>
-        <div class="code-block">frequent_itemsets = apriori(basket_encoded, min_support=0.05, use_colnames=True)
+<p class="desc">
+This project covered the two ends of exploratory data work: getting a messy dataset into a trustworthy
+state, and finding non-obvious patterns once it is. The first part started with a raw Employee
+Turnover dataset, 10,199 records across 16 variables. Before any analysis, every variable had
+to be profiled and typed correctly, quantitative vs. qualitative, continuous vs. discrete,
+nominal vs. ordinal, and checked for the kind of problems that quietly break downstream models:
+missing values, inconsistent categories, and outliers that are really data-entry errors rather
+than real extremes.
+</p>
+<p class="desc">
+The second task moved from cleaning to pattern discovery with market basket analysis on a real
+transactional dataset from Allias Megastore, where each row is one product within one customer
+order. I used the Apriori algorithm to mine frequent itemsets at a minimum support of 0.05,
+generate association rules at a minimum lift of 1.0, and rank the results by lift rather than
+support or confidence alone, because lift is the metric that actually measures whether two
+products are purchased together more often than chance would predict.
+</p>
+<div class="code-block">frequent_itemsets = apriori(basket_encoded, min_support=0.05, use_colnames=True)
 rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0)
 top_rules = rules.sort_values("lift", ascending=False).head(3)</div>
-        <p class="desc">
-          The strongest rule the algorithm surfaced: customers who bought the Childrens Cutlery Spaceboy
-          set also bought the Childrens Cutlery Dolly Girl set in 92.59% of those orders, about 14 times
-          more often than random chance would predict, a genuine, actionable cross-sell signal rather
-          than a coincidence of two popular items.
-        </p>
-        <div class="result-callout">
-          <div class="rc-item"><span class="rc-num">0.0567</span><span class="rc-label">Support</span></div>
-          <div class="rc-item"><span class="rc-num">92.59%</span><span class="rc-label">Confidence</span></div>
-          <div class="rc-item"><span class="rc-num">14.08&times;</span><span class="rc-label">Lift</span></div>
-        </div>
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">mlxtend</span><span class="tag">Apriori</span><span class="tag">Data Profiling</span>
-        </div>
-      </div>
+<p class="desc">
+The strongest rule the algorithm surfaced: customers who bought the Childrens Cutlery Spaceboy
+set also bought the Childrens Cutlery Dolly Girl set in 92.59% of those orders, about 14 times
+more often than random chance would predict, a genuine, actionable cross-sell signal rather
+than a coincidence of two popular items.
+</p>
+<div class="result-callout">
+<div class="rc-item"><span class="rc-num">0.0567</span><span class="rc-label">Support</span></div>
+<div class="rc-item"><span class="rc-num">92.59%</span><span class="rc-label">Confidence</span></div>
+<div class="rc-item"><span class="rc-num">14.08&times;</span><span class="rc-label">Lift</span></div>
+</div>
+<div class="tag-row">
+<span class="tag">Python</span><span class="tag">pandas</span><span class="tag">mlxtend</span><span class="tag">Apriori</span><span class="tag">Data Profiling</span>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 04: D600 -->
-      <div class="project" id="case-04">
-        <div class="case-head"><span class="case-num">04</span><h3>Predictive Modeling: Regression &amp; Principal Component Analysis</h3></div>
-        <div class="case-course"><span class="case-course">Predictive Modeling</span></div>
-        <p class="case-sub">Housing dataset, 7,000 records, 22 variables</p>
+<!-- CASE 04: D600 -->
+<div class="project reveal" id="case-04">
+<div class="case-head"><span class="case-num">04</span><h3>Predictive Modeling: Regression &amp; Principal Component Analysis</h3></div>
+<div class="case-course"><span class="case-course">Predictive Modeling</span></div>
+<p class="case-sub">Housing dataset, 7,000 records, 22 variables</p>
 
-        <p class="desc">
-          This project was three parts built on the same 7,000-record housing dataset, each asking a different
-          kind of question of it. The first part fit a multiple linear regression model to predict home price,
-          starting from all candidate predictors and using backward stepwise elimination to arrive at an
-          optimized 9-variable model, then validated it against a held-out test set and reported RMSE
-          with scikit-learn rather than trusting the training fit alone.
-        </p>
-        <p class="desc">
-          The second part reframed the same kind of data as a classification problem: a logistic regression model
-          with 17 independent variables predicting whether a home falls into a luxury or non-luxury
-          category, evaluated with McFadden's pseudo R-squared, AIC/BIC, and a confusion matrix on a
-          stratified 80/20 train/test split. This part went through several revisions after an evaluator
-          flagged a subtle data-leakage bug: an early cleaning step let information from the target
-          variable influence a predictor before the split, inflating the model's apparent performance.
-          Finding that, fixing it, and regenerating every downstream statistic and screenshot from the
-          corrected run was the real work of it, and the one that taught me to check for leakage
-          as a first step, not an afterthought.
-        </p>
-        <p class="desc">
-          The third part dropped the target variable entirely and ran an unsupervised PCA on seven standardized
-          predictors, using the Kaiser rule (retain any component with an eigenvalue greater than 1) to
-          decide how many components to keep. Two were retained, PC1 (eigenvalue 1.4388) and PC2
-          (eigenvalue 1.0393), together explaining 35.40% of total variance, with PC1 loading most
-          heavily on distance to city center and home age, and PC2 loading on local employment rate and
-          crime rate, two genuinely different underlying dimensions the seven raw variables were
-          compressing.
-        </p>
+<p class="desc">
+This project was three parts built on the same 7,000-record housing dataset, each asking a different
+kind of question of it. The first part fit a multiple linear regression model to predict home price,
+starting from all candidate predictors and using backward stepwise elimination to arrive at an
+optimized 9-variable model, then validated it against a held-out test set and reported RMSE
+with scikit-learn rather than trusting the training fit alone.
+</p>
+<p class="desc">
+The second part reframed the same kind of data as a classification problem: a logistic regression model
+with 17 independent variables predicting whether a home falls into a luxury or non-luxury
+category, evaluated with McFadden's pseudo R-squared, AIC/BIC, and a confusion matrix on a
+stratified 80/20 train/test split. This part went through several revisions after an evaluator
+flagged a subtle data-leakage bug: an early cleaning step let information from the target
+variable influence a predictor before the split, inflating the model's apparent performance.
+Finding that, fixing it, and regenerating every downstream statistic and screenshot from the
+corrected run was the real work of it, and the one that taught me to check for leakage
+as a first step, not an afterthought.
+</p>
+<p class="desc">
+The third part dropped the target variable entirely and ran an unsupervised PCA on seven standardized
+predictors, using the Kaiser rule (retain any component with an eigenvalue greater than 1) to
+decide how many components to keep. Two were retained, PC1 (eigenvalue 1.4388) and PC2
+(eigenvalue 1.0393), together explaining 35.40% of total variance, with PC1 loading most
+heavily on distance to city center and home age, and PC2 loading on local employment rate and
+crime rate, two genuinely different underlying dimensions the seven raw variables were
+compressing.
+</p>
 
-        <div class="result-callout">
-          <div class="rc-item"><span class="rc-num">7,000</span><span class="rc-label">Records</span></div>
-          <div class="rc-item"><span class="rc-num">9 / 22</span><span class="rc-label">Predictors retained (regression)</span></div>
-          <div class="rc-item"><span class="rc-num">2</span><span class="rc-label">Principal components retained</span></div>
-          <div class="rc-item"><span class="rc-num">35.40%</span><span class="rc-label">Variance explained (PC1+PC2)</span></div>
-        </div>
+<div class="result-callout">
+<div class="rc-item"><span class="rc-num">7,000</span><span class="rc-label">Records</span></div>
+<div class="rc-item"><span class="rc-num">9 / 22</span><span class="rc-label">Predictors retained (regression)</span></div>
+<div class="rc-item"><span class="rc-num">2</span><span class="rc-label">Principal components retained</span></div>
+<div class="rc-item"><span class="rc-num">35.40%</span><span class="rc-label">Variance explained (PC1+PC2)</span></div>
+</div>
 
-        <div class="demo-panel">
-          <div class="demo-label">Model demo &middot; home price estimator</div>
-          <div class="demo-row">
-            <div class="field">
-              <label for="sqftInput">Square footage</label>
-              <input type="number" id="sqftInput" min="400" max="2600" step="10" value="1200">
-            </div>
-            <button class="btn-chip primary" id="estimateBtn" type="button">Run model</button>
-          </div>
-          <div class="demo-result" id="estimateResult">Enter a value and run the model.</div>
-        </div>
+<div class="demo-panel">
+<div class="demo-label">Model demo &middot; home price estimator</div>
+<div class="demo-row">
+<div class="field">
+<label for="sqftInput">Square footage</label>
+<input type="number" id="sqftInput" min="400" max="2600" step="10" value="1200">
+</div>
+<button class="btn-chip primary" id="estimateBtn" type="button">Run model</button>
+</div>
+<div class="demo-result" id="estimateResult">Enter a value and run the model.</div>
+</div>
 
-        <div class="stat-row">
-          <span class="stat-pill">R&sup2; = <span id="r2Stat">&hellip;</span></span>
-          <span class="stat-pill" id="slopeStat">&hellip;</span>
-        </div>
-        <div class="chart-wrap"><canvas id="regressionChart" height="220"></canvas></div>
+<div class="stat-row">
+<span class="stat-pill">R&sup2; = <span id="r2Stat">&hellip;</span></span>
+<span class="stat-pill" id="slopeStat">&hellip;</span>
+</div>
+<div class="chart-wrap"><canvas id="regressionChart" height="220"></canvas></div>
 
-        <h3 style="margin-top:32px; font-size:16px;">Principal Component Analysis</h3>
-        <p class="desc" style="margin-top:8px;">
-          Same dataset, reduced to 7 standardized variables. Click a bar to see the loading weights for
-          that component.
-        </p>
-        <div class="chart-wrap"><canvas id="pcaChart" height="200"></canvas></div>
-        <div id="pcaLoadingsPanel"></div>
+<h3 style="margin-top:32px; font-size:16px;">Principal Component Analysis</h3>
+<p class="desc" style="margin-top:8px;">
+Same dataset, reduced to 7 standardized variables. Click a bar to see the loading weights for
+that component.
+</p>
+<div class="chart-wrap"><canvas id="pcaChart" height="200"></canvas></div>
+<div id="pcaLoadingsPanel"></div>
 
-        <div class="figure-frame"><img src="assets/d600-scree.png" alt="PCA scree plot with Kaiser criterion"></div>
-        <div class="figure-cap">Scree plot of eigenvalues by principal component, with the Kaiser criterion (eigenvalue = 1) marked.</div>
+<div class="figure-frame"><img src="assets/d600-scree.png" alt="PCA scree plot with Kaiser criterion"></div>
+<div class="figure-cap">Scree plot of eigenvalues by principal component, with the Kaiser criterion (eigenvalue = 1) marked.</div>
 
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">scikit-learn</span><span class="tag">Linear Regression</span><span class="tag">Logistic Regression</span><span class="tag">PCA</span>
-        </div>
-      </div>
+<div class="tag-row">
+<span class="tag">Python</span><span class="tag">statsmodels</span><span class="tag">scikit-learn</span><span class="tag">Linear Regression</span><span class="tag">Logistic Regression</span><span class="tag">PCA</span>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 05: D601 -->
-      <div class="project" id="case-05">
-        <div class="case-head"><span class="case-num">05</span><h3>Data Analytics &amp; Visualization</h3></div>
-        <div class="case-course"><span class="case-course">Data Analytics</span></div>
-        <p class="case-sub">Interactive Tableau KPI dashboard</p>
+<!-- CASE 05: D601 -->
+<div class="project reveal" id="case-05">
+<div class="case-head"><span class="case-num">05</span><h3>Data Analytics &amp; Visualization</h3></div>
+<div class="case-course"><span class="case-course">Data Analytics</span></div>
+<p class="case-sub">Interactive Tableau KPI dashboard</p>
 
-        <p class="desc">
-          This one was two parts: design and build a dashboard, then present it. For the first part, I built
-          an interactive Tableau workbook against a customer churn dataset, with four coordinated
-          visualizations and a set of filters, contract type, internet service, tenure, and state, that update every chart
-          on the dashboard at once rather than requiring a separate view per slice of the data. The
-          accompanying write-up documented the reasoning behind each visualization choice and each KPI,
-          tying every chart back to a specific business question rather than including a chart because
-          the software made one easy.
-        </p>
-        <p class="desc">
-          For the second part, I recorded a presentation walking through the finished dashboard: what each KPI
-          means, what the filters reveal when used, and what the data actually supports recommending.
-          The screenshot below is pulled straight from the live workbook: an overall churn rate of 26.5%,
-          an average monthly charge of $172.62, and the contract type and internet service breakdowns that
-          explain most of the swing between them.
-        </p>
-        <div class="figure-frame"><img src="assets/tableau-dashboard.jpg" alt="Tableau customer churn dashboard with KPI cards and four linked charts"></div>
-        <div class="figure-cap">Live workbook, presentation mode: churn rate and average monthly charge broken out by contract type, internet service, and tenure.</div>
-        <div class="tag-row">
-          <span class="tag">Tableau</span><span class="tag">Data Visualization</span><span class="tag">KPI Design</span><span class="tag">Dashboarding</span>
-        </div>
-      </div>
+<p class="desc">
+This one was two parts: design and build a dashboard, then present it. For the first part, I built
+an interactive Tableau workbook against a customer churn dataset, with four coordinated
+visualizations and a set of filters, contract type, internet service, tenure, and state, that update every chart
+on the dashboard at once rather than requiring a separate view per slice of the data. The
+accompanying write-up documented the reasoning behind each visualization choice and each KPI,
+tying every chart back to a specific business question rather than including a chart because
+the software made one easy.
+</p>
+<p class="desc">
+For the second part, I recorded a presentation walking through the finished dashboard: what each KPI
+means, what the filters reveal when used, and what the data actually supports recommending.
+The screenshot below is pulled straight from the live workbook: an overall churn rate of 26.5%,
+an average monthly charge of $172.62, and the contract type and internet service breakdowns that
+explain most of the swing between them.
+</p>
+<div class="figure-frame"><img src="assets/tableau-dashboard.jpg" alt="Tableau customer churn dashboard with KPI cards and four linked charts"></div>
+<div class="figure-cap">Live workbook, presentation mode: churn rate and average monthly charge broken out by contract type, internet service, and tenure.</div>
+<div class="tag-row">
+<span class="tag">Tableau</span><span class="tag">Data Visualization</span><span class="tag">KPI Design</span><span class="tag">Dashboarding</span>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 06: D602 -->
-      <div class="project" id="case-06">
-        <div class="case-head"><span class="case-num">06</span><h3>MLOps &amp; Automation: Flight Delay Prediction Pipeline</h3></div>
-        <div class="case-course"><span class="case-course">Machine Learning DevOps</span></div>
-        <p class="case-sub">BTS flight-delay data, GitLab CI/CD</p>
+<!-- CASE 06: D602 -->
+<div class="project reveal" id="case-06">
+<div class="case-head"><span class="case-num">06</span><h3>MLOps &amp; Automation: Flight Delay Prediction Pipeline</h3></div>
+<div class="case-course"><span class="case-course">Machine Learning DevOps</span></div>
+<p class="case-sub">BTS flight-delay data, GitLab CI/CD</p>
 
-        <p class="desc">
-          This project asked a different question than the modeling work before it: not just can you build a
-          model, but can you make it reproducible, trackable, and deployable by someone other than you.
-          Working from real Bureau of Transportation Statistics flight-delay data for a chosen airport, I
-          built the pipeline across three parts and three GitLab merge requests.
-        </p>
-        <p class="desc">
-          The first part built the modeling pipeline itself: import and format scripts with DVC versioning both
-          the raw and cleaned datasets so any run can be traced back to the exact data it used, a
-          cleaning and filtering stage, and an MLflow-tracked training script that logs parameters,
-          metrics, and the model artifact for every run automatically, not just the best one. The second part leaned
-          on real verification: rather than trust the pipeline worked, I
-          ran it end to end against the actual project and captured fresh evidence, a genuine successful
-          run, shown below, after catching that the first pass through didn't
-          clearly demonstrate a full run. The third part packaged the trained model behind a FastAPI endpoint,
-          containerized it with Docker, and wired a GitLab CI/CD pipeline to build, test, and deploy it
-          automatically on every push to the working branch, with an automated test suite guarding the
-          API contract.
-        </p>
+<p class="desc">
+This project asked a different question than the modeling work before it: not just can you build a
+model, but can you make it reproducible, trackable, and deployable by someone other than you.
+Working from real Bureau of Transportation Statistics flight-delay data for a chosen airport, I
+built the pipeline across three parts and three GitLab merge requests.
+</p>
+<p class="desc">
+The first part built the modeling pipeline itself: import and format scripts with DVC versioning both
+the raw and cleaned datasets so any run can be traced back to the exact data it used, a
+cleaning and filtering stage, and an MLflow-tracked training script that logs parameters,
+metrics, and the model artifact for every run automatically, not just the best one. The second part leaned
+on real verification: rather than trust the pipeline worked, I
+ran it end to end against the actual project and captured fresh evidence, a genuine successful
+run, shown below, after catching that the first pass through didn't
+clearly demonstrate a full run. The third part packaged the trained model behind a FastAPI endpoint,
+containerized it with Docker, and wired a GitLab CI/CD pipeline to build, test, and deploy it
+automatically on every push to the working branch, with an automated test suite guarding the
+API contract.
+</p>
 
-        <div class="pipeline-tab-nav">
-          <button class="pipeline-tab-btn active" data-target="tab-import" type="button">Import</button>
-          <button class="pipeline-tab-btn" data-target="tab-clean" type="button">Clean</button>
-          <button class="pipeline-tab-btn" data-target="tab-train" type="button">Train</button>
-          <button class="pipeline-tab-btn" data-target="tab-track" type="button">Track</button>
-          <button class="pipeline-tab-btn" data-target="tab-deploy" type="button">Deploy</button>
-        </div>
-        <div id="tab-import" class="pipeline-tab-panel active"><p>Pulls raw flight delay records from the Bureau of Transportation Statistics and versions the raw file with DVC.</p></div>
-        <div id="tab-clean" class="pipeline-tab-panel"><p>Filters and cleans the records, handling missing values and outliers, and versions the cleaned dataset separately.</p></div>
-        <div id="tab-train" class="pipeline-tab-panel"><p>Trains the delay prediction model and saves it as a versioned artifact.</p></div>
-        <div id="tab-track" class="pipeline-tab-panel">
-          <p>MLflow records parameters, metrics, and artifacts for every run automatically. Below is a real run from this project.</p>
-          <div class="media-frame" style="margin-top:10px;"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
-        </div>
-        <div id="tab-deploy" class="pipeline-tab-panel"><p>Packages the model behind a FastAPI endpoint in Docker, tested and deployed automatically through GitLab CI/CD.</p></div>
-        <div class="tag-row">
-          <span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">GitLab CI/CD</span>
-        </div>
-        <div class="project-links">
-          <a href="https://gitlab.com/wgu-gitlab-environment/student-repos/dmcnei29/d602-deployment-task-3/-/tree/working-branch" target="_blank">Working branch on GitLab</a>
-        </div>
-      </div>
+<div class="pipeline-tab-nav">
+<button class="pipeline-tab-btn active" data-target="tab-import" type="button">Import</button>
+<button class="pipeline-tab-btn" data-target="tab-clean" type="button">Clean</button>
+<button class="pipeline-tab-btn" data-target="tab-train" type="button">Train</button>
+<button class="pipeline-tab-btn" data-target="tab-track" type="button">Track</button>
+<button class="pipeline-tab-btn" data-target="tab-deploy" type="button">Deploy</button>
+</div>
+<div id="tab-import" class="pipeline-tab-panel active"><p>Pulls raw flight delay records from the Bureau of Transportation Statistics and versions the raw file with DVC.</p></div>
+<div id="tab-clean" class="pipeline-tab-panel"><p>Filters and cleans the records, handling missing values and outliers, and versions the cleaned dataset separately.</p></div>
+<div id="tab-train" class="pipeline-tab-panel"><p>Trains the delay prediction model and saves it as a versioned artifact.</p></div>
+<div id="tab-track" class="pipeline-tab-panel">
+<p>MLflow records parameters, metrics, and artifacts for every run automatically. Below is a real run from this project.</p>
+<div class="media-frame" style="margin-top:10px;"><img src="assets/mlflow-run.png" alt="MLflow experiment tracking run"></div>
+</div>
+<div id="tab-deploy" class="pipeline-tab-panel"><p>Packages the model behind a FastAPI endpoint in Docker, tested and deployed automatically through GitLab CI/CD.</p></div>
+<div class="tag-row">
+<span class="tag">MLflow</span><span class="tag">DVC</span><span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">GitLab CI/CD</span>
+</div>
+<div class="project-links">
+<a href="https://gitlab.com/wgu-gitlab-environment/student-repos/dmcnei29/d602-deployment-task-3/-/tree/working-branch" target="_blank">Working branch on GitLab</a>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 07: D607 -->
-      <div class="project" id="case-07">
-        <div class="case-head"><span class="case-num">07</span><h3>Cloud Database Design &amp; Implementation</h3></div>
-        <div class="case-course"><span class="case-course">Cloud Databases</span></div>
-        <p class="case-sub">Alliah Company &mdash; GCP architecture &amp; BigQuery</p>
+<!-- CASE 07: D607 -->
+<div class="project reveal" id="case-07">
+<div class="case-head"><span class="case-num">07</span><h3>Cloud Database Design &amp; Implementation</h3></div>
+<div class="case-course"><span class="case-course">Cloud Databases</span></div>
+<p class="case-sub">Alliah Company &mdash; GCP architecture &amp; BigQuery</p>
 
-        <p class="desc">
-          This project was two parts: propose a cloud architecture, then actually build the database it calls
-          for. For the first part, I designed a Google Cloud Platform architecture for a retailer, Alliah
-          Company, processing roughly 10 TB of transaction data per day: Cloud Pub/Sub for streaming
-          ingestion, Cloud Dataflow for validation and deduplication, Cloud Storage as the raw data lake
-          with a tiered lifecycle policy, and two different serving layers for two different needs, a
-          nested BigQuery warehouse mirroring the source JSON for analytics, and a normalized Cloud SQL
-          for PostgreSQL database for operational lookups.
-        </p>
-        <div class="media-frame" id="gcpSlideshow">
-          <img src="assets/gcp-architecture.png" alt="GCP architecture diagram" style="display:block;">
-          <img src="assets/gcp-logical-diagram.png" alt="Normalized logical data diagram" style="display:none;">
-        </div>
-        <div class="slideshow-controls">
-          <button id="gcpPrev" class="btn-chip" type="button">&larr; Prev</button>
-          <span id="gcpCaption">Architecture: data flow from ingestion into BigQuery and Cloud SQL.</span>
-          <button id="gcpNext" class="btn-chip" type="button">Next &rarr;</button>
-        </div>
-        <div class="gcp-components">
-          <div class="gcp-component">
-            <button class="gcp-component-head" type="button">Cloud Pub/Sub <span class="plus">+</span></button>
-            <div class="gcp-component-body"><p>Serverless publish/subscribe ingestion for transaction and customer interaction events the moment they occur, decoupling producers from downstream processing.</p></div>
-          </div>
-          <div class="gcp-component">
-            <button class="gcp-component-head" type="button">Cloud Dataflow <span class="plus">+</span></button>
-            <div class="gcp-component-body"><p>Serverless streaming and batch processing (Apache Beam) that validates and de-duplicates records before routing them to storage.</p></div>
-          </div>
-          <div class="gcp-component">
-            <button class="gcp-component-head" type="button">Cloud Storage <span class="plus">+</span></button>
-            <div class="gcp-component-body"><p>Raw data lake retaining an unmodified copy of every record, with a lifecycle policy moving older objects to cheaper storage tiers after 30 and 90 days.</p></div>
-          </div>
-          <div class="gcp-component">
-            <button class="gcp-component-head" type="button">BigQuery <span class="plus">+</span></button>
-            <div class="gcp-component-body"><p>Serverless analytics warehouse storing the data in a nested schema that mirrors the source JSON, avoiding a separate flattening step for BI queries.</p></div>
-          </div>
-          <div class="gcp-component">
-            <button class="gcp-component-head" type="button">Cloud SQL for PostgreSQL <span class="plus">+</span></button>
-            <div class="gcp-component-body"><p>Regional, high availability relational database storing the same data in a normalized 5-table schema for operational lookups and financial reporting.</p></div>
-          </div>
-        </div>
+<p class="desc">
+This project was two parts: propose a cloud architecture, then actually build the database it calls
+for. For the first part, I designed a Google Cloud Platform architecture for a retailer, Alliah
+Company, processing roughly 10 TB of transaction data per day: Cloud Pub/Sub for streaming
+ingestion, Cloud Dataflow for validation and deduplication, Cloud Storage as the raw data lake
+with a tiered lifecycle policy, and two different serving layers for two different needs, a
+nested BigQuery warehouse mirroring the source JSON for analytics, and a normalized Cloud SQL
+for PostgreSQL database for operational lookups.
+</p>
+<div class="media-frame" id="gcpSlideshow">
+<img src="assets/gcp-architecture.png" alt="GCP architecture diagram" style="display:block;">
+<img src="assets/gcp-logical-diagram.png" alt="Normalized logical data diagram" style="display:none;">
+</div>
+<div class="slideshow-controls">
+<button id="gcpPrev" class="btn-chip" type="button">&larr; Prev</button>
+<span id="gcpCaption">Architecture: data flow from ingestion into BigQuery and Cloud SQL.</span>
+<button id="gcpNext" class="btn-chip" type="button">Next &rarr;</button>
+</div>
+<div class="gcp-components">
+<div class="gcp-component">
+<button class="gcp-component-head" type="button">Cloud Pub/Sub <span class="plus">+</span></button>
+<div class="gcp-component-body"><p>Serverless publish/subscribe ingestion for transaction and customer interaction events the moment they occur, decoupling producers from downstream processing.</p></div>
+</div>
+<div class="gcp-component">
+<button class="gcp-component-head" type="button">Cloud Dataflow <span class="plus">+</span></button>
+<div class="gcp-component-body"><p>Serverless streaming and batch processing (Apache Beam) that validates and de-duplicates records before routing them to storage.</p></div>
+</div>
+<div class="gcp-component">
+<button class="gcp-component-head" type="button">Cloud Storage <span class="plus">+</span></button>
+<div class="gcp-component-body"><p>Raw data lake retaining an unmodified copy of every record, with a lifecycle policy moving older objects to cheaper storage tiers after 30 and 90 days.</p></div>
+</div>
+<div class="gcp-component">
+<button class="gcp-component-head" type="button">BigQuery <span class="plus">+</span></button>
+<div class="gcp-component-body"><p>Serverless analytics warehouse storing the data in a nested schema that mirrors the source JSON, avoiding a separate flattening step for BI queries.</p></div>
+</div>
+<div class="gcp-component">
+<button class="gcp-component-head" type="button">Cloud SQL for PostgreSQL <span class="plus">+</span></button>
+<div class="gcp-component-body"><p>Regional, high availability relational database storing the same data in a normalized 5-table schema for operational lookups and financial reporting.</p></div>
+</div>
+</div>
 
-        <p class="desc" style="margin-top:22px;">
-          For the second part, I implemented the BigQuery half of that proposal directly in a hosted GCP
-          sandbox rather than just describing it. The schema uses a customer STRUCT and a repeated
-          shopping_cart ARRAY&lt;STRUCT&gt; in a single transactions table, which lets one row hold a full
-          order, including a variable number of cart items, without a join to a separate line-items
-          table. Ten real records were loaded with an INSERT ... SELECT FROM UNNEST([...]) statement,
-          BigQuery's pattern for inserting several complete nested rows in one statement, since it
-          doesn't support a plain multi-row VALUES list, and I wrote and ran three queries against the
-          live table: a DISTINCT query flattening unique customers, an UNNEST query flattening one
-          customer's shopping cart into individual item rows, and a GROUP BY aggregate ranking customers
-          by total spend.
-        </p>
-        <div class="code-block">customer STRUCT&lt;
-  customer_id STRING, name STRING, email STRING, phone STRING, address STRING
+<p class="desc" style="margin-top:22px;">
+For the second part, I implemented the BigQuery half of that proposal directly in a hosted GCP
+sandbox rather than just describing it. The schema uses a customer STRUCT and a repeated
+shopping_cart ARRAY&lt;STRUCT&gt; in a single transactions table, which lets one row hold a full
+order, including a variable number of cart items, without a join to a separate line-items
+table. Ten real records were loaded with an INSERT ... SELECT FROM UNNEST([...]) statement,
+BigQuery's pattern for inserting several complete nested rows in one statement, since it
+doesn't support a plain multi-row VALUES list, and I wrote and ran three queries against the
+live table: a DISTINCT query flattening unique customers, an UNNEST query flattening one
+customer's shopping cart into individual item rows, and a GROUP BY aggregate ranking customers
+by total spend.
+</p>
+<div class="code-block">customer STRUCT&lt;
+customer_id STRING, name STRING, email STRING, phone STRING, address STRING
 &gt;,
 shopping_cart ARRAY&lt;STRUCT&lt;
-  product_id STRING, vendor STRING, product_category STRING,
-  product_name STRING, quantity INT64, price FLOAT64
+product_id STRING, vendor STRING, product_category STRING,
+product_name STRING, quantity INT64, price FLOAT64
 &gt;&gt;</div>
 
-        <div class="demo-panel">
-          <div class="demo-label">Try a similar query pattern &middot; 12 sample orders</div>
-          <div class="demo-row" style="margin-bottom:2px;">
-            <button class="btn-chip" data-sql="region" type="button">Revenue by region</button>
-            <button class="btn-chip" data-sql="delayed" type="button">Delayed orders</button>
-            <button class="btn-chip" data-sql="top" type="button">Top 5 by order value</button>
-          </div>
-          <pre id="sqlText" class="mono" style="font-size:12.5px; color:var(--muted); margin-top:12px; white-space:pre-wrap;">Select a query above.</pre>
-          <div id="sqlResultWrap"></div>
-        </div>
+<div class="demo-panel">
+<div class="demo-label">Try a similar query pattern &middot; 12 sample orders</div>
+<div class="demo-row" style="margin-bottom:2px;">
+<button class="btn-chip" data-sql="region" type="button">Revenue by region</button>
+<button class="btn-chip" data-sql="delayed" type="button">Delayed orders</button>
+<button class="btn-chip" data-sql="top" type="button">Top 5 by order value</button>
+</div>
+<pre id="sqlText" class="mono" style="font-size:12.5px; color:var(--muted); margin-top:12px; white-space:pre-wrap;">Select a query above.</pre>
+<div id="sqlResultWrap"></div>
+</div>
 
-        <div class="tag-row">
-          <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Cloud Architecture</span><span class="tag">Data Modeling</span><span class="tag">SQL</span>
-        </div>
-      </div>
+<div class="tag-row">
+<span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">Cloud Architecture</span><span class="tag">Data Modeling</span><span class="tag">SQL</span>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 08: D608 -->
-      <div class="project" id="case-08">
-        <div class="case-head"><span class="case-num">08</span><h3>Data Governance &amp; Automated Data Pipelines</h3></div>
-        <div class="case-course"><span class="case-course">Advanced Data Management</span></div>
-        <p class="case-sub">SmallFirm, Inc. monitoring plan &amp; Airflow/Redshift pipeline</p>
+<!-- CASE 08: D608 -->
+<div class="project reveal" id="case-08">
+<div class="case-head"><span class="case-num">08</span><h3>Data Governance &amp; Automated Data Pipelines</h3></div>
+<div class="case-course"><span class="case-course">Advanced Data Management</span></div>
+<p class="case-sub">SmallFirm, Inc. monitoring plan &amp; Airflow/Redshift pipeline</p>
 
-        <p class="desc">
-          This project paired a written governance deliverable with a working one. The first part designed a full
-          data-processing solution for SmallFirm, Inc., a scenario with multiple on-premises source
-          systems, MS Access databases for payroll, personnel, and vendors, and Excel files for products,
-          production batches, tooling, and raw materials, that needed to land in a centralized Azure
-          Synapse warehouse. I mapped the source-to-target attributes explicitly, then diagrammed the
-          full process below: extract, cleanse and validate through Azure Data Factory, quarantine
-          anything that fails validation rather than silently dropping or guessing at it, load into the
-          appropriate target system, and integrate into the warehouse for reporting.
-        </p>
-        <div class="figure-frame"><img src="assets/d608-flow1.png" alt="SmallFirm Inc. process and data flow diagram"></div>
-        <div class="figure-cap">Level 1 process and data flow diagram: extract &rarr; cleanse/validate &rarr; quarantine or load &rarr; integrate &amp; serve, with continuous monitoring hooked into every stage.</div>
+<p class="desc">
+This project paired a written governance deliverable with a working one. The first part designed a full
+data-processing solution for SmallFirm, Inc., a scenario with multiple on-premises source
+systems, MS Access databases for payroll, personnel, and vendors, and Excel files for products,
+production batches, tooling, and raw materials, that needed to land in a centralized Azure
+Synapse warehouse. I mapped the source-to-target attributes explicitly, then diagrammed the
+full process below: extract, cleanse and validate through Azure Data Factory, quarantine
+anything that fails validation rather than silently dropping or guessing at it, load into the
+appropriate target system, and integrate into the warehouse for reporting.
+</p>
+<div class="figure-frame"><img src="assets/d608-flow1.png" alt="SmallFirm Inc. process and data flow diagram"></div>
+<div class="figure-cap">Level 1 process and data flow diagram: extract &rarr; cleanse/validate &rarr; quarantine or load &rarr; integrate &amp; serve, with continuous monitoring hooked into every stage.</div>
 
-        <p class="desc">
-          The second part built directly on that diagram: a continuous monitoring plan with concrete, measurable
-          thresholds instead of vague goals, shown below, plus specific benchmarks and a troubleshooting
-          runbook for when a threshold is breached.
-        </p>
-        <div class="mini-stats" style="margin-bottom:22px;">
-          <span class="mini-stat"><b>&lt;0.5%</b> quarantine rate threshold</span>
-          <span class="mini-stat"><b>15 min</b> failure ack SLA</span>
-          <span class="mini-stat"><b>2 yr</b> audit retention</span>
-        </div>
+<p class="desc">
+The second part built directly on that diagram: a continuous monitoring plan with concrete, measurable
+thresholds instead of vague goals, shown below, plus specific benchmarks and a troubleshooting
+runbook for when a threshold is breached.
+</p>
+<div class="mini-stats" style="margin-bottom:22px;">
+<span class="mini-stat"><b>&lt;0.5%</b> quarantine rate threshold</span>
+<span class="mini-stat"><b>15 min</b> failure ack SLA</span>
+<span class="mini-stat"><b>2 yr</b> audit retention</span>
+</div>
 
-        <p class="desc">
-          To demonstrate the same governance pattern in working code rather than only on paper, I also
-          built and ran an Apache Airflow-orchestrated data pipeline, included here because it implements
-          exactly the kind of automated data-quality gate this plan calls for: four custom Airflow
-          operators staging JSON events from S3 into Redshift, building fact and dimension tables, and a
-          dedicated data-quality operator that runs row-count and null checks after every load and fails
-          the DAG loudly, rather than silently, if the data doesn't pass.
-        </p>
-        <div class="pipeline-steps">
-          <div class="pipeline-step"><div class="n">01</div><div class="t">Stage</div><div class="d">Copy raw JSON from S3 into Redshift staging tables via a custom operator.</div></div>
-          <div class="pipeline-step"><div class="n">02</div><div class="t">Load Fact</div><div class="d">Build the fact table from the staged event data.</div></div>
-          <div class="pipeline-step"><div class="n">03</div><div class="t">Load Dimensions</div><div class="d">Build the dimension tables in parallel.</div></div>
-          <div class="pipeline-step"><div class="n">04</div><div class="t">Validate</div><div class="d">Run row count and null checks; fail the DAG loudly if data quality does not pass.</div></div>
-        </div>
+<p class="desc">
+To demonstrate the same governance pattern in working code rather than only on paper, I also
+built and ran an Apache Airflow-orchestrated data pipeline, included here because it implements
+exactly the kind of automated data-quality gate this plan calls for: four custom Airflow
+operators staging JSON events from S3 into Redshift, building fact and dimension tables, and a
+dedicated data-quality operator that runs row-count and null checks after every load and fails
+the DAG loudly, rather than silently, if the data doesn't pass.
+</p>
+<div class="pipeline-steps">
+<div class="pipeline-step"><div class="n">01</div><div class="t">Stage</div><div class="d">Copy raw JSON from S3 into Redshift staging tables via a custom operator.</div></div>
+<div class="pipeline-step"><div class="n">02</div><div class="t">Load Fact</div><div class="d">Build the fact table from the staged event data.</div></div>
+<div class="pipeline-step"><div class="n">03</div><div class="t">Load Dimensions</div><div class="d">Build the dimension tables in parallel.</div></div>
+<div class="pipeline-step"><div class="n">04</div><div class="t">Validate</div><div class="d">Run row count and null checks; fail the DAG loudly if data quality does not pass.</div></div>
+</div>
 
-        <div class="mini-card" style="margin-top:22px; padding:26px;">
-          <h3 style="font-size:16px;">Data Quality Rule Engine</h3>
-          <p style="color:var(--muted); font-size:14px; margin-bottom:12px;">A standalone version of the same checks the data-quality operator runs: row counts, null rates, and load latency, each checked against a threshold and flagged instead of assumed fine.</p>
-          <div class="demo-panel">
-            <div class="demo-label">Sample run &middot; 4 warehouse tables</div>
-            <div id="dqTableWrap"></div>
-            <button class="btn-chip primary" id="dqRunBtn" type="button" style="margin-top:14px;">Run quality check</button>
-          </div>
-        </div>
+<div class="mini-card" style="margin-top:22px; padding:26px;">
+<h3 style="font-size:16px;">Data Quality Rule Engine</h3>
+<p style="color:var(--muted); font-size:14px; margin-bottom:12px;">A standalone version of the same checks the data-quality operator runs: row counts, null rates, and load latency, each checked against a threshold and flagged instead of assumed fine.</p>
+<div class="demo-panel">
+<div class="demo-label">Sample run &middot; 4 warehouse tables</div>
+<div id="dqTableWrap"></div>
+<button class="btn-chip primary" id="dqRunBtn" type="button" style="margin-top:14px;">Run quality check</button>
+</div>
+</div>
 
-        <div class="tag-row" style="margin-top:18px;">
-          <span class="tag">Azure Data Factory</span><span class="tag">Data Governance</span><span class="tag">Apache Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Data Quality</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">Pipeline source on GitHub</a>
-        </div>
-      </div>
+<div class="tag-row" style="margin-top:18px;">
+<span class="tag">Azure Data Factory</span><span class="tag">Data Governance</span><span class="tag">Apache Airflow</span><span class="tag">AWS Redshift</span><span class="tag">Data Quality</span>
+</div>
+<div class="project-links">
+<a href="https://github.com/dandremcneish/data-pipelines-with-airflow" target="_blank">Pipeline source on GitHub</a>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 09: D609 -->
-      <div class="project" id="case-09">
-        <div class="case-head"><span class="case-num">09</span><h3>Big Data Architecture at Scale</h3></div>
-        <div class="case-course"><span class="case-course">Data Analytics at Scale</span></div>
-        <p class="case-sub">STEDI Human Balance Analytics &mdash; Azure proposal &amp; applied AWS Glue lakehouse</p>
+<!-- CASE 09: D609 -->
+<div class="project reveal" id="case-09">
+<div class="case-head"><span class="case-num">09</span><h3>Big Data Architecture at Scale</h3></div>
+<div class="case-course"><span class="case-course">Data Analytics at Scale</span></div>
+<p class="case-sub">STEDI Human Balance Analytics &mdash; Azure proposal &amp; applied AWS Glue lakehouse</p>
 
-        <p class="desc">
-          This project was a big data architecture proposal for STEDI, a balance-training device company
-          whose Step Trainer hardware and companion mobile app produce three raw data streams: customer
-          profile data, mobile accelerometer readings, and Step Trainer sensor readings. The scenario's
-          real constraint shaped the whole design: STEDI is contractually restricted from building on
-          AWS, so the proposal runs entirely on Microsoft Azure and Microsoft Fabric, ingesting and
-          privacy-filtering all three streams, dropping any customer who hasn't consented to share data
-          before it reaches anything else, into a single trusted, machine-learning-ready dataset for the
-          step-detection model at the core of STEDI's product.
-        </p>
-        <p class="desc">
-          To go beyond the written proposal, I separately built a hands-on implementation of the same
-          landing &rarr; trusted &rarr; curated medallion pattern on a different, freely-available stack:
-          an AWS Glue and Athena data lakehouse, with five Glue ETL jobs moving the same three STEDI data
-          streams through progressively more trustworthy layers, each stage verified with real row counts
-          in the AWS console rather than assumed to have worked.
-        </p>
+<p class="desc">
+This project was a big data architecture proposal for STEDI, a balance-training device company
+whose Step Trainer hardware and companion mobile app produce three raw data streams: customer
+profile data, mobile accelerometer readings, and Step Trainer sensor readings. The scenario's
+real constraint shaped the whole design: STEDI is contractually restricted from building on
+AWS, so the proposal runs entirely on Microsoft Azure and Microsoft Fabric, ingesting and
+privacy-filtering all three streams, dropping any customer who hasn't consented to share data
+before it reaches anything else, into a single trusted, machine-learning-ready dataset for the
+step-detection model at the core of STEDI's product.
+</p>
+<p class="desc">
+To go beyond the written proposal, I separately built a hands-on implementation of the same
+landing &rarr; trusted &rarr; curated medallion pattern on a different, freely-available stack:
+an AWS Glue and Athena data lakehouse, with five Glue ETL jobs moving the same three STEDI data
+streams through progressively more trustworthy layers, each stage verified with real row counts
+in the AWS console rather than assumed to have worked.
+</p>
 
-        <div class="result-callout">
-          <div class="rc-item"><span class="rc-num">956</span><span class="rc-label">Customers landed</span></div>
-          <div class="rc-item"><span class="rc-num">482</span><span class="rc-label">Consented, trusted</span></div>
-          <div class="rc-item"><span class="rc-num">43,681</span><span class="rc-label">Curated ML-ready rows</span></div>
-        </div>
+<div class="result-callout">
+<div class="rc-item"><span class="rc-num">956</span><span class="rc-label">Customers landed</span></div>
+<div class="rc-item"><span class="rc-num">482</span><span class="rc-label">Consented, trusted</span></div>
+<div class="rc-item"><span class="rc-num">43,681</span><span class="rc-label">Curated ML-ready rows</span></div>
+</div>
 
-        <div class="figure-frame"><img src="assets/stedi-landing.jpg" alt="STEDI landing zone customer count in AWS Glue console"></div>
-        <div class="figure-cap">Landing zone: raw customer records confirmed in S3/Glue before any privacy filtering.</div>
-        <div class="figure-frame"><img src="assets/stedi-curated.jpg" alt="STEDI curated machine learning dataset count"></div>
-        <div class="figure-cap">Curated layer: 43,681 joined accelerometer and step-trainer readings, ready to train the step-detection model.</div>
+<div class="figure-frame"><img src="assets/stedi-landing.jpg" alt="STEDI landing zone customer count in AWS Glue console"></div>
+<div class="figure-cap">Landing zone: raw customer records confirmed in S3/Glue before any privacy filtering.</div>
+<div class="figure-frame"><img src="assets/stedi-curated.jpg" alt="STEDI curated machine learning dataset count"></div>
+<div class="figure-cap">Curated layer: 43,681 joined accelerometer and step-trainer readings, ready to train the step-detection model.</div>
 
-        <div class="tag-row">
-          <span class="tag">Azure</span><span class="tag">Microsoft Fabric</span><span class="tag">AWS Glue</span><span class="tag">Athena</span><span class="tag">Data Lakehouse</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/dandremcneish/stedi-human-balance-analytics" target="_blank">Lakehouse source on GitHub</a>
-        </div>
-      </div>
+<div class="tag-row">
+<span class="tag">Azure</span><span class="tag">Microsoft Fabric</span><span class="tag">AWS Glue</span><span class="tag">Athena</span><span class="tag">Data Lakehouse</span>
+</div>
+<div class="project-links">
+<a href="https://github.com/dandremcneish/stedi-human-balance-analytics" target="_blank">Lakehouse source on GitHub</a>
+</div>
+</div>
 
-      <hr class="case-divider">
+<hr class="case-divider">
 
-      <!-- CASE 10: D610 -->
-      <div class="project" id="case-10">
-        <div class="case-head"><span class="case-num">10</span><h3>Data Engineering Capstone: Automated Data Quality Validation</h3></div>
-        <div class="case-course"><span class="case-course">Data Engineering Capstone</span></div>
-        <p class="case-sub">Meridian Retail Co. &mdash; hypothesis-driven validation pipeline</p>
+<!-- CASE 10: D610 -->
+<div class="project reveal" id="case-10">
+<div class="case-head"><span class="case-num">10</span><h3>Data Engineering Capstone: Automated Data Quality Validation</h3></div>
+<div class="case-course"><span class="case-course">Data Engineering Capstone</span></div>
+<p class="case-sub">Meridian Retail Co. &mdash; hypothesis-driven validation pipeline</p>
 
-        <p class="desc">
-          The capstone tied everything earlier together into one hypothesis-driven project. The
-          premise: Meridian Retail Co., a fictional multi-vendor e-commerce retailer, relies on manual
-          review to catch defective order records, a missing customer ID, a negative quantity, a
-          non-numeric price, an invalid shipping method, and manual review at volume inevitably misses
-          some of them. My hypothesis was that an automated, rule-based validation pipeline would catch a
-          statistically significantly higher percentage of those defects than manual review, measured by
-          the residual error rate reaching downstream reporting.
-        </p>
-        <p class="desc">
-          To test it properly rather than just assert it, I generated a synthetic dataset of 10,000 order
-          records, nested customer profile, repeated shopping-cart array, the same BigQuery modeling
-          pattern I'd used in an earlier cloud database project, with 800 defects deliberately injected, evenly split across the four defect
-          types. I loaded the data into BigQuery and built a rule-based validation query checking every
-          record against all four conditions, then separately simulated Meridian's existing manual
-          process at a 35% catch probability, a conservative estimate grounded in documented human-review
-          performance at volume.
-        </p>
-        <p class="desc">
-          The automated pipeline caught all 800 of 800 injected defects, a 100% catch rate, bringing the
-          residual error rate reaching the reporting layer down to 0%. The simulated manual process
-          caught 279 of 800 (34.9%), leaving a 5.21% residual error rate still reaching downstream
-          reports. A two-proportion z-test comparing the two error rates returned z = 23.129, p &lt; .001,
-          rejecting the null hypothesis: the gap is not attributable to chance. I presented the full
-          analysis, the pipeline, the statistical test, and the business recommendation, in a written
-          report, a slide deck, and a recorded presentation.
-        </p>
+<p class="desc">
+The capstone tied everything earlier together into one hypothesis-driven project. The
+premise: Meridian Retail Co., a fictional multi-vendor e-commerce retailer, relies on manual
+review to catch defective order records, a missing customer ID, a negative quantity, a
+non-numeric price, an invalid shipping method, and manual review at volume inevitably misses
+some of them. My hypothesis was that an automated, rule-based validation pipeline would catch a
+statistically significantly higher percentage of those defects than manual review, measured by
+the residual error rate reaching downstream reporting.
+</p>
+<p class="desc">
+To test it properly rather than just assert it, I generated a synthetic dataset of 10,000 order
+records, nested customer profile, repeated shopping-cart array, the same BigQuery modeling
+pattern I'd used in an earlier cloud database project, with 800 defects deliberately injected, evenly split across the four defect
+types. I loaded the data into BigQuery and built a rule-based validation query checking every
+record against all four conditions, then separately simulated Meridian's existing manual
+process at a 35% catch probability, a conservative estimate grounded in documented human-review
+performance at volume.
+</p>
+<p class="desc">
+The automated pipeline caught all 800 of 800 injected defects, a 100% catch rate, bringing the
+residual error rate reaching the reporting layer down to 0%. The simulated manual process
+caught 279 of 800 (34.9%), leaving a 5.21% residual error rate still reaching downstream
+reports. A two-proportion z-test comparing the two error rates returned z = 23.129, p &lt; .001,
+rejecting the null hypothesis: the gap is not attributable to chance. I presented the full
+analysis, the pipeline, the statistical test, and the business recommendation, in a written
+report, a slide deck, and a recorded presentation.
+</p>
 
-        <div class="result-callout">
-          <div class="rc-item"><span class="rc-num">100%</span><span class="rc-label">Automated catch rate</span></div>
-          <div class="rc-item"><span class="rc-num">34.9%</span><span class="rc-label">Simulated manual catch rate</span></div>
-          <div class="rc-item"><span class="rc-num">z=23.13</span><span class="rc-label">p &lt; .001</span></div>
-        </div>
+<div class="result-callout">
+<div class="rc-item"><span class="rc-num">100%</span><span class="rc-label">Automated catch rate</span></div>
+<div class="rc-item"><span class="rc-num">34.9%</span><span class="rc-label">Simulated manual catch rate</span></div>
+<div class="rc-item"><span class="rc-num">z=23.13</span><span class="rc-label">p &lt; .001</span></div>
+</div>
 
-        <div class="tag-row">
-          <span class="tag">BigQuery</span><span class="tag">Python</span><span class="tag">Hypothesis Testing</span><span class="tag">Statistical Analysis</span><span class="tag">Data Validation</span>
-        </div>
-      </div>
+<div class="tag-row">
+<span class="tag">BigQuery</span><span class="tag">Python</span><span class="tag">Hypothesis Testing</span><span class="tag">Statistical Analysis</span><span class="tag">Data Validation</span>
+</div>
+</div>
 
-    </section>
+</section>
 
-    <section id="education" class="reveal">
-      <div class="section-title"><span class="num">04.</span> Education <span class="rule"></span></div>
-      <div class="edu-row">
-        <span class="name">M.S. Data Analytics and Data Engineering, Western Governors University</span>
-        <span class="when">2026</span>
-      </div>
-      <div class="edu-row">
-        <span class="name"><a href="https://wgu.badges.parchment.com/public/assertions/yElPAIW8Q4CeBBZWt6LjKw?identity__email=dmcnei29@wgu.edu" target="_blank" rel="noopener">WGU Data Engineering Professional Specialization</a><span class="badge-tag">Verified</span></span>
-        <span class="when">Issued Sep 2026</span>
-      </div>
-      <div class="edu-row">
-        <span class="name">B.A.S. Data Analytics and Artificial Intelligence, Broward College</span>
-        <span class="when">2025</span>
-      </div>
-      <div class="edu-row">
-        <span class="name">A.A.S. Information Technology, Broward College</span>
-        <span class="when">2019 &middot; 3.8 GPA</span>
-      </div>
-    </section>
+<section id="education">
+<div class="section-title"><span class="num">04.</span> Education <span class="rule"></span></div>
+<div class="edu-row">
+<span class="name">M.S. Data Analytics and Data Engineering, Western Governors University</span>
+<span class="when">2026</span>
+</div>
+<div class="edu-row">
+<span class="name"><a href="https://wgu.badges.parchment.com/public/assertions/yElPAIW8Q4CeBBZWt6LjKw?identity__email=dmcnei29@wgu.edu" target="_blank" rel="noopener">WGU Data Engineering Professional Specialization</a><span class="badge-tag">Verified</span></span>
+<span class="when">Issued Sep 2026</span>
+</div>
+<div class="edu-row">
+<span class="name">B.A.S. Data Analytics and Artificial Intelligence, Broward College</span>
+<span class="when">2025</span>
+</div>
+<div class="edu-row">
+<span class="name">A.A.S. Information Technology, Broward College</span>
+<span class="when">2019 &middot; 3.8 GPA</span>
+</div>
+</section>
 
-    <section id="contact" class="reveal">
-      <div class="section-title"><span class="num">05.</span> Contact <span class="rule"></span></div>
-      <div class="contact-box">
-        <p>Open to data engineering and data analytics roles. The fastest way to reach me is email.</p>
-        <div class="contact-links">
-          <a href="mailto:dmcneish365@gmail.com">Email</a>
-          <a href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Resume</a>
-          <a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
-          <a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
-          <a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
-        </div>
-      </div>
-    </section>
+<section id="contact">
+<div class="section-title"><span class="num">05.</span> Contact <span class="rule"></span></div>
+<div class="contact-box">
+<p>Open to data engineering and data analytics roles. The fastest way to reach me is email.</p>
+<div class="contact-links">
+<a href="mailto:dmcneish365@gmail.com">Email</a>
+<a href="assets/DAndre_McNeish_Resume.pdf" target="_blank">Resume</a>
+<a href="https://www.linkedin.com/in/dandre-mcneish/" target="_blank">LinkedIn</a>
+<a href="https://github.com/dandremcneish" target="_blank">GitHub</a>
+<a href="https://gitlab.com/dmcnei29" target="_blank">GitLab</a>
+</div>
+</div>
+</section>
 
-    <footer class="bottom">Built by D'Andre McNeish</footer>
+<footer class="bottom">Built by D'Andre McNeish</footer>
 
-  </main>
+</main>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 (function () {
-  var root = document.documentElement;
-  var saved = localStorage.getItem('theme');
-  if (saved) { root.setAttribute('data-theme', saved); }
+var root = document.documentElement;
+var saved = localStorage.getItem('theme');
+if (saved) { root.setAttribute('data-theme', saved); }
 
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
-    var toggle = document.getElementById('themeToggle');
-    function updateToggleLabel() {
-      var isLight = root.getAttribute('data-theme') === 'light';
-      toggle.textContent = isLight ? 'Dark mode' : 'Light mode';
-    }
-    updateToggleLabel();
-    toggle.addEventListener('click', function () {
-      var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      var next = current === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateToggleLabel();
-    });
+var toggle = document.getElementById('themeToggle');
+function updateToggleLabel() {
+var isLight = root.getAttribute('data-theme') === 'light';
+toggle.textContent = isLight ? 'Dark mode' : 'Light mode';
+}
+updateToggleLabel();
+toggle.addEventListener('click', function () {
+var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+var next = current === 'light' ? 'dark' : 'light';
+root.setAttribute('data-theme', next);
+localStorage.setItem('theme', next);
+updateToggleLabel();
+});
 
-    var revealEls = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.05 });
-      revealEls.forEach(function (el) { io.observe(el); });
-    } else {
-      revealEls.forEach(function (el) { el.classList.add('visible'); });
-    }
+var revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (e) {
+if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+});
+}, { threshold: 0.05 });
+revealEls.forEach(function (el) { io.observe(el); });
+} else {
+revealEls.forEach(function (el) { el.classList.add('visible'); });
+}
 
-    var navLinks = document.querySelectorAll('.side-nav a');
-    var sections = ['about', 'journey', 'case-studies', 'education', 'contact'].map(function (id) { return document.getElementById(id); });
-    function setActive() {
-      var scrollPos = window.scrollY + 200;
-      var current = sections[0];
-      sections.forEach(function (s) { if (s && s.offsetTop <= scrollPos) current = s; });
-      navLinks.forEach(function (a) {
-        a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
-      });
-    }
-    window.addEventListener('scroll', setActive);
-    setActive();
+var navLinks = document.querySelectorAll('.side-nav a');
+var sections = ['about', 'journey', 'case-studies', 'education', 'contact'].map(function (id) { return document.getElementById(id); });
+function setActive() {
+var scrollPos = window.scrollY + 200;
+var current = sections[0];
+sections.forEach(function (s) { if (s && s.offsetTop <= scrollPos) current = s; });
+navLinks.forEach(function (a) {
+a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id);
+});
+}
+window.addEventListener('scroll', setActive);
+setActive();
 
-    /* GCP slideshow */
-    var slides = document.querySelectorAll('#gcpSlideshow img');
-    var captions = [
-      'Architecture: data flow from ingestion into BigQuery and Cloud SQL.',
-      'Logical data model: the normalized schema behind the warehouse.'
-    ];
-    var slideIndex = 0;
-    function showSlide(i) {
-      slides.forEach(function (s, idx) { s.style.display = idx === i ? 'block' : 'none'; });
-      document.getElementById('gcpCaption').textContent = captions[i];
-    }
-    document.getElementById('gcpPrev').addEventListener('click', function () {
-      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-      showSlide(slideIndex);
-    });
-    document.getElementById('gcpNext').addEventListener('click', function () {
-      slideIndex = (slideIndex + 1) % slides.length;
-      showSlide(slideIndex);
-    });
+/* GCP slideshow */
+var slides = document.querySelectorAll('#gcpSlideshow img');
+var captions = [
+'Architecture: data flow from ingestion into BigQuery and Cloud SQL.',
+'Logical data model: the normalized schema behind the warehouse.'
+];
+var slideIndex = 0;
+function showSlide(i) {
+slides.forEach(function (s, idx) { s.style.display = idx === i ? 'block' : 'none'; });
+document.getElementById('gcpCaption').textContent = captions[i];
+}
+document.getElementById('gcpPrev').addEventListener('click', function () {
+slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+showSlide(slideIndex);
+});
+document.getElementById('gcpNext').addEventListener('click', function () {
+slideIndex = (slideIndex + 1) % slides.length;
+showSlide(slideIndex);
+});
 
-    document.querySelectorAll('.gcp-component-head').forEach(function (head) {
-      head.addEventListener('click', function () { head.parentElement.classList.toggle('open'); });
-    });
+document.querySelectorAll('.gcp-component-head').forEach(function (head) {
+head.addEventListener('click', function () { head.parentElement.classList.toggle('open'); });
+});
 
-    var tabButtons = document.querySelectorAll('.pipeline-tab-btn');
-    var tabPanels = document.querySelectorAll('.pipeline-tab-panel');
-    tabButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        tabButtons.forEach(function (b) { b.classList.remove('active'); });
-        tabPanels.forEach(function (p) { p.classList.remove('active'); });
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.target).classList.add('active');
-      });
-    });
+var tabButtons = document.querySelectorAll('.pipeline-tab-btn');
+var tabPanels = document.querySelectorAll('.pipeline-tab-panel');
+tabButtons.forEach(function (btn) {
+btn.addEventListener('click', function () {
+tabButtons.forEach(function (b) { b.classList.remove('active'); });
+tabPanels.forEach(function (p) { p.classList.remove('active'); });
+btn.classList.add('active');
+document.getElementById(btn.dataset.target).classList.add('active');
+});
+});
 
-    if (window.Chart) {
-      fetch('assets/regression_sample.json').then(function (r) { return r.json(); }).then(function (data) {
-        var scatterData = data.points.map(function (p) { return { x: p.x, y: p.y }; });
-        var xs = data.points.map(function (p) { return p.x; });
-        var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
-        var lineData = [{ x: minX, y: data.slope * minX + data.intercept }, { x: maxX, y: data.slope * maxX + data.intercept }];
-        var ctx = document.getElementById('regressionChart');
-        var chart = new Chart(ctx, {
-          type: 'scatter',
-          data: {
-            datasets: [
-              { label: 'Homes (real data)', data: scatterData, backgroundColor: 'rgba(45,212,191,0.45)', pointRadius: 3 },
-              { label: 'Regression line', data: lineData, type: 'line', borderColor: '#79879c', borderWidth: 2, pointRadius: 0, fill: false },
-              { label: 'Your estimate', data: [], backgroundColor: '#2dd4bf', borderColor: '#eef2f6', borderWidth: 2, pointRadius: 7, pointStyle: 'rectRot' }
-            ]
-          },
-          options: {
-            responsive: true,
-            plugins: { legend: { position: 'bottom', labels: { color: '#79879c' } } },
-            scales: {
-              x: { title: { display: true, text: 'Square Footage', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } },
-              y: { title: { display: true, text: 'Price ($)', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } }
-            }
-          }
-        });
-        document.getElementById('r2Stat').textContent = data.r2.toFixed(3);
-        document.getElementById('slopeStat').textContent = '+$' + Math.round(data.slope) + '/sq ft';
+if (window.Chart) {
+fetch('assets/regression_sample.json').then(function (r) { return r.json(); }).then(function (data) {
+var scatterData = data.points.map(function (p) { return { x: p.x, y: p.y }; });
+var xs = data.points.map(function (p) { return p.x; });
+var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+var lineData = [{ x: minX, y: data.slope * minX + data.intercept }, { x: maxX, y: data.slope * maxX + data.intercept }];
+var ctx = document.getElementById('regressionChart');
+var chart = new Chart(ctx, {
+type: 'scatter',
+data: {
+datasets: [
+{ label: 'Homes (real data)', data: scatterData, backgroundColor: 'rgba(45,212,191,0.45)', pointRadius: 3 },
+{ label: 'Regression line', data: lineData, type: 'line', borderColor: '#79879c', borderWidth: 2, pointRadius: 0, fill: false },
+{ label: 'Your estimate', data: [], backgroundColor: '#2dd4bf', borderColor: '#eef2f6', borderWidth: 2, pointRadius: 7, pointStyle: 'rectRot' }
+]
+},
+options: {
+responsive: true,
+plugins: { legend: { position: 'bottom', labels: { color: '#79879c' } } },
+scales: {
+x: { title: { display: true, text: 'Square Footage', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } },
+y: { title: { display: true, text: 'Price ($)', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } }
+}
+}
+});
+document.getElementById('r2Stat').textContent = data.r2.toFixed(3);
+document.getElementById('slopeStat').textContent = '+$' + Math.round(data.slope) + '/sq ft';
 
-        document.getElementById('estimateBtn').addEventListener('click', function () {
-          var sqft = parseFloat(document.getElementById('sqftInput').value);
-          if (isNaN(sqft) || sqft <= 0) { document.getElementById('estimateResult').innerHTML = 'Enter a valid square footage.'; return; }
-          var predicted = data.slope * sqft + data.intercept;
-          document.getElementById('estimateResult').innerHTML =
-            '$' + Math.round(predicted).toLocaleString() +
-            '<span class="muted">price = ' + data.slope.toFixed(2) + ' &times; sqft + ' + Math.round(data.intercept).toLocaleString() + '</span>';
-          chart.data.datasets[2].data = [{ x: sqft, y: predicted }];
-          chart.update();
-        });
-      });
+document.getElementById('estimateBtn').addEventListener('click', function () {
+var sqft = parseFloat(document.getElementById('sqftInput').value);
+if (isNaN(sqft) || sqft <= 0) { document.getElementById('estimateResult').innerHTML = 'Enter a valid square footage.'; return; }
+var predicted = data.slope * sqft + data.intercept;
+document.getElementById('estimateResult').innerHTML =
+'$' + Math.round(predicted).toLocaleString() +
+'<span class="muted">price = ' + data.slope.toFixed(2) + ' &times; sqft + ' + Math.round(data.intercept).toLocaleString() + '</span>';
+chart.data.datasets[2].data = [{ x: sqft, y: predicted }];
+chart.update();
+});
+});
 
-      fetch('assets/pca_full.json').then(function (r) { return r.json(); }).then(function (data) {
-        var ctx2 = document.getElementById('pcaChart');
-        new Chart(ctx2, {
-          type: 'bar',
-          data: {
-            labels: data.components,
-            datasets: [{ label: 'Eigenvalue', data: data.eigenvalues, backgroundColor: data.eigenvalues.map(function (v) { return v > 1 ? '#2dd4bf' : '#2a3444'; }) }]
-          },
-          options: {
-            responsive: true,
-            onClick: function (evt, elements) { if (elements.length) { showLoadings(elements[0].index); } },
-            plugins: { legend: { display: false } },
-            scales: {
-              x: { ticks: { color: '#79879c' }, grid: { display: false } },
-              y: { title: { display: true, text: 'Eigenvalue', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } }
-            }
-          }
-        });
+fetch('assets/pca_full.json').then(function (r) { return r.json(); }).then(function (data) {
+var ctx2 = document.getElementById('pcaChart');
+new Chart(ctx2, {
+type: 'bar',
+data: {
+labels: data.components,
+datasets: [{ label: 'Eigenvalue', data: data.eigenvalues, backgroundColor: data.eigenvalues.map(function (v) { return v > 1 ? '#2dd4bf' : '#2a3444'; }) }]
+},
+options: {
+responsive: true,
+onClick: function (evt, elements) { if (elements.length) { showLoadings(elements[0].index); } },
+plugins: { legend: { display: false } },
+scales: {
+x: { ticks: { color: '#79879c' }, grid: { display: false } },
+y: { title: { display: true, text: 'Eigenvalue', color: '#79879c' }, ticks: { color: '#79879c' }, grid: { color: 'rgba(121,135,156,0.15)' } }
+}
+}
+});
 
-        var interpretations = {
-          'PC1': 'Loads most heavily on Distance to City Center and Age of Home (positive) and Square Footage (negative). Farther out, older homes move together on this component, separate from newer, larger homes.',
-          'PC2': 'Loads most heavily on Employment Rate (positive) and Crime Rate (negative). Separates areas by local economic and safety conditions rather than by home size.'
-        };
-        function showLoadings(index) {
-          var pc = data.components[index];
-          var loadings = data.loadings[pc];
-          var rows = data.variables.map(function (v, i) { return { name: v, value: loadings[i] }; });
-          rows.sort(function (a, b) { return Math.abs(b.value) - Math.abs(a.value); });
-          var retained = data.retained[index];
-          var html = '<table class="loadings-table"><thead><tr><th>Variable</th><th>Loading on ' + pc + '</th></tr></thead><tbody>';
-          rows.forEach(function (r) { html += '<tr><td>' + r.name + '</td><td class="num">' + (r.value >= 0 ? '+' : '') + r.value.toFixed(4) + '</td></tr>'; });
-          html += '</tbody></table>';
-          html += '<p class="loadings-note">' + (retained ? (interpretations[pc] || 'Retained under the Kaiser rule (eigenvalue greater than 1).') : 'Not retained. Eigenvalue is below 1, so under the Kaiser rule it explains less variance than a single original variable.') + '</p>';
-          document.getElementById('pcaLoadingsPanel').innerHTML = html;
-        }
-        showLoadings(0);
-      });
-    }
+var interpretations = {
+'PC1': 'Loads most heavily on Distance to City Center and Age of Home (positive) and Square Footage (negative). Farther out, older homes move together on this component, separate from newer, larger homes.',
+'PC2': 'Loads most heavily on Employment Rate (positive) and Crime Rate (negative). Separates areas by local economic and safety conditions rather than by home size.'
+};
+function showLoadings(index) {
+var pc = data.components[index];
+var loadings = data.loadings[pc];
+var rows = data.variables.map(function (v, i) { return { name: v, value: loadings[i] }; });
+rows.sort(function (a, b) { return Math.abs(b.value) - Math.abs(a.value); });
+var retained = data.retained[index];
+var html = '<table class="loadings-table"><thead><tr><th>Variable</th><th>Loading on ' + pc + '</th></tr></thead><tbody>';
+rows.forEach(function (r) { html += '<tr><td>' + r.name + '</td><td class="num">' + (r.value >= 0 ? '+' : '') + r.value.toFixed(4) + '</td></tr>'; });
+html += '</tbody></table>';
+html += '<p class="loadings-note">' + (retained ? (interpretations[pc] || 'Retained under the Kaiser rule (eigenvalue greater than 1).') : 'Not retained. Eigenvalue is below 1, so under the Kaiser rule it explains less variance than a single original variable.') + '</p>';
+document.getElementById('pcaLoadingsPanel').innerHTML = html;
+}
+showLoadings(0);
+});
+}
 
-    /* Data Quality Rule Engine */
-    var dqTables = [
-      { name: 'stg_events', rows: 48213, expectedMin: 10000, nullRate: 0.002, nullThreshold: 0.01, latency: 42, sla: 60 },
-      { name: 'stg_songs', rows: 14896, expectedMin: 10000, nullRate: 0.014, nullThreshold: 0.01, latency: 38, sla: 60 },
-      { name: 'fact_songplays', rows: 6821, expectedMin: 1000, nullRate: 0.001, nullThreshold: 0.01, latency: 51, sla: 60 },
-      { name: 'dim_users', rows: 0, expectedMin: 50, nullRate: 0.0, nullThreshold: 0.01, latency: 6, sla: 60 }
-    ];
-    function renderDqTable(withResults) {
-      var html = '<table class="dq-table"><thead><tr><th>Table</th><th>Rows</th><th>Null rate</th><th>Load time</th>' + (withResults ? '<th>Result</th>' : '') + '</tr></thead><tbody>';
-      dqTables.forEach(function (t) {
-        var rowFail = t.rows < t.expectedMin;
-        var nullFail = t.nullRate > t.nullThreshold;
-        var latFail = t.latency > t.sla;
-        var failed = rowFail || nullFail || latFail;
-        html += '<tr><td>' + t.name + '</td><td class="mono">' + t.rows.toLocaleString() + '</td><td class="mono">' + (t.nullRate * 100).toFixed(1) + '%</td><td class="mono">' + t.latency + 's</td>';
-        if (withResults) {
-          if (failed) {
-            var reasons = [];
-            if (rowFail) reasons.push('row count below ' + t.expectedMin.toLocaleString());
-            if (nullFail) reasons.push('null rate above ' + (t.nullThreshold * 100).toFixed(0) + '%');
-            if (latFail) reasons.push('latency above ' + t.sla + 's SLA');
-            html += '<td class="status-fail">FAIL &middot; ' + reasons.join(', ') + '</td>';
-          } else {
-            html += '<td class="status-pass">PASS</td>';
-          }
-        }
-        html += '</tr>';
-      });
-      html += '</tbody></table>';
-      document.getElementById('dqTableWrap').innerHTML = html;
-    }
-    renderDqTable(false);
-    document.getElementById('dqRunBtn').addEventListener('click', function () { renderDqTable(true); });
+/* Data Quality Rule Engine */
+var dqTables = [
+{ name: 'stg_events', rows: 48213, expectedMin: 10000, nullRate: 0.002, nullThreshold: 0.01, latency: 42, sla: 60 },
+{ name: 'stg_songs', rows: 14896, expectedMin: 10000, nullRate: 0.014, nullThreshold: 0.01, latency: 38, sla: 60 },
+{ name: 'fact_songplays', rows: 6821, expectedMin: 1000, nullRate: 0.001, nullThreshold: 0.01, latency: 51, sla: 60 },
+{ name: 'dim_users', rows: 0, expectedMin: 50, nullRate: 0.0, nullThreshold: 0.01, latency: 6, sla: 60 }
+];
+function renderDqTable(withResults) {
+var html = '<table class="dq-table"><thead><tr><th>Table</th><th>Rows</th><th>Null rate</th><th>Load time</th>' + (withResults ? '<th>Result</th>' : '') + '</tr></thead><tbody>';
+dqTables.forEach(function (t) {
+var rowFail = t.rows < t.expectedMin;
+var nullFail = t.nullRate > t.nullThreshold;
+var latFail = t.latency > t.sla;
+var failed = rowFail || nullFail || latFail;
+html += '<tr><td>' + t.name + '</td><td class="mono">' + t.rows.toLocaleString() + '</td><td class="mono">' + (t.nullRate * 100).toFixed(1) + '%</td><td class="mono">' + t.latency + 's</td>';
+if (withResults) {
+if (failed) {
+var reasons = [];
+if (rowFail) reasons.push('row count below ' + t.expectedMin.toLocaleString());
+if (nullFail) reasons.push('null rate above ' + (t.nullThreshold * 100).toFixed(0) + '%');
+if (latFail) reasons.push('latency above ' + t.sla + 's SLA');
+html += '<td class="status-fail">FAIL &middot; ' + reasons.join(', ') + '</td>';
+} else {
+html += '<td class="status-pass">PASS</td>';
+}
+}
+html += '</tr>';
+});
+html += '</tbody></table>';
+document.getElementById('dqTableWrap').innerHTML = html;
+}
+renderDqTable(false);
+document.getElementById('dqRunBtn').addEventListener('click', function () { renderDqTable(true); });
 
-    /* SQL Query Console */
-    var orders = [
-      { id: 1001, customer: 'Harbor Retail', region: 'Southeast', amount: 4820, status: 'fulfilled' },
-      { id: 1002, customer: 'Quill & Co', region: 'Northeast', amount: 1290, status: 'fulfilled' },
-      { id: 1003, customer: 'Basecamp Supply', region: 'Midwest', amount: 760, status: 'delayed' },
-      { id: 1004, customer: 'Harbor Retail', region: 'Southeast', amount: 3110, status: 'fulfilled' },
-      { id: 1005, customer: 'Norwood Group', region: 'West', amount: 9840, status: 'fulfilled' },
-      { id: 1006, customer: 'Quill & Co', region: 'Northeast', amount: 540, status: 'delayed' },
-      { id: 1007, customer: 'Pier Six Foods', region: 'West', amount: 2210, status: 'fulfilled' },
-      { id: 1008, customer: 'Basecamp Supply', region: 'Midwest', amount: 1875, status: 'fulfilled' },
-      { id: 1009, customer: 'Norwood Group', region: 'West', amount: 6430, status: 'fulfilled' },
-      { id: 1010, customer: 'Harbor Retail', region: 'Southeast', amount: 990, status: 'delayed' },
-      { id: 1011, customer: 'Pier Six Foods', region: 'West', amount: 3420, status: 'fulfilled' },
-      { id: 1012, customer: 'Quill & Co', region: 'Northeast', amount: 5150, status: 'fulfilled' }
-    ];
-    var sqlDefs = {
-      region: {
-        sql: 'SELECT region, SUM(amount) AS revenue\nFROM orders\nGROUP BY region\nORDER BY revenue DESC;',
-        run: function () {
-          var totals = {};
-          orders.forEach(function (o) { totals[o.region] = (totals[o.region] || 0) + o.amount; });
-          return Object.keys(totals).map(function (r) { return { region: r, revenue: totals[r] }; })
-            .sort(function (a, b) { return b.revenue - a.revenue; });
-        }
-      },
-      delayed: {
-        sql: "SELECT id, customer, region, amount\nFROM orders\nWHERE status = 'delayed';",
-        run: function () {
-          return orders.filter(function (o) { return o.status === 'delayed'; })
-            .map(function (o) { return { id: o.id, customer: o.customer, region: o.region, amount: o.amount }; });
-        }
-      },
-      top: {
-        sql: 'SELECT id, customer, amount\nFROM orders\nORDER BY amount DESC\nLIMIT 5;',
-        run: function () {
-          return orders.slice().sort(function (a, b) { return b.amount - a.amount; }).slice(0, 5)
-            .map(function (o) { return { id: o.id, customer: o.customer, amount: o.amount }; });
-        }
-      }
-    };
-    function renderSqlRows(rows) {
-      if (!rows.length) { return '<p style="color:var(--muted); font-size:13px; margin-top:10px;">No rows.</p>'; }
-      var cols = Object.keys(rows[0]);
-      var html = '<table class="sql-table"><thead><tr>' + cols.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '</tr></thead><tbody>';
-      rows.forEach(function (r) {
-        html += '<tr>' + cols.map(function (c) {
-          var v = r[c];
-          if (c === 'amount' || c === 'revenue') { v = '$' + v.toLocaleString(); }
-          return '<td>' + v + '</td>';
-        }).join('') + '</tr>';
-      });
-      html += '</tbody></table>';
-      return html;
-    }
-    document.querySelectorAll('[data-sql]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var def = sqlDefs[btn.dataset.sql];
-        document.getElementById('sqlText').textContent = def.sql;
-        document.getElementById('sqlResultWrap').innerHTML = renderSqlRows(def.run());
-      });
-    });
+/* SQL Query Console */
+var orders = [
+{ id: 1001, customer: 'Harbor Retail', region: 'Southeast', amount: 4820, status: 'fulfilled' },
+{ id: 1002, customer: 'Quill & Co', region: 'Northeast', amount: 1290, status: 'fulfilled' },
+{ id: 1003, customer: 'Basecamp Supply', region: 'Midwest', amount: 760, status: 'delayed' },
+{ id: 1004, customer: 'Harbor Retail', region: 'Southeast', amount: 3110, status: 'fulfilled' },
+{ id: 1005, customer: 'Norwood Group', region: 'West', amount: 9840, status: 'fulfilled' },
+{ id: 1006, customer: 'Quill & Co', region: 'Northeast', amount: 540, status: 'delayed' },
+{ id: 1007, customer: 'Pier Six Foods', region: 'West', amount: 2210, status: 'fulfilled' },
+{ id: 1008, customer: 'Basecamp Supply', region: 'Midwest', amount: 1875, status: 'fulfilled' },
+{ id: 1009, customer: 'Norwood Group', region: 'West', amount: 6430, status: 'fulfilled' },
+{ id: 1010, customer: 'Harbor Retail', region: 'Southeast', amount: 990, status: 'delayed' },
+{ id: 1011, customer: 'Pier Six Foods', region: 'West', amount: 3420, status: 'fulfilled' },
+{ id: 1012, customer: 'Quill & Co', region: 'Northeast', amount: 5150, status: 'fulfilled' }
+];
+var sqlDefs = {
+region: {
+sql: 'SELECT region, SUM(amount) AS revenue\nFROM orders\nGROUP BY region\nORDER BY revenue DESC;',
+run: function () {
+var totals = {};
+orders.forEach(function (o) { totals[o.region] = (totals[o.region] || 0) + o.amount; });
+return Object.keys(totals).map(function (r) { return { region: r, revenue: totals[r] }; })
+.sort(function (a, b) { return b.revenue - a.revenue; });
+}
+},
+delayed: {
+sql: "SELECT id, customer, region, amount\nFROM orders\nWHERE status = 'delayed';",
+run: function () {
+return orders.filter(function (o) { return o.status === 'delayed'; })
+.map(function (o) { return { id: o.id, customer: o.customer, region: o.region, amount: o.amount }; });
+}
+},
+top: {
+sql: 'SELECT id, customer, amount\nFROM orders\nORDER BY amount DESC\nLIMIT 5;',
+run: function () {
+return orders.slice().sort(function (a, b) { return b.amount - a.amount; }).slice(0, 5)
+.map(function (o) { return { id: o.id, customer: o.customer, amount: o.amount }; });
+}
+}
+};
+function renderSqlRows(rows) {
+if (!rows.length) { return '<p style="color:var(--muted); font-size:13px; margin-top:10px;">No rows.</p>'; }
+var cols = Object.keys(rows[0]);
+var html = '<table class="sql-table"><thead><tr>' + cols.map(function (c) { return '<th>' + c + '</th>'; }).join('') + '</tr></thead><tbody>';
+rows.forEach(function (r) {
+html += '<tr>' + cols.map(function (c) {
+var v = r[c];
+if (c === 'amount' || c === 'revenue') { v = '$' + v.toLocaleString(); }
+return '<td>' + v + '</td>';
+}).join('') + '</tr>';
+});
+html += '</tbody></table>';
+return html;
+}
+document.querySelectorAll('[data-sql]').forEach(function (btn) {
+btn.addEventListener('click', function () {
+var def = sqlDefs[btn.dataset.sql];
+document.getElementById('sqlText').textContent = def.sql;
+document.getElementById('sqlResultWrap').innerHTML = renderSqlRows(def.run());
+});
+});
 
-    document.getElementById('ratioBtn').addEventListener('click', function () {
-      var debt = parseFloat(document.getElementById('debtInput').value);
-      var revenue = parseFloat(document.getElementById('revenueInput').value);
-      var el = document.getElementById('ratioResult');
-      if (isNaN(debt) || isNaN(revenue)) { el.innerHTML = 'Enter numbers for both fields.'; return; }
-      if (revenue === 0) { el.innerHTML = 'NaN<span class="muted">Revenue was zero; the real code returns NaN instead of dividing by zero.</span>'; return; }
-      el.innerHTML = (debt / revenue).toFixed(3) + '<span class="muted">Debt &divide; Revenue</span>';
-    });
+document.getElementById('ratioBtn').addEventListener('click', function () {
+var debt = parseFloat(document.getElementById('debtInput').value);
+var revenue = parseFloat(document.getElementById('revenueInput').value);
+var el = document.getElementById('ratioResult');
+if (isNaN(debt) || isNaN(revenue)) { el.innerHTML = 'Enter numbers for both fields.'; return; }
+if (revenue === 0) { el.innerHTML = 'NaN<span class="muted">Revenue was zero; the real code returns NaN instead of dividing by zero.</span>'; return; }
+el.innerHTML = (debt / revenue).toFixed(3) + '<span class="muted">Debt &divide; Revenue</span>';
+});
 
-  });
+});
 })();
 </script>
 </body>
